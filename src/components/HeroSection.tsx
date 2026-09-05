@@ -1,16 +1,20 @@
 import React from 'react'
-import { ArrowRight, Shield, Database, Scale, HelpCircle } from 'lucide-react'
+import { ArrowRight, Shield, Database, Scale, Sparkles, CheckCircle2 } from 'lucide-react'
 
 interface HeroSectionProps {
   onFindNextMove: () => void
   onExploreResearch: () => void
   currentAmount: number
+  onSelectAmount?: (amount: number) => void
 }
+
+const QUICK_AMOUNTS = [10000, 25000, 50000, 100000, 250000]
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onFindNextMove,
   onExploreResearch,
-  currentAmount
+  currentAmount,
+  onSelectAmount
 }) => {
   const formattedAmount = new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -19,65 +23,88 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   }).format(currentAmount || 10000)
 
   return (
-    <section className="relative pt-8 pb-10 sm:pt-12 sm:pb-14 overflow-hidden border-b border-slate-900 bg-gradient-to-b from-navy-950 via-slate-950 to-navy-900/50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Calm Pill Badge */}
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs font-medium text-slate-300 mb-6">
-          <Scale className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Clarity under uncertainty, not fake certainty</span>
+    <section className="relative pt-12 pb-14 sm:pt-16 sm:pb-20 overflow-hidden border-b border-white/[0.04]">
+      {/* Sleek Radial Ambient Spotlight */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(16,185,129,0.12),rgba(255,255,255,0))] pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-indigo-500/[0.04] rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center z-10">
+        {/* Minimal Pill Badge */}
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-medium text-slate-300 mb-6 backdrop-blur-md">
+          <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+          <span>Objective Indian Mutual Fund Decision Intelligence</span>
         </div>
 
-        {/* Hero Title */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4">
+        {/* Minimal High-Impact Headline */}
+        <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-5 leading-[1.1]">
           What should I do with my next{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
             {formattedAmount}?
           </span>
         </h1>
 
-        {/* Subheading */}
-        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-400 mb-8 leading-relaxed">
-          NiveshPilot turns complicated market regime and Indian mutual-fund data into a simple,
-          evidence-backed next step. Zero noise. Zero paid APIs. Zero hype.
+        {/* Focused Subheading */}
+        <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-400 mb-8 leading-relaxed font-normal">
+          Translating 8+ years of empirical AMFI data and 6 market regimes into one clear,
+          evidence-backed next move. No hype. No paid APIs. Zero financial noise.
         </p>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8">
+        {/* Interactive Quick Capital Scrubber */}
+        {onSelectAmount && (
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-8 text-xs">
+            <span className="text-slate-500 font-medium mr-1">Quick Select:</span>
+            {QUICK_AMOUNTS.map((amt) => {
+              const isSelected = currentAmount === amt
+              const label =
+                amt >= 100000 ? `₹${amt / 100000} Lakh` : `₹${(amt / 1000).toFixed(0)}k`
+              return (
+                <button
+                  key={amt}
+                  onClick={() => onSelectAmount(amt)}
+                  className={`px-3 py-1.5 rounded-full font-semibold transition-all ${
+                    isSelected
+                      ? 'bg-emerald-500 text-navy-950 shadow-md shadow-emerald-500/20 scale-105'
+                      : 'bg-slate-900/60 hover:bg-slate-800 text-slate-400 hover:text-white border border-white/[0.06]'
+                  }`}
+                >
+                  {label}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        {/* Minimal Modern CTAs */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10">
           <button
             onClick={onFindNextMove}
-            className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-lg shadow-emerald-900/30 transition-all flex items-center justify-center space-x-2 group"
+            className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-navy-950 font-extrabold text-sm shadow-xl shadow-emerald-500/20 hover:scale-[1.02] transition-all flex items-center justify-center space-x-2 group"
           >
-            <span>Find My Next Move</span>
+            <span>Personalize My Next Move</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </button>
           <button
             onClick={onExploreResearch}
-            className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition-all flex items-center justify-center space-x-2"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-slate-900/60 hover:bg-slate-800/80 text-slate-300 hover:text-white font-semibold text-sm border border-white/[0.08] hover:border-white/[0.16] backdrop-blur-md transition-all flex items-center justify-center space-x-2"
           >
             <Database className="w-4 h-4 text-slate-400" />
-            <span>Explore the Research</span>
+            <span>Explore Empirical Research</span>
           </button>
         </div>
 
-        {/* Mandatory Core Disclaimers & Principles */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto text-left text-xs text-slate-400 pt-4 border-t border-slate-900/80">
-          <div className="flex items-start space-x-2 p-2 rounded-lg bg-slate-900/40 border border-slate-900">
-            <Shield className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-            <span>
-              <strong>Zero False Promises</strong>: We never promise guaranteed returns or claim to predict market bottoms.
-            </span>
+        {/* Minimalist Trust Features */}
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-slate-400 pt-6 border-t border-white/[0.04]">
+          <div className="flex items-center space-x-2">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <span>100% Client-Side Private (₹0 Cost)</span>
           </div>
-          <div className="flex items-start space-x-2 p-2 rounded-lg bg-slate-900/40 border border-slate-900">
-            <Database className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
-            <span>
-              <strong>Public AMFI Data</strong>: Tested against historical Nifty & mutual-fund data without illegal scraping.
-            </span>
+          <div className="flex items-center space-x-2">
+            <CheckCircle2 className="w-3.5 h-3.5 text-teal-400 shrink-0" />
+            <span>AMFI Historical Benchmark Archives</span>
           </div>
-          <div className="flex items-start space-x-2 p-2 rounded-lg bg-slate-900/40 border border-slate-900">
-            <HelpCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-            <span>
-              <strong>Honest Uncertainty</strong>: When market evidence is conflicting, the engine will state "No Clear Signal".
-            </span>
+          <div className="flex items-center space-x-2">
+            <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+            <span>Deterministic SHA-256 Decision Hash</span>
           </div>
         </div>
       </div>

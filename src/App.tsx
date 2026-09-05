@@ -132,6 +132,7 @@ export const App: React.FC = () => {
               currentAmount={profile.amount}
               onFindNextMove={() => setIsOnboardingOpen(true)}
               onExploreResearch={() => setAdvancedMode(true)}
+              onSelectAmount={(amt) => setProfile((prev) => ({ ...prev, amount: amt }))}
             />
 
             {/* Dominant Next Move Card Section */}

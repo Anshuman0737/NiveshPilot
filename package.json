@@ -2,7 +2,25 @@
   "name": "niveshpilot",
   "private": true,
   "version": "1.0.0",
+  "description": "Beginner-first Indian mutual-fund investment decision intelligence platform with client-side portfolio upgrade engine, ₹0 runtime cost architecture, and local AI Co-Pilot.",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Anshuman0737/NiveshPilot.git"
+  },
+  "keywords": [
+    "mutual-funds",
+    "investing",
+    "portfolio-optimization",
+    "quant",
+    "amfi",
+    "india",
+    "decision-intelligence",
+    "react19",
+    "typescript",
+    "ollama",
+    "groq"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

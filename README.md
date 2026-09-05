@@ -11,7 +11,10 @@
 [![Vite 6](https://img.shields.io/badge/Vite-6.2-646cff.svg?logo=vite&logoColor=white)](https://vite.dev/)
 [![Python 3.13](https://img.shields.io/badge/Python-3.13-3776ab.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Pytest 24/24 Passed](https://img.shields.io/badge/Tests-24%2F24%20Passing-10b981.svg?logo=pytest&logoColor=white)](research/tests/test_quant.py)
+[![Portfolio Upgrade](https://img.shields.io/badge/Portfolio%20Upgrade-PDF%20%7C%20Screenshot%20%7C%20Text-indigo.svg)](#8--smart-portfolio-import--empirical-optimization-blueprint)
+[![AI Co-Pilot](https://img.shields.io/badge/AI%20Audit-Ollama%20%7C%20Groq%20%7C%20Offline-purple.svg)](#10--dual-key-ai-co-pilot--decision-audit-layer)
 [![Zero-Cost Architecture](https://img.shields.io/badge/Runtime%20Cost-₹0%20Zero-teal.svg)](#zero-cost-architecture-target-cost-0)
+[![Privacy First](https://img.shields.io/badge/Privacy-100%25%20On--Device-brightgreen.svg)](#zero-cost-architecture-target-cost-0)
 [![SEBI Compliant Framing](https://img.shields.io/badge/SEBI-Educational%20Research%20Only-amber.svg)](#regulatory-compliance--sebi-notice)
 
 </div>
@@ -69,18 +72,27 @@ flowchart TD
         Quality --> Rules
     end
 
+    subgraph PortfolioEngine ["Smart Portfolio Upgrade Core (100% On-Device)"]
+        Parser["Multi-Modal Ingestion\n(PDF CAS, Broker Screenshots, Text, Presets)"]
+        Optimizer["Optimization Engine\n(Score Delta, 10-Yr Compounded Fee Drag, Overlap Mitigation)"]
+        Blueprint["Step-by-Step Action Roadmap\n(Keep / Prune / Add / Future SIP)"]
+        Parser --> Optimizer --> Blueprint
+    end
+
     subgraph Presentation ["Modern Interactive UI (React 19 + TypeScript)"]
         Pulse["Live Market Pulse & Heartbeat Ticker"]
         Simulator["Live Market Shock Simulator"]
         NextMove["Dominant 'Next Move' Card (3 Modes)"]
         SVGChart["Interactive SVG Trajectory & Drawdown Graph"]
         FlowGraph["Dynamic Rupee Deployment Flow Graph"]
+        UpgradeCard["Visual Portfolio Upgrade Blueprint Card"]
         Research["Advanced Quantitative Research Dashboard"]
         AuditToken --> NextMove
         Pulse --> NextMove
         Simulator --> NextMove
         NextMove --> SVGChart
         NextMove --> FlowGraph
+        Blueprint --> UpgradeCard
         Rules --> Research
     end
 ```

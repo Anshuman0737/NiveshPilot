@@ -130,8 +130,22 @@ flowchart TD
 ### 7. 🛡️ "Should I Sell My Fund?" Diagnostic
 * Helps anxious investors distinguish between **normal cyclical volatility** (-5% to -15% pullbacks) and **genuine fundamental deterioration** (fund lagging benchmark for 2+ years, manager departures).
 
-### 8. 🔍 Portfolio Health & Stock Overlap Inspector
-* Analyzes user portfolios for asset allocation balance, category concentration, and **underlying stock duplication** (e.g., overlapping exposure to HDFC Bank, ICICI Bank, and Reliance across multiple funds).
+### 8. 🔍 Smart Portfolio Import & Empirical Optimization Blueprint
+* **Multi-Modal Client-Side Statement Ingestion**:
+  * **PDF Statement (CAMS / KFintech CAS)**: Client-side stream parsing extracts scheme names, folio holdings, invested capital, and current valuations with zero cloud dependencies.
+  * **Broker App Screenshot (Groww / Zerodha Coin / INDmoney)**: Local image layout parsing extracts active mutual fund holdings.
+  * **Free-Form Text Paste**: Ingests email summaries, CAS text rows, or broker table snippets.
+  * **1-Click Real-World Presets**: Instant testing with pre-built scenarios (*High Overlap Trap*, *High-Fee Regular Drag*, *Small-Cap Over-Concentration*, and *Balanced Diversified*).
+* **100% Client-Side Privacy (₹0 Cost)**:
+  * Zero financial statements, holdings, or balances are uploaded to external servers.
+  * Zero broker login credentials or passwords required.
+* **Institutional-Grade Portfolio Optimization Engine**:
+  * **Side-by-Side Upgrade Blueprint**: Real-time comparison of Current vs Upgraded Portfolio Score (e.g. `62/100 -> 93/100`).
+  * **10-Year Compounded Fee Savings**: Mathematical compounding calculation quantifying exact rupee savings (e.g. `₹43,270 - ₹1,18,000+`) by replacing high-fee regular plans (1.6%+) with direct plans (0.6%).
+  * **Stock Overlap Elimination**: Identifies duplicate exposure to top-10 stocks (HDFC Bank, ICICI Bank, Reliance) and cuts peak overlap from `55%+` down to `<20%`.
+  * **Step-by-Step Action Roadmap**: Actionable categorization into **Keep** (core compounders), **Prune / Stop SIP** (redundant funds), and **Add** (liquid buffer for tactical dip deployment).
+  * **Recommended Future Monthly SIP Allocation**: Clear % allocation for upcoming monthly SIPs.
+  * **1-Click Apply**: Instantly updates active portfolio state to the upgraded blueprint.
 
 ### 9. 🔬 Advanced Research Dashboard & Immutable Ledger
 * Walk-forward backtesting tables across all 5 deployment strategies and 6 market regimes.
@@ -273,6 +287,23 @@ The quantitative core is protected by 24 unit and property-based invariant tests
 
 ```
 ============================= 24 passed in 0.67s ==============================
+```
+
+The client-side portfolio parsing and optimization engine is verified via:
+
+```bash
+npx tsx src/tests/portfolioUpgrade.test.ts
+```
+
+```
+--- Starting Portfolio Import & Optimization Engine Verification ---
+✓ Test 1 Passed: Client-side text parsing correctly extracted Indian mutual funds and amounts
+✓ Test 2 Passed: All 4 real-world sample presets validated
+✓ Test 3 Passed: Overlap-Heavy portfolio score improved from 66 to 93 (Peak Overlap reduced from 51% to 18%)
+✓ Test 4 Passed: Regular Plan Fee Drag calculated 10-year compounded savings of ₹43,272 with expense drop 1.65% -> 0.62%
+✓ Test 5 Passed: Upgraded monthly SIP allocation distribution exactly equals 100%
+✓ Test 6 Passed: Capital conservation invariant strictly preserved (Total Value = ₹1,76,000)
+ALL PORTFOLIO UPGRADE TESTS PASSED WITH 100% SUCCESS!
 ```
 
 ---

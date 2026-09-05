@@ -1,7 +1,20 @@
 import React, { useState } from 'react'
 import { Holding, FundSnapshot } from '../engine/types'
 import { analyzePortfolioHealth } from '../engine/portfolio'
-import { Layers, AlertTriangle, ShieldCheck, Plus, Trash2, CheckCircle2, Info, PieChart } from 'lucide-react'
+import { generatePortfolioOptimizationBlueprint } from '../engine/portfolioOptimizer'
+import { PortfolioImportModal } from './PortfolioImportModal'
+import { PortfolioUpgradeCard } from './PortfolioUpgradeCard'
+import {
+  Layers,
+  AlertTriangle,
+  ShieldCheck,
+  Plus,
+  Trash2,
+  UploadCloud,
+  FileText,
+  Sparkles,
+  Camera
+} from 'lucide-react'
 
 interface PortfolioHealthModeProps {
   funds: FundSnapshot[]
@@ -45,10 +58,12 @@ const DEFAULT_SAMPLE_HOLDINGS: Holding[] = [
 export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds }) => {
   const [holdings, setHoldings] = useState<Holding[]>(DEFAULT_SAMPLE_HOLDINGS)
   const [showAddModal, setShowAddModal] = useState(false)
+  const [showImportModal, setShowImportModal] = useState(false)
   const [newFundId, setNewFundId] = useState(funds[0]?.internal_id || 'MIRAE_LARGE')
   const [newInvested, setNewInvested] = useState(25000)
 
   const health = analyzePortfolioHealth(holdings)
+  const blueprint = generatePortfolioOptimizationBlueprint(holdings, funds)
 
   const formatINR = (val: number) =>
     new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(val)
@@ -63,7 +78,7 @@ export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds 
       fundName: target.scheme_name.split(' - ')[0],
       category: target.category,
       investedAmount: newInvested,
-      currentValue: newInvested // assume at par for newly added
+      currentValue: newInvested
     }
     setHoldings([...holdings, newH])
     setShowAddModal(false)
@@ -77,7 +92,6 @@ export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds 
     if (type === 'balanced') {
       setHoldings(DEFAULT_SAMPLE_HOLDINGS)
     } else {
-      // Intentionally overlapping portfolio to demonstrate warning
       setHoldings([
         {
           id: 'o1',
@@ -98,8 +112,8 @@ export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds 
         {
           id: 'o3',
           fundId: 'ICICI_HYBRID',
-          fundName: 'ICICI Prudential Equity & Debt',
-          category: 'Aggressive Hybrid Fund',
+          fundName: 'ICICI Prudential Large & Mid Cap',
+          category: 'Large Cap Fund',
           investedAmount: 50000,
           currentValue: 54000
         }
@@ -119,26 +133,37 @@ export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds 
           "Is My Portfolio Truly Diversified?"
         </h2>
         <p className="text-sm text-slate-400">
-          Owning 7 different equity funds does NOT automatically make you 7x diversified.
-          Inspect portfolio concentration, asset allocation, and underlying stock duplication.
+          Import your CAS statement or screenshots to diagnose stock duplication, eliminate distributor fee drag, and generate an upgraded institutional portfolio.
         </p>
       </div>
 
-      {/* Preset Buttons */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mb-6 text-xs">
-        <span className="text-slate-500 font-semibold mr-1">Load Demo Portfolio:</span>
-        <button
-          onClick={() => loadPreset('balanced')}
-          className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
-        >
-          Balanced Core (Large + Flexi + Mid + Liquid)
-        </button>
-        <button
-          onClick={() => loadPreset('overlap_heavy')}
-          className="px-3 py-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/40 text-rose-300 border border-rose-900/50 transition-colors"
-        >
-          High Duplication Overlap Sample
-        </button>
+      {/* Action Bar: Import Trigger + Presets */}
+      <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-slate-900 border border-slate-800 mb-8 shadow-xl">
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={() => setShowImportModal(true)}
+            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-teal-500 hover:from-indigo-500 hover:to-teal-400 text-white font-extrabold text-xs sm:text-sm flex items-center space-x-2 shadow-lg shadow-indigo-950/50 hover:scale-[1.02] transition-all"
+          >
+            <UploadCloud className="w-4 h-4 text-white" />
+            <span>Import Investments (PDF / Screenshot / Text)</span>
+          </button>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2 text-xs">
+          <span className="text-slate-500 font-semibold hidden sm:inline">Load Sample:</span>
+          <button
+            onClick={() => loadPreset('balanced')}
+            className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+          >
+            Balanced Core
+          </button>
+          <button
+            onClick={() => loadPreset('overlap_heavy')}
+            className="px-3 py-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/40 text-rose-300 border border-rose-900/50 transition-colors"
+          >
+            High Overlap Trap
+          </button>
+        </div>
       </div>
 
       {/* Summary Scorecard */}
@@ -189,6 +214,14 @@ export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds 
         </div>
       </div>
 
+      {/* Real-time Portfolio Upgrade Blueprint Component */}
+      {holdings.length > 0 && (
+        <PortfolioUpgradeCard
+          blueprint={blueprint}
+          onApplyUpgrade={(upgraded) => setHoldings(upgraded)}
+        />
+      )}
+
       {/* Holdings Table & Overlap Inspector */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Holdings List */}
@@ -198,40 +231,56 @@ export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds 
               <h3 className="text-lg font-bold text-white">Current Holdings</h3>
               <p className="text-xs text-slate-400">Zero broker password required. Client-side private analysis.</p>
             </div>
-            <button
-              onClick={() => setShowAddModal(true)}
-              className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center space-x-1 transition-colors"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Add Fund</span>
-            </button>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setShowImportModal(true)}
+                className="px-2.5 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 font-semibold text-xs flex items-center space-x-1 transition-colors"
+                title="Import CAS statement or screenshot"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Import</span>
+              </button>
+              <button
+                onClick={() => setShowAddModal(true)}
+                className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center space-x-1 transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Fund</span>
+              </button>
+            </div>
           </div>
 
           <div className="space-y-3">
-            {holdings.map((h) => (
-              <div
-                key={h.id}
-                className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-3"
-              >
-                <div>
-                  <div className="font-bold text-sm text-white">{h.fundName}</div>
-                  <div className="text-xs text-slate-400">{h.category}</div>
-                </div>
-                <div className="flex items-center space-x-4 text-right">
-                  <div>
-                    <div className="text-sm font-bold text-white">{formatINR(h.currentValue)}</div>
-                    <div className="text-[11px] text-slate-400">Invested: {formatINR(h.investedAmount)}</div>
-                  </div>
-                  <button
-                    onClick={() => handleRemove(h.id)}
-                    className="p-1 text-slate-500 hover:text-rose-400 transition-colors"
-                    title="Remove fund"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
+            {holdings.length === 0 ? (
+              <div className="text-center py-8 text-slate-500 text-xs">
+                No funds in portfolio. Click "Import Investments" or "Add Fund" to start.
               </div>
-            ))}
+            ) : (
+              holdings.map((h) => (
+                <div
+                  key={h.id}
+                  className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-3"
+                >
+                  <div>
+                    <div className="font-bold text-sm text-white">{h.fundName}</div>
+                    <div className="text-xs text-slate-400">{h.category}</div>
+                  </div>
+                  <div className="flex items-center space-x-4 text-right">
+                    <div>
+                      <div className="text-sm font-bold text-white">{formatINR(h.currentValue)}</div>
+                      <div className="text-[11px] text-slate-400">Invested: {formatINR(h.investedAmount)}</div>
+                    </div>
+                    <button
+                      onClick={() => handleRemove(h.id)}
+                      className="p-1 text-slate-500 hover:text-rose-400 transition-colors"
+                      title="Remove fund"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
@@ -317,6 +366,14 @@ export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds 
           </div>
         </div>
       )}
+
+      {/* Multi-Modal Import Modal (PDF / Screenshot / Text / Presets) */}
+      <PortfolioImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        onImport={(importedHoldings) => setHoldings(importedHoldings)}
+        knownFunds={funds}
+      />
     </div>
   )
 }

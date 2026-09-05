@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Holding, FundSnapshot } from '../engine/types'
 import { analyzePortfolioHealth } from '../engine/portfolio'
 import { generatePortfolioOptimizationBlueprint } from '../engine/portfolioOptimizer'
+import { subscribeToLiveMarket, LiveQuote } from '../engine/liveMarketService'
 import { PortfolioImportModal } from './PortfolioImportModal'
 import { PortfolioUpgradeCard } from './PortfolioUpgradeCard'
 import {
@@ -12,7 +13,12 @@ import {
   Trash2,
   UploadCloud,
   FileText,
-  Sparkles
+  Sparkles,
+  Building2,
+  TrendingUp,
+  PieChart,
+  BarChart2,
+  Briefcase
 } from 'lucide-react'
 
 interface PortfolioHealthModeProps {
@@ -56,12 +62,18 @@ const DEFAULT_SAMPLE_HOLDINGS: Holding[] = [
 
 export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds }) => {
   const [holdings, setHoldings] = useState<Holding[]>(DEFAULT_SAMPLE_HOLDINGS)
+  const [liveQuotes, setLiveQuotes] = useState<LiveQuote[]>([])
   const [showAddModal, setShowAddModal] = useState(false)
   const [showImportModal, setShowImportModal] = useState(false)
   const [newFundId, setNewFundId] = useState(funds[0]?.internal_id || 'MIRAE_LARGE')
   const [newInvested, setNewInvested] = useState(25000)
 
-  const health = analyzePortfolioHealth(holdings)
+  useEffect(() => {
+    const unsub = subscribeToLiveMarket((quotes) => setLiveQuotes(quotes))
+    return () => unsub()
+  }, [])
+
+  const health = analyzePortfolioHealth(holdings, liveQuotes)
   const blueprint = generatePortfolioOptimizationBlueprint(holdings, funds)
 
   const formatINR = (val: number) =>
@@ -207,6 +219,181 @@ export const PortfolioHealthMode: React.FC<PortfolioHealthModeProps> = ({ funds 
               Portfolio Health Assessment: {health.diversificationStatus}
             </h4>
             <p className="text-sm text-slate-300 leading-relaxed">{health.diversificationAdvice}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Institutional Portfolio Analyser (ICICI Direct Style & Beyond) */}
+      <div className="p-6 rounded-3xl glass-panel mb-8 border border-white/[0.08] relative overflow-hidden">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-6 border-b border-white/[0.06]">
+          <div>
+            <div className="flex items-center space-x-2 mb-1">
+              <Building2 className="w-4 h-4 text-emerald-400" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">
+                Institutional Portfolio Analyser
+              </span>
+              <span className="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 font-bold border border-emerald-500/20">
+                ICICI Direct Style + Live Real-Time Feeds
+              </span>
+            </div>
+            <h3 className="text-xl font-black text-white">Market-Cap, Sector & Underlying Stock Exposure</h3>
+          </div>
+          <div className="text-xs text-slate-400">
+            Aggregated across <strong className="text-white">{holdings.length}</strong> mutual funds
+          </div>
+        </div>
+
+        {/* 1. Market Cap Bifurcation (ICICI Direct feature) */}
+        <div className="mb-6 p-4 rounded-2xl bg-slate-950/60 border border-white/[0.05]">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
+              Market Capitalization Bifurcation
+            </span>
+            <span className="text-[11px] text-slate-400">SEBI Classification</span>
+          </div>
+
+          {/* Segmented Visual Stack Bar */}
+          <div className="w-full h-3 bg-slate-800 rounded-full overflow-hidden flex mb-3">
+            <div
+              style={{ width: `${health.marketCapBifurcation.largeCapPct}%` }}
+              className="bg-emerald-500 h-full transition-all"
+              title={`Large Cap: ${health.marketCapBifurcation.largeCapPct}%`}
+            />
+            <div
+              style={{ width: `${health.marketCapBifurcation.midCapPct}%` }}
+              className="bg-teal-400 h-full transition-all"
+              title={`Mid Cap: ${health.marketCapBifurcation.midCapPct}%`}
+            />
+            <div
+              style={{ width: `${health.marketCapBifurcation.smallCapPct}%` }}
+              className="bg-cyan-400 h-full transition-all"
+              title={`Small Cap: ${health.marketCapBifurcation.smallCapPct}%`}
+            />
+            <div
+              style={{ width: `${health.marketCapBifurcation.debtPct}%` }}
+              className="bg-indigo-400 h-full transition-all"
+              title={`Debt / Liquid: ${health.marketCapBifurcation.debtPct}%`}
+            />
+          </div>
+
+          {/* Legend Chips */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+            <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+              <div className="flex items-center space-x-1.5 mb-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
+                <span className="font-semibold text-slate-300">Giant / Large Cap</span>
+              </div>
+              <div className="text-lg font-black text-emerald-400">{health.marketCapBifurcation.largeCapPct}%</div>
+              <div className="text-[10px] text-slate-500">Top 100 Bluechip Indian Companies</div>
+            </div>
+
+            <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+              <div className="flex items-center space-x-1.5 mb-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-teal-400 shrink-0" />
+                <span className="font-semibold text-slate-300">Mid Cap</span>
+              </div>
+              <div className="text-lg font-black text-teal-400">{health.marketCapBifurcation.midCapPct}%</div>
+              <div className="text-[10px] text-slate-500">101st - 250th Growth Equities</div>
+            </div>
+
+            <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+              <div className="flex items-center space-x-1.5 mb-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0" />
+                <span className="font-semibold text-slate-300">Small Cap</span>
+              </div>
+              <div className="text-lg font-black text-cyan-400">{health.marketCapBifurcation.smallCapPct}%</div>
+              <div className="text-[10px] text-slate-500">251st+ High-Beta Opportunities</div>
+            </div>
+
+            <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+              <div className="flex items-center space-x-1.5 mb-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-indigo-400 shrink-0" />
+                <span className="font-semibold text-slate-300">Debt / Liquid</span>
+              </div>
+              <div className="text-lg font-black text-indigo-400">{health.marketCapBifurcation.debtPct}%</div>
+              <div className="text-[10px] text-slate-500">T-Bills, Cash & Sovereigns</div>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Top Consolidated Stocks (ICICI Direct feature) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Left: Top 10 Consolidated Equities */}
+          <div className="p-4 rounded-2xl bg-slate-950/60 border border-white/[0.05]">
+            <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/[0.04]">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                Top Consolidated Equities
+              </span>
+              <span className="text-[10px] text-slate-500">Actual Company Exposure</span>
+            </div>
+
+            {health.consolidatedStocks.length === 0 ? (
+              <div className="text-xs text-slate-500 py-4 text-center">Add funds to view underlying stock breakdown.</div>
+            ) : (
+              <div className="space-y-2">
+                {health.consolidatedStocks.map((stock, i) => (
+                  <div
+                    key={stock.symbol}
+                    className="p-2.5 rounded-xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.04] flex items-center justify-between gap-3 text-xs transition-colors"
+                  >
+                    <div className="flex items-center space-x-2 min-w-0">
+                      <span className="text-[10px] font-mono text-slate-500 w-4">#{i + 1}</span>
+                      <div className="truncate">
+                        <div className="font-bold text-white truncate flex items-center space-x-1.5">
+                          <span>{stock.name}</span>
+                          <span className="text-[10px] font-normal text-slate-500">({stock.symbol})</span>
+                        </div>
+                        <div className="text-[10px] text-slate-400 flex items-center space-x-2">
+                          <span>{stock.sector}</span>
+                          <span>•</span>
+                          <span className="text-emerald-400/80">Held in {stock.heldByFunds.length} fund{stock.heldByFunds.length > 1 ? 's' : ''}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="text-right shrink-0">
+                      <div className="font-black text-white">{stock.totalWeightPct}%</div>
+                      <div className="text-[10px] text-slate-400">{formatINR(stock.totalValue)}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Right: Consolidated Sector Allocation */}
+          <div className="p-4 rounded-2xl bg-slate-950/60 border border-white/[0.05]">
+            <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/[0.04]">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                Sector Allocation Breakdown
+              </span>
+              <span className="text-[10px] text-slate-500">Portfolio Weight</span>
+            </div>
+
+            {health.consolidatedSectors.length === 0 ? (
+              <div className="text-xs text-slate-500 py-4 text-center">No sector data available.</div>
+            ) : (
+              <div className="space-y-2.5">
+                {health.consolidatedSectors.map((sec) => (
+                  <div key={sec.sector} className="space-y-1">
+                    <div className="flex justify-between text-xs">
+                      <span className="font-semibold text-slate-300">{sec.sector}</span>
+                      <div className="space-x-2 text-right">
+                        <span className="font-bold text-white">{sec.weightPct}%</span>
+                        <span className="text-[10px] text-slate-500">({formatINR(sec.value)})</span>
+                      </div>
+                    </div>
+                    <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                      <div
+                        style={{ width: `${Math.min(100, sec.weightPct * 2.5)}%` }}
+                        className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

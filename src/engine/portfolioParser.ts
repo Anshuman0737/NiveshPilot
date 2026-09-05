@@ -113,6 +113,52 @@ export const SAMPLE_PORTFOLIO_PRESETS: Record<string, { title: string; desc: str
         currentValue: 26800
       }
     ]
+  },
+  icici_direct: {
+    title: 'ICICI Direct Mutual Fund Portfolio',
+    desc: 'Representative equity portfolio from ICICI Direct Portfolio Analyser featuring Large Cap, Flexi Cap, Mid Cap, and Liquid buffer.',
+    holdings: [
+      {
+        id: 'icici_1',
+        fundId: 'MIRAE_LARGE',
+        fundName: 'Mirae Asset Large Cap Fund',
+        category: 'Large Cap Fund',
+        investedAmount: 60000,
+        currentValue: 71200
+      },
+      {
+        id: 'icici_2',
+        fundId: 'PPFAS_FLEXI',
+        fundName: 'Parag Parikh Flexi Cap Fund',
+        category: 'Flexi Cap Fund',
+        investedAmount: 75000,
+        currentValue: 92400
+      },
+      {
+        id: 'icici_3',
+        fundId: 'HDFC_MIDCAP',
+        fundName: 'HDFC Mid-Cap Opportunities Fund',
+        category: 'Mid Cap Fund',
+        investedAmount: 40000,
+        currentValue: 51800
+      },
+      {
+        id: 'icici_4',
+        fundId: 'ICICI_HYBRID',
+        fundName: 'ICICI Prudential Equity & Debt Fund',
+        category: 'Aggressive Hybrid Fund',
+        investedAmount: 45000,
+        currentValue: 52100
+      },
+      {
+        id: 'icici_5',
+        fundId: 'SBI_LIQUID',
+        fundName: 'SBI Liquid Overnight Fund',
+        category: 'Liquid Fund',
+        investedAmount: 20000,
+        currentValue: 21400
+      }
+    ]
   }
 }
 
@@ -133,6 +179,7 @@ export function parsePortfolioText(text: string, knownFunds: FundSnapshot[]): Pa
     { pattern: /parag\s*parikh|ppfas/i, fundId: 'PPFAS_FLEXI', defaultName: 'Parag Parikh Flexi Cap Fund', category: 'Flexi Cap Fund' },
     { pattern: /mirae\s*asset\s*large|mirae\s*large/i, fundId: 'MIRAE_LARGE', defaultName: 'Mirae Asset Large Cap Fund', category: 'Large Cap Fund' },
     { pattern: /hdfc\s*mid[\s-]*cap/i, fundId: 'HDFC_MIDCAP', defaultName: 'HDFC Mid-Cap Opportunities Fund', category: 'Mid Cap Fund' },
+    { pattern: /icici\s*(?:pru|prudential)?\s*(?:equity|debt|hybrid|large)/i, fundId: 'ICICI_HYBRID', defaultName: 'ICICI Prudential Equity & Debt Fund', category: 'Aggressive Hybrid Fund' },
     { pattern: /nippon\s*india\s*small|nippon\s*small/i, fundId: 'NIPPON_SMALL', defaultName: 'Nippon India Small Cap Fund', category: 'Small Cap Fund' },
     { pattern: /icici\s*(?:prudential)?\s*(?:equity\s*&\s*debt|hybrid)/i, fundId: 'ICICI_HYBRID', defaultName: 'ICICI Prudential Equity & Debt', category: 'Aggressive Hybrid Fund' },
     { pattern: /sbi\s*liquid|hdfc\s*liquid|liquid\s*fund/i, fundId: 'SBI_LIQUID', defaultName: 'SBI Liquid Fund', category: 'Liquid Fund' },

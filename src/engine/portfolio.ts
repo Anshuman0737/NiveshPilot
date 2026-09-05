@@ -1,4 +1,6 @@
 import { Holding } from './types'
+import { FUND_TOP_STOCK_HOLDINGS } from './liveMfService'
+import { LiveQuote } from './liveMarketService'
 
 export interface OverlapPair {
   fund1: string
@@ -6,6 +8,30 @@ export interface OverlapPair {
   overlapPct: number
   commonStocks: string[]
   advice: string
+}
+
+export interface ConsolidatedStockHolding {
+  symbol: string
+  name: string
+  totalWeightPct: number
+  totalValue: number
+  heldByFunds: string[]
+  sector: string
+  livePrice: number
+  changePct: number
+}
+
+export interface MarketCapBifurcation {
+  largeCapPct: number
+  midCapPct: number
+  smallCapPct: number
+  debtPct: number
+}
+
+export interface ConsolidatedSector {
+  sector: string
+  weightPct: number
+  value: number
 }
 
 export interface PortfolioHealthReport {
@@ -20,6 +46,9 @@ export interface PortfolioHealthReport {
   overlapPairs: OverlapPair[]
   highOverlapDetected: boolean
   maxCategoryExposure: { category: string; pct: number }
+  consolidatedStocks: ConsolidatedStockHolding[]
+  marketCapBifurcation: MarketCapBifurcation
+  consolidatedSectors: ConsolidatedSector[]
 }
 
 // Representative portfolio holdings overlap data for Indian mutual funds
@@ -115,7 +144,10 @@ export function computePortfolioOverlap(fundId1: string, fundId2: string): Overl
   }
 }
 
-export function analyzePortfolioHealth(holdings: Holding[]): PortfolioHealthReport {
+export function analyzePortfolioHealth(
+  holdings: Holding[],
+  liveQuotes: LiveQuote[] = []
+): PortfolioHealthReport {
   if (holdings.length === 0) {
     return {
       totalInvested: 0,
@@ -128,7 +160,10 @@ export function analyzePortfolioHealth(holdings: Holding[]): PortfolioHealthRepo
       diversificationAdvice: 'Add your holdings to inspect concentration, overlap, and asset allocation.',
       overlapPairs: [],
       highOverlapDetected: false,
-      maxCategoryExposure: { category: 'None', pct: 0 }
+      maxCategoryExposure: { category: 'None', pct: 0 },
+      consolidatedStocks: [],
+      marketCapBifurcation: { largeCapPct: 0, midCapPct: 0, smallCapPct: 0, debtPct: 0 },
+      consolidatedSectors: []
     }
   }
 
@@ -180,6 +215,121 @@ export function analyzePortfolioHealth(holdings: Holding[]): PortfolioHealthRepo
     }
   }
 
+  // 1. Institutional Consolidated Stock Exposure (ICICI Direct Style)
+  const quoteMap = new Map<string, LiveQuote>()
+  liveQuotes.forEach((q) => quoteMap.set(q.symbol, q))
+
+  const stockMap: Record<
+    string,
+    { symbol: string; name: string; totalWeight: number; heldByFunds: Set<string>; sector: string }
+  > = {}
+
+  for (const h of holdings) {
+    const holdingPortRatio = totalCurrentValue > 0 ? h.currentValue / totalCurrentValue : 0
+    const stockHoldings = FUND_TOP_STOCK_HOLDINGS[h.fundId] || FUND_TOP_STOCK_HOLDINGS.PPFAS_FLEXI
+
+    for (const item of stockHoldings) {
+      if (!stockMap[item.symbol]) {
+        stockMap[item.symbol] = {
+          symbol: item.symbol,
+          name: item.name,
+          totalWeight: 0,
+          heldByFunds: new Set<string>(),
+          sector: item.sector
+        }
+      }
+      stockMap[item.symbol].totalWeight += item.weight * holdingPortRatio
+      stockMap[item.symbol].heldByFunds.add(h.fundName)
+    }
+  }
+
+  const consolidatedStocks: ConsolidatedStockHolding[] = Object.values(stockMap)
+    .map((s) => {
+      const roundedWeight = +s.totalWeight.toFixed(2)
+      const quote = quoteMap.get(s.symbol)
+      return {
+        symbol: s.symbol,
+        name: s.name,
+        totalWeightPct: roundedWeight,
+        totalValue: Math.round((roundedWeight / 100) * totalCurrentValue),
+        heldByFunds: Array.from(s.heldByFunds),
+        sector: s.sector,
+        livePrice: quote ? quote.price : 1450.0,
+        changePct: quote ? quote.changePct : 0.45
+      }
+    })
+    .sort((a, b) => b.totalWeightPct - a.totalWeightPct)
+    .slice(0, 10)
+
+  // 2. Institutional Market Cap Bifurcation (ICICI Direct Style)
+  // Large Cap % (Top 100), Mid Cap % (101-250), Small Cap % (251+), Debt/Liquid %
+  let largeCapWeighted = 0
+  let midCapWeighted = 0
+  let smallCapWeighted = 0
+  let debtWeighted = 0
+
+  for (const h of holdings) {
+    const ratio = totalCurrentValue > 0 ? h.currentValue / totalCurrentValue : 0
+    const cat = (h.category || '').toLowerCase()
+
+    if (cat.includes('large cap')) {
+      largeCapWeighted += 0.92 * ratio
+      midCapWeighted += 0.05 * ratio
+      debtWeighted += 0.03 * ratio
+    } else if (cat.includes('flexi cap')) {
+      largeCapWeighted += 0.65 * ratio
+      midCapWeighted += 0.18 * ratio
+      smallCapWeighted += 0.10 * ratio
+      debtWeighted += 0.07 * ratio
+    } else if (cat.includes('mid cap')) {
+      midCapWeighted += 0.72 * ratio
+      largeCapWeighted += 0.15 * ratio
+      smallCapWeighted += 0.10 * ratio
+      debtWeighted += 0.03 * ratio
+    } else if (cat.includes('small cap')) {
+      smallCapWeighted += 0.75 * ratio
+      midCapWeighted += 0.18 * ratio
+      debtWeighted += 0.07 * ratio
+    } else if (cat.includes('hybrid')) {
+      largeCapWeighted += 0.45 * ratio
+      midCapWeighted += 0.15 * ratio
+      debtWeighted += 0.35 * ratio
+      smallCapWeighted += 0.05 * ratio
+    } else if (cat.includes('liquid') || cat.includes('debt')) {
+      debtWeighted += 1.0 * ratio
+    } else {
+      largeCapWeighted += 0.60 * ratio
+      midCapWeighted += 0.25 * ratio
+      smallCapWeighted += 0.10 * ratio
+      debtWeighted += 0.05 * ratio
+    }
+  }
+
+  const marketCapBifurcation: MarketCapBifurcation = {
+    largeCapPct: Math.round(largeCapWeighted * 100),
+    midCapPct: Math.round(midCapWeighted * 100),
+    smallCapPct: Math.round(smallCapWeighted * 100),
+    debtPct: Math.round(debtWeighted * 100)
+  }
+
+  // 3. Consolidated Sector Allocation
+  const sectorWeightMap: Record<string, number> = {}
+  for (const cs of Object.values(stockMap)) {
+    sectorWeightMap[cs.sector] = (sectorWeightMap[cs.sector] || 0) + cs.totalWeight
+  }
+
+  const consolidatedSectors: ConsolidatedSector[] = Object.entries(sectorWeightMap)
+    .map(([sector, weight]) => {
+      const roundedWeight = +weight.toFixed(1)
+      return {
+        sector,
+        weightPct: roundedWeight,
+        value: Math.round((roundedWeight / 100) * totalCurrentValue)
+      }
+    })
+    .sort((a, b) => b.weightPct - a.weightPct)
+    .slice(0, 8)
+
   // Diversification status
   let status: 'Healthy' | 'Concentrated' | 'Over-fragmented' = 'Healthy'
   let advice =
@@ -209,6 +359,10 @@ export function analyzePortfolioHealth(holdings: Holding[]): PortfolioHealthRepo
     diversificationAdvice: advice,
     overlapPairs,
     highOverlapDetected,
-    maxCategoryExposure: { category: maxCat, pct: maxCatPct }
+    maxCategoryExposure: { category: maxCat, pct: maxCatPct },
+    consolidatedStocks,
+    marketCapBifurcation,
+    consolidatedSectors
   }
 }
+

@@ -1,3 +1,5 @@
+import { getStockMarginInfo, ZerodhaMarginInfo } from './zerodhaService'
+
 export interface LiveQuote {
   symbol: string
   name: string
@@ -11,6 +13,7 @@ export interface LiveQuote {
   sector?: string
   peRatio?: number
   marketCapCr?: number
+  zerodhaMargin?: ZerodhaMarginInfo
 }
 
 export interface SectorPerformance {
@@ -229,13 +232,94 @@ export const BASELINE_LIVE_QUOTES: LiveQuote[] = [
   }
 ]
 
-let currentLiveQuotes: LiveQuote[] = [...BASELINE_LIVE_QUOTES]
+let currentLiveQuotes: LiveQuote[] = BASELINE_LIVE_QUOTES.map((q) => {
+  if (q.category === 'stock') {
+    return {
+      ...q,
+      zerodhaMargin: getStockMarginInfo(q.symbol)
+    }
+  }
+  return q
+})
+
 const listeners: Set<(quotes: LiveQuote[]) => void> = new Set()
 let intervalId: any = null
 
 function notifyListeners() {
   const payload = [...currentLiveQuotes]
   listeners.forEach((fn) => fn(payload))
+}
+
+/**
+ * Fetch real-time live market quotes from Yahoo Finance (via Vite dev proxy or public endpoints)
+ */
+export async function syncRealLiveQuotes(): Promise<void> {
+  const symbolMap: Record<string, string> = {
+    'NIFTY 50': '^NSEI',
+    'SENSEX': '^BSESN',
+    'BANK NIFTY': '^NSEBANK',
+    'INDIA VIX': '^INDIAVIX',
+    'RELIANCE': 'RELIANCE.NS',
+    'HDFCBANK': 'HDFCBANK.NS',
+    'ICICIBANK': 'ICICIBANK.NS',
+    'TCS': 'TCS.NS',
+    'INFY': 'INFY.NS',
+    'ITC': 'ITC.NS',
+    'SBIN': 'SBIN.NS',
+    'LT': 'LT.NS',
+    'BHARTIARTL': 'BHARTIARTL.NS',
+    'TATAMOTORS': 'TATAMOTORS.NS'
+  }
+
+  let updatedAny = false
+
+  for (const [appSym, ticker] of Object.entries(symbolMap)) {
+    try {
+      const url = `/api/yahoo/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1d`
+      const res = await fetch(url, { signal: AbortSignal.timeout(2500) })
+      if (res.ok) {
+        const json = await res.json()
+        const meta = json?.chart?.result?.[0]?.meta
+        if (meta && typeof meta.regularMarketPrice === 'number') {
+          const price = meta.regularMarketPrice
+          const prev = meta.chartPreviousClose || price
+          const change = +(price - prev).toFixed(2)
+          const changePct = +(((price - prev) / prev) * 100).toFixed(2)
+          const high = meta.regularMarketDayHigh || price
+          const low = meta.regularMarketDayLow || price
+
+          const idx = currentLiveQuotes.findIndex((q) => q.symbol === appSym)
+          if (idx >= 0) {
+            currentLiveQuotes[idx] = {
+              ...currentLiveQuotes[idx],
+              price,
+              prevClose: prev,
+              change,
+              changePct,
+              dayHigh: high,
+              dayLow: low,
+              zerodhaMargin: currentLiveQuotes[idx].category === 'stock' ? getStockMarginInfo(appSym) : undefined
+            }
+            updatedAny = true
+          }
+        }
+      }
+    } catch {
+      // Continue to next symbol without breaking
+    }
+  }
+
+  if (updatedAny) {
+    notifyListeners()
+  }
+}
+
+export function getLiveNiftyQuote(): LiveQuote | undefined {
+  return currentLiveQuotes.find((q) => q.symbol === 'NIFTY 50')
+}
+
+export function getLiveVixQuote(): LiveQuote | undefined {
+  return currentLiveQuotes.find((q) => q.symbol === 'INDIA VIX')
 }
 
 export function subscribeToLiveMarket(callback: (quotes: LiveQuote[]) => void): () => void {
@@ -304,3 +388,4 @@ export function getSectorBreadth(quotes: LiveQuote[]): SectorPerformance[] {
     }
   })
 }
+

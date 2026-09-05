@@ -7,6 +7,7 @@ import {
   ChevronDown,
   ChevronUp
 } from 'lucide-react'
+import { subscribeToLiveMarket, LiveQuote } from '../engine/liveMarketService'
 
 export interface SimulatedMarketState {
   isSimulated: boolean
@@ -22,45 +23,47 @@ interface LiveMarketPulseProps {
 }
 
 export const LiveMarketPulse: React.FC<LiveMarketPulseProps> = ({ onSimulateStateChange }) => {
-  const BASELINE_INDEX = 25235.9
-  const BASELINE_CHANGE = 142.3
-  const BASELINE_PCT = 0.57
-  const BASELINE_VOL = 12.8
-  const BASELINE_DD = -1.4
-  const BASELINE_REGIME = 'Bull (Low Volatility)'
-
-  const [tickOffset, setTickOffset] = useState<number>(0)
+  const [liveNifty, setLiveNifty] = useState<LiveQuote | null>(null)
+  const [liveVix, setLiveVix] = useState<LiveQuote | null>(null)
   const [isSimulatorOpen, setIsSimulatorOpen] = useState<boolean>(false)
 
   const [simDrop, setSimDrop] = useState<number>(0)
-  const [simVol, setSimVol] = useState<number>(12.8)
+  const [simVol, setSimVol] = useState<number>(13.4)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const microDrift = (Math.random() - 0.48) * 1.8
-      setTickOffset((prev) => +(prev + microDrift).toFixed(2))
-    }, 4000)
-    return () => clearInterval(interval)
+    const unsub = subscribeToLiveMarket((quotes) => {
+      const nifty = quotes.find((q) => q.symbol === 'NIFTY 50')
+      const vix = quotes.find((q) => q.symbol === 'INDIA VIX')
+      if (nifty) setLiveNifty(nifty)
+      if (vix) setLiveVix(vix)
+    })
+    return () => unsub()
   }, [])
 
-  const isSimulated = simDrop > 0 || Math.abs(simVol - BASELINE_VOL) > 1.0
+  const baseIndex = liveNifty?.price || 24852.4
+  const baseChange = liveNifty?.change || 142.3
+  const baseChangePct = liveNifty?.changePct || 0.57
+  const baseVol = liveVix?.price || 13.4
+  const baseDD = -1.4
+
+  const isSimulated = simDrop > 0 || Math.abs(simVol - baseVol) > 1.0
 
   const activeIndex = isSimulated
-    ? +(BASELINE_INDEX * (1 - simDrop / 100)).toFixed(2)
-    : +(BASELINE_INDEX + tickOffset).toFixed(2)
+    ? +(baseIndex * (1 - simDrop / 100)).toFixed(2)
+    : baseIndex
 
   const activeChange = isSimulated
-    ? +(-BASELINE_INDEX * (simDrop / 100)).toFixed(2)
-    : +(BASELINE_CHANGE + tickOffset).toFixed(2)
+    ? +(-baseIndex * (simDrop / 100)).toFixed(2)
+    : baseChange
 
   const activeChangePct = isSimulated
     ? +(-simDrop).toFixed(2)
-    : +(BASELINE_PCT + (tickOffset / BASELINE_INDEX) * 100).toFixed(2)
+    : baseChangePct
 
-  const activeVol = isSimulated ? simVol : BASELINE_VOL
-  const activeDD = isSimulated ? +(-simDrop - 1.4).toFixed(1) : BASELINE_DD
+  const activeVol = isSimulated ? simVol : baseVol
+  const activeDD = isSimulated ? +(-simDrop - 1.4).toFixed(1) : baseDD
 
-  let activeRegime = BASELINE_REGIME
+  let activeRegime = 'Bull (Low Volatility)'
   let activeSignal = 'INVEST NOW'
   let regimeColor = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
 
@@ -93,7 +96,7 @@ export const LiveMarketPulse: React.FC<LiveMarketPulseProps> = ({ onSimulateStat
 
   const handleReset = () => {
     setSimDrop(0)
-    setSimVol(BASELINE_VOL)
+    setSimVol(baseVol)
   }
 
   return (

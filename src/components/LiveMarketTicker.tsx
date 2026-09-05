@@ -218,7 +218,7 @@ export const LiveMarketTicker: React.FC = () => {
               </div>
             </div>
 
-            {/* Key Metrics */}
+            {/* Key Metrics & Zerodha Margin Data */}
             <div className="grid grid-cols-2 gap-2 text-xs mb-4">
               {selectedQuote.peRatio && (
                 <div className="p-2.5 rounded-xl bg-slate-950/60 border border-white/[0.05]">
@@ -231,6 +231,21 @@ export const LiveMarketTicker: React.FC = () => {
                   <span className="text-[10px] text-slate-500 block">Market Cap:</span>
                   <span className="font-bold text-white text-sm">
                     ₹{(selectedQuote.marketCapCr / 1000).toFixed(0)}k Cr
+                  </span>
+                </div>
+              )}
+              {selectedQuote.zerodhaMargin && (
+                <div className="col-span-2 p-2.5 rounded-xl bg-slate-950/60 border border-orange-500/20 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-orange-400 font-bold uppercase tracking-wider block">
+                      Zerodha Kite Margin & Leverage
+                    </span>
+                    <span className="font-bold text-white text-xs">
+                      {selectedQuote.zerodhaMargin.leverageDesc}
+                    </span>
+                  </div>
+                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-orange-500/10 text-orange-300 font-mono font-semibold border border-orange-500/20">
+                    Zerodha Public Data
                   </span>
                 </div>
               )}

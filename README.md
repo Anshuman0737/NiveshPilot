@@ -109,15 +109,23 @@ flowchart TD
 
 ### 1. 🔴/🟢 Live Market Streaming Ticker & Equity Breadth
 * **Real-Time Market Ribbon**: Continuously streaming marquee ticker displaying live ticks across Indian benchmarks and blue-chip equities:
-  * **Major Benchmarks**: Nifty 50 (`25,235.90`), BSE Sensex (`82,559.84`), Bank Nifty (`51,390.40`), Nifty Midcap 150 (`21,430.10`), Nifty Smallcap 250 (`18,290.50`), and India VIX (`13.80`).
+  * **Major Benchmarks**: Nifty 50, BSE Sensex, Bank Nifty, Nifty Midcap 150, Nifty Smallcap 250, and India VIX.
   * **Top Indian Equities**: Live quotes and daily % changes for Reliance Industries, HDFC Bank, ICICI Bank, TCS, Infosys, ITC, SBI, Larsen & Toubro, Bharti Airtel, and Tata Motors.
+  * **Real-Time Free API Synchronization**: Dynamic live quote synchronization via Yahoo Finance and Kite endpoints with seamless offline micro-tick fallbacks.
+* **Zerodha Kite Public Integration**:
+  * Free connection to official **Zerodha Kite open margin endpoints** (`https://api.kite.trade/margins/equity`).
+  * Shows intraday MIS multipliers (e.g. 5x leverage) and capital margin requirements directly in the stock inspector modal.
 * **Sector Breadth Drawer**: Instant 1-click view of sectoral performance across Financials, IT, Energy, FMCG, Auto, and Capital Goods with advancing vs declining ratio.
-* **Interactive Stock Inspector**: Click any stock to view live price, day change, 52-week high/low, P/E ratio, and market capitalization.
+* **Interactive Stock Inspector**: Click any stock to view live price, day change, 52-week high/low, P/E ratio, market cap, and official Zerodha Kite margin eligibility.
 
 ### 2. 🔍 Official AMFI Live Search across 40,000+ Mutual Funds
 * **Direct Official AMFI Integration**: Connects straight to public AMFI endpoints (`api.mfapi.in`) at **₹0 cost** with full CORS support.
 * **Universal Search**: Type any scheme name or fund house (e.g. *Parag Parikh, Quant, Mirae, HDFC, Nippon, Tata, UTI, Motilal Oswal*) to search across 40,000+ active schemes.
-* **Instant Historical Loading**: Pulls real daily NAV history in milliseconds, calculating live rolling returns (1M, 3M, 6M, 1Y), 3Y/5Y CAGRs, and institutional fund quality scores.
+* **100% Empirical Metric Calculation (Zero Hardcoding)**:
+  * **Real 252-Day Peak Drawdown**: Mathematically computed from the fund's complete historical daily NAV series.
+  * **Real 30-Day Realized Volatility**: Calculated using daily return standard deviations annualized across 252 trading sessions.
+  * **Real 1-Year Rolling Sortino**: Calculated using downside deviation below the 6% risk-free rate.
+  * **Automated Direct/Regular Expense Ratio Detection**: Detects scheme plan type directly from scheme metadata.
 * **Dynamic Category Filtering**: Seamlessly filter between *All*, *Flexi Cap*, *Large Cap*, *Mid Cap*, *Small Cap*, *Hybrid*, and *Liquid* funds.
 
 ### 3. 🏢 Underlying Equity Portfolio Transparency

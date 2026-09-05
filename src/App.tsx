@@ -19,6 +19,8 @@ import { Navbar, ActiveTab } from './components/Navbar'
 import { LiveMarketTicker } from './components/LiveMarketTicker'
 import { LiveMarketPulse, SimulatedMarketState } from './components/LiveMarketPulse'
 import { syncActiveFundsWithLiveAMFI } from './engine/liveMfService'
+import { syncRealLiveQuotes } from './engine/liveMarketService'
+import { fetchZerodhaMargins } from './engine/zerodhaService'
 import { HeroSection } from './components/HeroSection'
 import { OnboardingModal } from './components/OnboardingModal'
 import { AISettingsModal } from './components/AISettingsModal'
@@ -75,6 +77,10 @@ export const App: React.FC = () => {
     fetchBacktestResults().then((res) => {
       if (res) setBacktest(res)
     })
+
+    // Fetch real-time market quotes and Zerodha margin metrics
+    syncRealLiveQuotes().catch((err) => console.warn('Yahoo real quotes sync:', err))
+    fetchZerodhaMargins().catch((err) => console.warn('Zerodha margins sync:', err))
   }, [])
 
   const handleAddLiveFund = (newFund: FundSnapshot) => {
@@ -154,7 +160,10 @@ export const App: React.FC = () => {
             <HeroSection
               currentAmount={profile.amount}
               onFindNextMove={() => setIsOnboardingOpen(true)}
-              onExploreResearch={() => setAdvancedMode(true)}
+              onExploreResearch={() => {
+                setActiveTab('research')
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
               onSelectAmount={(amt) => setProfile((prev) => ({ ...prev, amount: amt }))}
             />
 

@@ -1,0 +1,81 @@
+{
+  "NIFTY50_TRI": {
+    "fund_id": "NIFTY50_TRI",
+    "category": "Benchmark",
+    "total_records": 2261,
+    "start_date": "2016-01-01",
+    "end_date": "2024-08-30",
+    "quality_score": 100,
+    "status": "ACCEPTABLE",
+    "issues": [],
+    "anomalies_detected": false
+  },
+  "PPFAS_FLEXI": {
+    "fund_id": "PPFAS_FLEXI",
+    "category": "Flexi Cap Fund",
+    "total_records": 2261,
+    "start_date": "2016-01-01",
+    "end_date": "2024-08-30",
+    "quality_score": 100,
+    "status": "ACCEPTABLE",
+    "issues": [],
+    "anomalies_detected": false
+  },
+  "MIRAE_LARGE": {
+    "fund_id": "MIRAE_LARGE",
+    "category": "Large Cap Fund",
+    "total_records": 2261,
+    "start_date": "2016-01-01",
+    "end_date": "2024-08-30",
+    "quality_score": 100,
+    "status": "ACCEPTABLE",
+    "issues": [],
+    "anomalies_detected": false
+  },
+  "HDFC_MIDCAP": {
+    "fund_id": "HDFC_MIDCAP",
+    "category": "Mid Cap Fund",
+    "total_records": 2261,
+    "start_date": "2016-01-01",
+    "end_date": "2024-08-30",
+    "quality_score": 100,
+    "status": "ACCEPTABLE",
+    "issues": [],
+    "anomalies_detected": false
+  },
+  "NIPPON_SMALL": {
+    "fund_id": "NIPPON_SMALL",
+    "category": "Small Cap Fund",
+    "total_records": 2261,
+    "start_date": "2016-01-01",
+    "end_date": "2024-08-30",
+    "quality_score": 90,
+    "status": "ACCEPTABLE",
+    "issues": [
+      "Found 1 abnormal single-day return jumps exceeding 15.0%."
+    ],
+    "anomalies_detected": true
+  },
+  "ICICI_HYBRID": {
+    "fund_id": "ICICI_HYBRID",
+    "category": "Aggressive Hybrid Fund",
+    "total_records": 2261,
+    "start_date": "2016-01-01",
+    "end_date": "2024-08-30",
+    "quality_score": 100,
+    "status": "ACCEPTABLE",
+    "issues": [],
+    "anomalies_detected": false
+  },
+  "SBI_LIQUID": {
+    "fund_id": "SBI_LIQUID",
+    "category": "Liquid Fund",
+    "total_records": 2261,
+    "start_date": "2016-01-01",
+    "end_date": "2024-08-30",
+    "quality_score": 100,
+    "status": "ACCEPTABLE",
+    "issues": [],
+    "anomalies_detected": false
+  }
+}

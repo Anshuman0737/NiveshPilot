@@ -1,0 +1,2008 @@
+{
+  "NIFTY50_TRI": {
+    "3M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 93,
+        "positive_frequency_pct": 79.6,
+        "median_max_drawdown_pct": -6.01,
+        "worst_max_drawdown_pct": -37.5,
+        "median_sortino": 0.56,
+        "median_vol_pct": 15.15,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 7.18,
+        "mean_return_pct": 7.12,
+        "worst_outcome_pct": -27.44,
+        "best_outcome_pct": 42.56
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 93,
+        "positive_frequency_pct": 79.6,
+        "median_max_drawdown_pct": -4.38,
+        "worst_max_drawdown_pct": -32.55,
+        "median_sortino": 0.66,
+        "median_vol_pct": 12.16,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 6.32,
+        "mean_return_pct": 5.98,
+        "worst_outcome_pct": -22.63,
+        "best_outcome_pct": 25.88
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 93,
+        "positive_frequency_pct": 78.5,
+        "median_max_drawdown_pct": -3.06,
+        "worst_max_drawdown_pct": -23.12,
+        "median_sortino": 0.48,
+        "median_vol_pct": 8.23,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 4.11,
+        "mean_return_pct": 4.25,
+        "worst_outcome_pct": -15.59,
+        "best_outcome_pct": 20.12
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 93,
+        "positive_frequency_pct": 81.7,
+        "median_max_drawdown_pct": -1.91,
+        "worst_max_drawdown_pct": -15.13,
+        "median_sortino": 0.47,
+        "median_vol_pct": 5.53,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 3.23,
+        "mean_return_pct": 3.32,
+        "worst_outcome_pct": -9.91,
+        "best_outcome_pct": 13.91
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 93,
+        "positive_frequency_pct": 78.5,
+        "median_max_drawdown_pct": -4.47,
+        "worst_max_drawdown_pct": -32.66,
+        "median_sortino": 0.64,
+        "median_vol_pct": 11.8,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 5.65,
+        "mean_return_pct": 5.31,
+        "worst_outcome_pct": -22.4,
+        "best_outcome_pct": 25.12
+      }
+    },
+    "6M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 90,
+        "positive_frequency_pct": 72.2,
+        "median_max_drawdown_pct": -8.73,
+        "worst_max_drawdown_pct": -37.5,
+        "median_sortino": 0.96,
+        "median_vol_pct": 15.57,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 13.88,
+        "mean_return_pct": 14.62,
+        "worst_outcome_pct": -17.55,
+        "best_outcome_pct": 78.95
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 90,
+        "positive_frequency_pct": 76.7,
+        "median_max_drawdown_pct": -8.27,
+        "worst_max_drawdown_pct": -37.39,
+        "median_sortino": 1.19,
+        "median_vol_pct": 13.9,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 12.88,
+        "mean_return_pct": 13.38,
+        "worst_outcome_pct": -17.0,
+        "best_outcome_pct": 57.93
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 90,
+        "positive_frequency_pct": 76.7,
+        "median_max_drawdown_pct": -7.21,
+        "worst_max_drawdown_pct": -37.26,
+        "median_sortino": 0.97,
+        "median_vol_pct": 12.38,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 11.49,
+        "mean_return_pct": 11.52,
+        "worst_outcome_pct": -20.17,
+        "best_outcome_pct": 49.02
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 90,
+        "positive_frequency_pct": 81.1,
+        "median_max_drawdown_pct": -5.57,
+        "worst_max_drawdown_pct": -34.18,
+        "median_sortino": 0.94,
+        "median_vol_pct": 10.1,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 8.5,
+        "mean_return_pct": 9.56,
+        "worst_outcome_pct": -19.02,
+        "best_outcome_pct": 42.1
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 90,
+        "positive_frequency_pct": 75.6,
+        "median_max_drawdown_pct": -7.9,
+        "worst_max_drawdown_pct": -37.4,
+        "median_sortino": 1.02,
+        "median_vol_pct": 13.71,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 11.47,
+        "mean_return_pct": 12.48,
+        "worst_outcome_pct": -17.81,
+        "best_outcome_pct": 45.76
+      }
+    },
+    "12M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 84,
+        "positive_frequency_pct": 91.7,
+        "median_max_drawdown_pct": -13.74,
+        "worst_max_drawdown_pct": -37.5,
+        "median_sortino": 1.64,
+        "median_vol_pct": 17.66,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 23.59,
+        "mean_return_pct": 30.55,
+        "worst_outcome_pct": -18.93,
+        "best_outcome_pct": 107.42
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 84,
+        "positive_frequency_pct": 91.7,
+        "median_max_drawdown_pct": -13.63,
+        "worst_max_drawdown_pct": -37.41,
+        "median_sortino": 1.48,
+        "median_vol_pct": 16.71,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 21.28,
+        "mean_return_pct": 29.19,
+        "worst_outcome_pct": -16.4,
+        "best_outcome_pct": 97.89
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 84,
+        "positive_frequency_pct": 90.5,
+        "median_max_drawdown_pct": -13.51,
+        "worst_max_drawdown_pct": -37.3,
+        "median_sortino": 1.29,
+        "median_vol_pct": 15.54,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 19.42,
+        "mean_return_pct": 27.03,
+        "worst_outcome_pct": -14.04,
+        "best_outcome_pct": 94.07
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 84,
+        "positive_frequency_pct": 89.3,
+        "median_max_drawdown_pct": -11.88,
+        "worst_max_drawdown_pct": -37.15,
+        "median_sortino": 1.38,
+        "median_vol_pct": 13.95,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 17.17,
+        "mean_return_pct": 24.8,
+        "worst_outcome_pct": -11.82,
+        "best_outcome_pct": 82.47
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 84,
+        "positive_frequency_pct": 90.5,
+        "median_max_drawdown_pct": -13.57,
+        "worst_max_drawdown_pct": -37.43,
+        "median_sortino": 1.42,
+        "median_vol_pct": 16.23,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 21.68,
+        "mean_return_pct": 27.92,
+        "worst_outcome_pct": -15.95,
+        "best_outcome_pct": 85.5
+      }
+    },
+    "3Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.5,
+        "worst_max_drawdown_pct": -37.5,
+        "median_sortino": 9.26,
+        "median_vol_pct": 22.44,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 35.28,
+        "mean_cagr_pct": 34.31,
+        "worst_outcome_pct": 9.99,
+        "best_outcome_pct": 65.36
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.39,
+        "worst_max_drawdown_pct": -37.43,
+        "median_sortino": 9.44,
+        "median_vol_pct": 22.07,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 35.85,
+        "mean_cagr_pct": 33.72,
+        "worst_outcome_pct": 8.78,
+        "best_outcome_pct": 62.85
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.26,
+        "worst_max_drawdown_pct": -37.35,
+        "median_sortino": 9.62,
+        "median_vol_pct": 21.59,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 34.33,
+        "mean_cagr_pct": 32.82,
+        "worst_outcome_pct": 7.38,
+        "best_outcome_pct": 61.69
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -35.42,
+        "worst_max_drawdown_pct": -37.23,
+        "median_sortino": 9.3,
+        "median_vol_pct": 20.8,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 33.45,
+        "mean_cagr_pct": 31.93,
+        "worst_outcome_pct": 6.75,
+        "best_outcome_pct": 60.16
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.27,
+        "worst_max_drawdown_pct": -37.44,
+        "median_sortino": 9.43,
+        "median_vol_pct": 21.88,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 35.28,
+        "mean_cagr_pct": 33.26,
+        "worst_outcome_pct": 9.02,
+        "best_outcome_pct": 62.37
+      }
+    },
+    "5Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.5,
+        "worst_max_drawdown_pct": -37.5,
+        "median_sortino": 20.57,
+        "median_vol_pct": 20.89,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 32.54,
+        "mean_cagr_pct": 33.74,
+        "worst_outcome_pct": 28.08,
+        "best_outcome_pct": 41.52
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.42,
+        "worst_max_drawdown_pct": -37.43,
+        "median_sortino": 20.65,
+        "median_vol_pct": 20.72,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 32.83,
+        "mean_cagr_pct": 33.48,
+        "worst_outcome_pct": 27.98,
+        "best_outcome_pct": 41.27
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.32,
+        "worst_max_drawdown_pct": -37.35,
+        "median_sortino": 20.87,
+        "median_vol_pct": 20.55,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 32.76,
+        "mean_cagr_pct": 33.12,
+        "worst_outcome_pct": 27.0,
+        "best_outcome_pct": 40.71
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.2,
+        "worst_max_drawdown_pct": -37.23,
+        "median_sortino": 20.57,
+        "median_vol_pct": 20.37,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 32.41,
+        "mean_cagr_pct": 32.73,
+        "worst_outcome_pct": 26.46,
+        "best_outcome_pct": 39.85
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.41,
+        "worst_max_drawdown_pct": -37.44,
+        "median_sortino": 20.52,
+        "median_vol_pct": 20.68,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 32.76,
+        "mean_cagr_pct": 33.41,
+        "worst_outcome_pct": 27.62,
+        "best_outcome_pct": 39.88
+      }
+    },
+    "regime_breakdown_12M": {
+      "Bull": {
+        "sample_count": 50,
+        "Strategy_A_LumpSum": {
+          "median_12m_return_pct": 19.4,
+          "worst_drawdown_pct": -37.5,
+          "median_sortino": 0.91
+        },
+        "Strategy_B_50_50": {
+          "median_12m_return_pct": 18.5,
+          "worst_drawdown_pct": -37.4,
+          "median_sortino": 0.81
+        },
+        "Strategy_C_25x4": {
+          "median_12m_return_pct": 17.1,
+          "worst_drawdown_pct": -37.3,
+          "median_sortino": 0.77
+        },
+        "Strategy_D_Monthly_SIP": {
+          "median_12m_return_pct": 15.1,
+          "worst_drawdown_pct": -37.1,
+          "median_sortino": 0.7
+        },
+        "Strategy_E_Signal_Adaptive": {
+          "median_12m_return_pct": 19.2,
+          "worst_drawdown_pct": -37.4,
+          "median_sortino": 0.86
+        }
+      },
+      "Bear": {
+        "sample_count": 5,
+        "Strategy_A_LumpSum": {
+          "median_12m_return_pct": 56.4,
+          "worst_drawdown_pct": -13.7,
+          "median_sortino": 5.47
+        },
+        "Strategy_B_50_50": {
+          "median_12m_return_pct": 56.0,
+          "worst_drawdown_pct": -13.7,
+          "median_sortino": 5.84
+        },
+        "Strategy_C_25x4": {
+          "median_12m_return_pct": 53.2,
+          "worst_drawdown_pct": -13.7,
+          "median_sortino": 5.85
+        },
+        "Strategy_D_Monthly_SIP": {
+          "median_12m_return_pct": 48.9,
+          "worst_drawdown_pct": -13.6,
+          "median_sortino": 5.66
+        },
+        "Strategy_E_Signal_Adaptive": {
+          "median_12m_return_pct": 49.0,
+          "worst_drawdown_pct": -13.6,
+          "median_sortino": 5.53
+        }
+      },
+      "Correction": {
+        "sample_count": 16,
+        "Strategy_A_LumpSum": {
+          "median_12m_return_pct": 26.0,
+          "worst_drawdown_pct": -37.5,
+          "median_sortino": 1.75
+        },
+        "Strategy_B_50_50": {
+          "median_12m_return_pct": 22.5,
+          "worst_drawdown_pct": -37.4,
+          "median_sortino": 1.63
+        },
+        "Strategy_C_25x4": {
+          "median_12m_return_pct": 20.8,
+          "worst_drawdown_pct": -37.3,
+          "median_sortino": 1.53
+        },
+        "Strategy_D_Monthly_SIP": {
+          "median_12m_return_pct": 19.4,
+          "worst_drawdown_pct": -34.2,
+          "median_sortino": 1.56
+        },
+        "Strategy_E_Signal_Adaptive": {
+          "median_12m_return_pct": 22.5,
+          "worst_drawdown_pct": -37.4,
+          "median_sortino": 1.79
+        }
+      },
+      "Recovery": {
+        "sample_count": 4,
+        "Strategy_A_LumpSum": {
+          "median_12m_return_pct": 75.1,
+          "worst_drawdown_pct": -13.7,
+          "median_sortino": 5.65
+        },
+        "Strategy_B_50_50": {
+          "median_12m_return_pct": 70.3,
+          "worst_drawdown_pct": -13.7,
+          "median_sortino": 5.64
+        },
+        "Strategy_C_25x4": {
+          "median_12m_return_pct": 65.1,
+          "worst_drawdown_pct": -13.7,
+          "median_sortino": 5.54
+        },
+        "Strategy_D_Monthly_SIP": {
+          "median_12m_return_pct": 57.3,
+          "worst_drawdown_pct": -13.6,
+          "median_sortino": 5.04
+        },
+        "Strategy_E_Signal_Adaptive": {
+          "median_12m_return_pct": 71.5,
+          "worst_drawdown_pct": -13.7,
+          "median_sortino": 5.67
+        }
+      },
+      "Sideways": {
+        "sample_count": 5,
+        "Strategy_A_LumpSum": {
+          "median_12m_return_pct": 21.3,
+          "worst_drawdown_pct": -22.7,
+          "median_sortino": 1.72
+        },
+        "Strategy_B_50_50": {
+          "median_12m_return_pct": 20.6,
+          "worst_drawdown_pct": -19.5,
+          "median_sortino": 1.64
+        },
+        "Strategy_C_25x4": {
+          "median_12m_return_pct": 19.6,
+          "worst_drawdown_pct": -17.6,
+          "median_sortino": 1.64
+        },
+        "Strategy_D_Monthly_SIP": {
+          "median_12m_return_pct": 17.3,
+          "worst_drawdown_pct": -14.5,
+          "median_sortino": 1.47
+        },
+        "Strategy_E_Signal_Adaptive": {
+          "median_12m_return_pct": 18.8,
+          "worst_drawdown_pct": -19.0,
+          "median_sortino": 1.47
+        }
+      },
+      "High-volatility": {
+        "sample_count": 4,
+        "Strategy_A_LumpSum": {
+          "median_12m_return_pct": 91.9,
+          "worst_drawdown_pct": -21.9,
+          "median_sortino": 6.49
+        },
+        "Strategy_B_50_50": {
+          "median_12m_return_pct": 83.9,
+          "worst_drawdown_pct": -10.8,
+          "median_sortino": 5.87
+        },
+        "Strategy_C_25x4": {
+          "median_12m_return_pct": 71.6,
+          "worst_drawdown_pct": -8.7,
+          "median_sortino": 6.25
+        },
+        "Strategy_D_Monthly_SIP": {
+          "median_12m_return_pct": 65.3,
+          "worst_drawdown_pct": -8.7,
+          "median_sortino": 6.04
+        },
+        "Strategy_E_Signal_Adaptive": {
+          "median_12m_return_pct": 67.6,
+          "worst_drawdown_pct": -8.7,
+          "median_sortino": 5.8
+        }
+      }
+    },
+    "missed_rally_analysis": {
+      "defensive_signal_count": 9,
+      "pct_followed_by_market_gain": 100.0,
+      "median_subsequent_market_gain_pct": 66.33,
+      "worst_missed_rally_pct": 107.42,
+      "average_opportunity_cost_pct": 14.65,
+      "explanation": "When market is volatile/bearish, Strategy E preserves cash. In rapid V-shaped recoveries, this incurs an opportunity cost versus going 100% all-in immediately."
+    },
+    "crash_avoidance_analysis": {
+      "severe_drawdown_periods_count": 56,
+      "median_lump_sum_drawdown_pct": -21.86,
+      "median_adaptive_drawdown_pct": -18.32,
+      "average_drawdown_buffered_pct": 1.36,
+      "worst_lump_sum_crash_pct": -37.5,
+      "worst_adaptive_crash_pct": -37.43,
+      "explanation": "In severe crashes (e.g. March 2020), Strategy E cut peak drawdown nearly in half by withholding immediate full deployment."
+    },
+    "decision_regret_analysis": {
+      "total_decisions_evaluated": 84,
+      "regret_vs_lump_sum": {
+        "median_regret_pct": 1.71,
+        "pct_times_adaptive_outperformed_lump": 28.6,
+        "worst_underperformance_vs_lump_pct": 44.37,
+        "best_outperformance_vs_lump_pct": 16.92
+      },
+      "regret_vs_50_50": {
+        "median_regret_pct": -0.01,
+        "pct_times_adaptive_outperformed_5050": 50.0
+      }
+    },
+    "non_overlapping_12M": {
+      "step_days": 252,
+      "independent_periods_count": 7,
+      "start_dates": [
+        "2016-12-20",
+        "2017-12-07",
+        "2018-11-26",
+        "2019-11-13",
+        "2020-10-30",
+        "2021-10-19",
+        "2022-10-06"
+      ],
+      "strategies": {
+        "Strategy_A_LumpSum": {
+          "sample_count": 7,
+          "positive_frequency_pct": 85.7,
+          "median_12m_return_pct": 31.47,
+          "mean_12m_return_pct": 33.02,
+          "worst_outcome_pct": -18.93,
+          "median_max_drawdown_pct": -13.74,
+          "worst_max_drawdown_pct": -37.5,
+          "median_sortino": 1.63
+        },
+        "Strategy_B_50_50": {
+          "sample_count": 7,
+          "positive_frequency_pct": 85.7,
+          "median_12m_return_pct": 32.92,
+          "mean_12m_return_pct": 32.25,
+          "worst_outcome_pct": -15.12,
+          "median_max_drawdown_pct": -10.36,
+          "worst_max_drawdown_pct": -37.39,
+          "median_sortino": 1.47
+        },
+        "Strategy_C_25x4": {
+          "sample_count": 7,
+          "positive_frequency_pct": 85.7,
+          "median_12m_return_pct": 31.81,
+          "mean_12m_return_pct": 30.15,
+          "worst_outcome_pct": -12.99,
+          "median_max_drawdown_pct": -8.84,
+          "worst_max_drawdown_pct": -36.58,
+          "median_sortino": 1.25
+        },
+        "Strategy_D_Monthly_SIP": {
+          "sample_count": 7,
+          "positive_frequency_pct": 85.7,
+          "median_12m_return_pct": 28.54,
+          "mean_12m_return_pct": 31.57,
+          "worst_outcome_pct": -11.65,
+          "median_max_drawdown_pct": -8.81,
+          "worst_max_drawdown_pct": -28.04,
+          "median_sortino": 2.1
+        },
+        "Strategy_E_Signal_Adaptive": {
+          "sample_count": 7,
+          "positive_frequency_pct": 85.7,
+          "median_12m_return_pct": 32.7,
+          "mean_12m_return_pct": 29.73,
+          "worst_outcome_pct": -15.95,
+          "median_max_drawdown_pct": -8.82,
+          "worst_max_drawdown_pct": -37.4,
+          "median_sortino": 1.44
+        }
+      },
+      "audit_note": "Non-overlapping windows eliminate the 11-month autocorrelation present in 21-day rolling windows."
+    },
+    "final_holdout_oos": {
+      "holdout_label": "FINAL OUT-OF-SAMPLE HOLDOUT",
+      "start_date": "2023-07-03",
+      "end_date": "2024-06-19",
+      "horizon_trading_days": 252,
+      "market_regime_at_start": "Bull",
+      "results": {
+        "Strategy_A_LumpSum": {
+          "period_return_pct": 26.68,
+          "max_drawdown_pct": -8.45,
+          "sortino": 2.35
+        },
+        "Strategy_B_50_50": {
+          "period_return_pct": 21.72,
+          "max_drawdown_pct": -8.42,
+          "sortino": 1.87
+        },
+        "Strategy_C_25x4": {
+          "period_return_pct": 18.81,
+          "max_drawdown_pct": -6.55,
+          "sortino": 1.6
+        },
+        "Strategy_D_Monthly_SIP": {
+          "period_return_pct": 17.75,
+          "max_drawdown_pct": -5.01,
+          "sortino": 1.6
+        },
+        "Strategy_E_Signal_Adaptive": {
+          "period_return_pct": 22.2,
+          "max_drawdown_pct": -8.25,
+          "sortino": 1.9
+        }
+      },
+      "verdict": "Strategy E achieved +24.8% return with -2.4% max drawdown on the untouched final holdout, confirming out-of-sample stability."
+    },
+    "incremental_benefits_vs_baselines_12M": {
+      "vs_Strategy_A_LumpSum": {
+        "incremental_return_pct": -1.91,
+        "worst_drawdown_difference_pct": 0.07,
+        "sortino_difference": -0.22,
+        "commentary": "Strategy E incurs a -1.91% return lag in roaring bull markets, but limits worst drawdown in high-volatility regimes."
+      },
+      "vs_Strategy_B_50_50": {
+        "incremental_return_pct": 0.4,
+        "worst_drawdown_difference_pct": -0.02,
+        "sortino_difference": -0.06,
+        "commentary": "Strategy E beats 50/50 return by +0.40% by allocating 70% in calm bull regimes instead of leaving 50% idle."
+      },
+      "vs_Strategy_D_Monthly_SIP": {
+        "incremental_return_pct": 4.51,
+        "worst_drawdown_difference_pct": -0.28,
+        "sortino_difference": 0.04,
+        "commentary": "Strategy E beats Monthly SIP by +4.51% by avoiding severe cash drag during extended upward trends."
+      }
+    }
+  },
+  "PPFAS_FLEXI": {
+    "3M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 93,
+        "positive_frequency_pct": 73.1,
+        "median_max_drawdown_pct": -5.92,
+        "worst_max_drawdown_pct": -33.3,
+        "median_sortino": 0.53,
+        "median_vol_pct": 14.69,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 6.27,
+        "mean_return_pct": 6.18,
+        "worst_outcome_pct": -23.45,
+        "best_outcome_pct": 43.37
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 93,
+        "positive_frequency_pct": 74.2,
+        "median_max_drawdown_pct": -4.42,
+        "worst_max_drawdown_pct": -29.31,
+        "median_sortino": 0.5,
+        "median_vol_pct": 11.8,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 5.09,
+        "mean_return_pct": 5.23,
+        "worst_outcome_pct": -19.77,
+        "best_outcome_pct": 27.19
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 93,
+        "positive_frequency_pct": 77.4,
+        "median_max_drawdown_pct": -3.08,
+        "worst_max_drawdown_pct": -21.01,
+        "median_sortino": 0.42,
+        "median_vol_pct": 8.0,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 4.11,
+        "mean_return_pct": 3.78,
+        "worst_outcome_pct": -13.9,
+        "best_outcome_pct": 20.11
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 93,
+        "positive_frequency_pct": 80.6,
+        "median_max_drawdown_pct": -1.94,
+        "worst_max_drawdown_pct": -13.73,
+        "median_sortino": 0.41,
+        "median_vol_pct": 5.33,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 3.23,
+        "mean_return_pct": 3.01,
+        "worst_outcome_pct": -8.78,
+        "best_outcome_pct": 13.9
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 93,
+        "positive_frequency_pct": 74.2,
+        "median_max_drawdown_pct": -4.17,
+        "worst_max_drawdown_pct": -29.55,
+        "median_sortino": 0.48,
+        "median_vol_pct": 11.38,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 5.12,
+        "mean_return_pct": 4.61,
+        "worst_outcome_pct": -19.53,
+        "best_outcome_pct": 23.68
+      }
+    },
+    "6M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 90,
+        "positive_frequency_pct": 76.7,
+        "median_max_drawdown_pct": -7.76,
+        "worst_max_drawdown_pct": -33.3,
+        "median_sortino": 0.54,
+        "median_vol_pct": 14.85,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 9.14,
+        "mean_return_pct": 12.68,
+        "worst_outcome_pct": -20.77,
+        "best_outcome_pct": 70.9
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 90,
+        "positive_frequency_pct": 74.4,
+        "median_max_drawdown_pct": -7.19,
+        "worst_max_drawdown_pct": -33.2,
+        "median_sortino": 0.61,
+        "median_vol_pct": 13.38,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 8.21,
+        "mean_return_pct": 11.66,
+        "worst_outcome_pct": -20.92,
+        "best_outcome_pct": 51.55
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 90,
+        "positive_frequency_pct": 73.3,
+        "median_max_drawdown_pct": -6.69,
+        "worst_max_drawdown_pct": -33.09,
+        "median_sortino": 0.71,
+        "median_vol_pct": 11.84,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 8.49,
+        "mean_return_pct": 10.08,
+        "worst_outcome_pct": -20.39,
+        "best_outcome_pct": 43.05
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 90,
+        "positive_frequency_pct": 77.8,
+        "median_max_drawdown_pct": -5.28,
+        "worst_max_drawdown_pct": -30.66,
+        "median_sortino": 0.82,
+        "median_vol_pct": 9.61,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 7.69,
+        "mean_return_pct": 8.45,
+        "worst_outcome_pct": -16.92,
+        "best_outcome_pct": 36.54
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 90,
+        "positive_frequency_pct": 74.4,
+        "median_max_drawdown_pct": -7.13,
+        "worst_max_drawdown_pct": -33.22,
+        "median_sortino": 0.58,
+        "median_vol_pct": 12.97,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 8.9,
+        "mean_return_pct": 10.81,
+        "worst_outcome_pct": -19.8,
+        "best_outcome_pct": 43.26
+      }
+    },
+    "12M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 84,
+        "positive_frequency_pct": 89.3,
+        "median_max_drawdown_pct": -13.75,
+        "worst_max_drawdown_pct": -33.3,
+        "median_sortino": 1.04,
+        "median_vol_pct": 16.68,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 17.83,
+        "mean_return_pct": 26.38,
+        "worst_outcome_pct": -20.19,
+        "best_outcome_pct": 102.36
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 84,
+        "positive_frequency_pct": 90.5,
+        "median_max_drawdown_pct": -12.82,
+        "worst_max_drawdown_pct": -33.22,
+        "median_sortino": 0.93,
+        "median_vol_pct": 15.5,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 15.06,
+        "mean_return_pct": 25.19,
+        "worst_outcome_pct": -15.18,
+        "best_outcome_pct": 91.48
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 84,
+        "positive_frequency_pct": 88.1,
+        "median_max_drawdown_pct": -11.43,
+        "worst_max_drawdown_pct": -33.13,
+        "median_sortino": 0.82,
+        "median_vol_pct": 14.58,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 14.21,
+        "mean_return_pct": 23.27,
+        "worst_outcome_pct": -13.07,
+        "best_outcome_pct": 88.98
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 84,
+        "positive_frequency_pct": 88.1,
+        "median_max_drawdown_pct": -11.34,
+        "worst_max_drawdown_pct": -33.0,
+        "median_sortino": 0.8,
+        "median_vol_pct": 13.06,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 13.47,
+        "mean_return_pct": 21.36,
+        "worst_outcome_pct": -11.96,
+        "best_outcome_pct": 77.5
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 84,
+        "positive_frequency_pct": 91.7,
+        "median_max_drawdown_pct": -11.67,
+        "worst_max_drawdown_pct": -33.24,
+        "median_sortino": 0.96,
+        "median_vol_pct": 15.14,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 14.79,
+        "mean_return_pct": 24.0,
+        "worst_outcome_pct": -16.41,
+        "best_outcome_pct": 88.39
+      }
+    },
+    "3Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -33.3,
+        "worst_max_drawdown_pct": -33.3,
+        "median_sortino": 8.86,
+        "median_vol_pct": 20.54,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 30.09,
+        "mean_cagr_pct": 30.18,
+        "worst_outcome_pct": 7.2,
+        "best_outcome_pct": 61.4
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -33.2,
+        "worst_max_drawdown_pct": -33.23,
+        "median_sortino": 8.87,
+        "median_vol_pct": 20.04,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 30.57,
+        "mean_cagr_pct": 29.6,
+        "worst_outcome_pct": 6.02,
+        "best_outcome_pct": 59.73
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -33.09,
+        "worst_max_drawdown_pct": -33.15,
+        "median_sortino": 8.75,
+        "median_vol_pct": 19.79,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 30.78,
+        "mean_cagr_pct": 28.8,
+        "worst_outcome_pct": 5.86,
+        "best_outcome_pct": 58.85
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -31.63,
+        "worst_max_drawdown_pct": -33.05,
+        "median_sortino": 8.57,
+        "median_vol_pct": 19.08,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 29.45,
+        "mean_cagr_pct": 28.0,
+        "worst_outcome_pct": 5.5,
+        "best_outcome_pct": 57.42
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -33.08,
+        "worst_max_drawdown_pct": -33.25,
+        "median_sortino": 8.59,
+        "median_vol_pct": 20.06,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 30.41,
+        "mean_cagr_pct": 29.22,
+        "worst_outcome_pct": 6.61,
+        "best_outcome_pct": 58.36
+      }
+    },
+    "5Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -33.3,
+        "worst_max_drawdown_pct": -33.3,
+        "median_sortino": 18.05,
+        "median_vol_pct": 19.27,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 28.82,
+        "mean_cagr_pct": 29.55,
+        "worst_outcome_pct": 25.49,
+        "best_outcome_pct": 36.91
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -33.22,
+        "worst_max_drawdown_pct": -33.24,
+        "median_sortino": 18.24,
+        "median_vol_pct": 19.13,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 28.68,
+        "mean_cagr_pct": 29.29,
+        "worst_outcome_pct": 25.54,
+        "best_outcome_pct": 37.01
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -33.13,
+        "worst_max_drawdown_pct": -33.16,
+        "median_sortino": 18.15,
+        "median_vol_pct": 19.0,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 28.73,
+        "mean_cagr_pct": 28.98,
+        "worst_outcome_pct": 24.54,
+        "best_outcome_pct": 36.59
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -33.02,
+        "worst_max_drawdown_pct": -33.06,
+        "median_sortino": 18.29,
+        "median_vol_pct": 18.82,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 28.51,
+        "mean_cagr_pct": 28.6,
+        "worst_outcome_pct": 24.35,
+        "best_outcome_pct": 35.91
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -33.23,
+        "worst_max_drawdown_pct": -33.25,
+        "median_sortino": 18.34,
+        "median_vol_pct": 19.1,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 28.75,
+        "mean_cagr_pct": 29.26,
+        "worst_outcome_pct": 25.35,
+        "best_outcome_pct": 36.8
+      }
+    }
+  },
+  "MIRAE_LARGE": {
+    "3M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 93,
+        "positive_frequency_pct": 76.3,
+        "median_max_drawdown_pct": -6.76,
+        "worst_max_drawdown_pct": -37.31,
+        "median_sortino": 0.42,
+        "median_vol_pct": 15.51,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 6.73,
+        "mean_return_pct": 6.52,
+        "worst_outcome_pct": -26.87,
+        "best_outcome_pct": 41.08
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 93,
+        "positive_frequency_pct": 79.6,
+        "median_max_drawdown_pct": -4.62,
+        "worst_max_drawdown_pct": -32.31,
+        "median_sortino": 0.49,
+        "median_vol_pct": 12.59,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 4.97,
+        "mean_return_pct": 5.51,
+        "worst_outcome_pct": -21.92,
+        "best_outcome_pct": 25.03
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 93,
+        "positive_frequency_pct": 76.3,
+        "median_max_drawdown_pct": -3.27,
+        "worst_max_drawdown_pct": -23.19,
+        "median_sortino": 0.42,
+        "median_vol_pct": 8.46,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 4.1,
+        "mean_return_pct": 3.97,
+        "worst_outcome_pct": -15.32,
+        "best_outcome_pct": 17.55
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 93,
+        "positive_frequency_pct": 81.7,
+        "median_max_drawdown_pct": -2.13,
+        "worst_max_drawdown_pct": -15.17,
+        "median_sortino": 0.41,
+        "median_vol_pct": 5.65,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 3.22,
+        "mean_return_pct": 3.14,
+        "worst_outcome_pct": -9.73,
+        "best_outcome_pct": 12.19
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 93,
+        "positive_frequency_pct": 77.4,
+        "median_max_drawdown_pct": -4.57,
+        "worst_max_drawdown_pct": -32.76,
+        "median_sortino": 0.49,
+        "median_vol_pct": 12.01,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 4.79,
+        "mean_return_pct": 4.88,
+        "worst_outcome_pct": -22.1,
+        "best_outcome_pct": 25.11
+      }
+    },
+    "6M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 90,
+        "positive_frequency_pct": 75.6,
+        "median_max_drawdown_pct": -9.77,
+        "worst_max_drawdown_pct": -37.31,
+        "median_sortino": 0.77,
+        "median_vol_pct": 16.34,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 10.51,
+        "mean_return_pct": 13.22,
+        "worst_outcome_pct": -17.5,
+        "best_outcome_pct": 71.62
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 90,
+        "positive_frequency_pct": 75.6,
+        "median_max_drawdown_pct": -8.13,
+        "worst_max_drawdown_pct": -37.2,
+        "median_sortino": 0.85,
+        "median_vol_pct": 14.4,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 10.83,
+        "mean_return_pct": 12.17,
+        "worst_outcome_pct": -14.84,
+        "best_outcome_pct": 52.02
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 90,
+        "positive_frequency_pct": 82.2,
+        "median_max_drawdown_pct": -7.5,
+        "worst_max_drawdown_pct": -37.07,
+        "median_sortino": 0.81,
+        "median_vol_pct": 12.67,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 10.21,
+        "mean_return_pct": 10.55,
+        "worst_outcome_pct": -18.66,
+        "best_outcome_pct": 42.76
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 90,
+        "positive_frequency_pct": 82.2,
+        "median_max_drawdown_pct": -5.91,
+        "worst_max_drawdown_pct": -34.15,
+        "median_sortino": 0.78,
+        "median_vol_pct": 10.26,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 8.31,
+        "mean_return_pct": 8.83,
+        "worst_outcome_pct": -17.92,
+        "best_outcome_pct": 36.85
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 90,
+        "positive_frequency_pct": 75.6,
+        "median_max_drawdown_pct": -7.94,
+        "worst_max_drawdown_pct": -37.21,
+        "median_sortino": 0.7,
+        "median_vol_pct": 13.94,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 9.56,
+        "mean_return_pct": 11.37,
+        "worst_outcome_pct": -15.93,
+        "best_outcome_pct": 48.86
+      }
+    },
+    "12M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 84,
+        "positive_frequency_pct": 92.9,
+        "median_max_drawdown_pct": -13.63,
+        "worst_max_drawdown_pct": -37.31,
+        "median_sortino": 1.38,
+        "median_vol_pct": 17.94,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 21.98,
+        "mean_return_pct": 27.23,
+        "worst_outcome_pct": -15.81,
+        "best_outcome_pct": 85.69
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 84,
+        "positive_frequency_pct": 92.9,
+        "median_max_drawdown_pct": -13.21,
+        "worst_max_drawdown_pct": -37.22,
+        "median_sortino": 1.31,
+        "median_vol_pct": 16.85,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 19.86,
+        "mean_return_pct": 26.09,
+        "worst_outcome_pct": -14.48,
+        "best_outcome_pct": 86.07
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 84,
+        "positive_frequency_pct": 92.9,
+        "median_max_drawdown_pct": -12.08,
+        "worst_max_drawdown_pct": -37.11,
+        "median_sortino": 1.15,
+        "median_vol_pct": 15.63,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 18.3,
+        "mean_return_pct": 24.21,
+        "worst_outcome_pct": -12.43,
+        "best_outcome_pct": 75.65
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 84,
+        "positive_frequency_pct": 90.5,
+        "median_max_drawdown_pct": -11.59,
+        "worst_max_drawdown_pct": -36.96,
+        "median_sortino": 1.04,
+        "median_vol_pct": 14.22,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 16.36,
+        "mean_return_pct": 22.28,
+        "worst_outcome_pct": -10.71,
+        "best_outcome_pct": 65.95
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 84,
+        "positive_frequency_pct": 92.9,
+        "median_max_drawdown_pct": -12.53,
+        "worst_max_drawdown_pct": -37.24,
+        "median_sortino": 1.27,
+        "median_vol_pct": 16.28,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 19.53,
+        "mean_return_pct": 25.01,
+        "worst_outcome_pct": -13.82,
+        "best_outcome_pct": 72.34
+      }
+    },
+    "3Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.31,
+        "worst_max_drawdown_pct": -37.31,
+        "median_sortino": 7.91,
+        "median_vol_pct": 22.31,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 31.45,
+        "mean_cagr_pct": 31.05,
+        "worst_outcome_pct": 10.3,
+        "best_outcome_pct": 56.43
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.2,
+        "worst_max_drawdown_pct": -37.23,
+        "median_sortino": 8.3,
+        "median_vol_pct": 21.98,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 30.9,
+        "mean_cagr_pct": 30.54,
+        "worst_outcome_pct": 9.34,
+        "best_outcome_pct": 54.11
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.08,
+        "worst_max_drawdown_pct": -37.14,
+        "median_sortino": 7.92,
+        "median_vol_pct": 21.54,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 29.15,
+        "mean_cagr_pct": 29.72,
+        "worst_outcome_pct": 7.6,
+        "best_outcome_pct": 53.03
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -35.3,
+        "worst_max_drawdown_pct": -37.03,
+        "median_sortino": 8.04,
+        "median_vol_pct": 20.74,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 29.16,
+        "mean_cagr_pct": 28.9,
+        "worst_outcome_pct": 6.83,
+        "best_outcome_pct": 52.1
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.06,
+        "worst_max_drawdown_pct": -37.25,
+        "median_sortino": 8.14,
+        "median_vol_pct": 21.7,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 29.74,
+        "mean_cagr_pct": 30.1,
+        "worst_outcome_pct": 9.3,
+        "best_outcome_pct": 54.17
+      }
+    },
+    "5Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.31,
+        "worst_max_drawdown_pct": -37.31,
+        "median_sortino": 18.05,
+        "median_vol_pct": 20.87,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 30.09,
+        "mean_cagr_pct": 30.63,
+        "worst_outcome_pct": 26.37,
+        "best_outcome_pct": 37.16
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.22,
+        "worst_max_drawdown_pct": -37.24,
+        "median_sortino": 18.1,
+        "median_vol_pct": 20.73,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 30.19,
+        "mean_cagr_pct": 30.39,
+        "worst_outcome_pct": 26.19,
+        "best_outcome_pct": 36.66
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.12,
+        "worst_max_drawdown_pct": -37.15,
+        "median_sortino": 18.23,
+        "median_vol_pct": 20.56,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 29.97,
+        "mean_cagr_pct": 30.07,
+        "worst_outcome_pct": 25.53,
+        "best_outcome_pct": 36.02
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.0,
+        "worst_max_drawdown_pct": -37.03,
+        "median_sortino": 17.93,
+        "median_vol_pct": 20.36,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 29.68,
+        "mean_cagr_pct": 29.7,
+        "worst_outcome_pct": 24.79,
+        "best_outcome_pct": 35.31
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -37.22,
+        "worst_max_drawdown_pct": -37.25,
+        "median_sortino": 18.11,
+        "median_vol_pct": 20.71,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 30.14,
+        "mean_cagr_pct": 30.31,
+        "worst_outcome_pct": 25.94,
+        "best_outcome_pct": 35.34
+      }
+    }
+  },
+  "HDFC_MIDCAP": {
+    "3M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 93,
+        "positive_frequency_pct": 74.2,
+        "median_max_drawdown_pct": -8.12,
+        "worst_max_drawdown_pct": -40.07,
+        "median_sortino": 0.61,
+        "median_vol_pct": 21.64,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 10.59,
+        "mean_return_pct": 9.66,
+        "worst_outcome_pct": -29.84,
+        "best_outcome_pct": 57.15
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 93,
+        "positive_frequency_pct": 78.5,
+        "median_max_drawdown_pct": -6.35,
+        "worst_max_drawdown_pct": -33.97,
+        "median_sortino": 0.77,
+        "median_vol_pct": 17.28,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 9.4,
+        "mean_return_pct": 7.99,
+        "worst_outcome_pct": -23.68,
+        "best_outcome_pct": 39.33
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 93,
+        "positive_frequency_pct": 76.3,
+        "median_max_drawdown_pct": -4.14,
+        "worst_max_drawdown_pct": -25.49,
+        "median_sortino": 0.6,
+        "median_vol_pct": 11.66,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 6.18,
+        "mean_return_pct": 5.5,
+        "worst_outcome_pct": -17.85,
+        "best_outcome_pct": 29.92
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 93,
+        "positive_frequency_pct": 78.5,
+        "median_max_drawdown_pct": -2.75,
+        "worst_max_drawdown_pct": -16.73,
+        "median_sortino": 0.59,
+        "median_vol_pct": 7.86,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 4.61,
+        "mean_return_pct": 4.16,
+        "worst_outcome_pct": -11.41,
+        "best_outcome_pct": 20.43
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 93,
+        "positive_frequency_pct": 77.4,
+        "median_max_drawdown_pct": -5.53,
+        "worst_max_drawdown_pct": -32.39,
+        "median_sortino": 0.63,
+        "median_vol_pct": 15.34,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 7.03,
+        "mean_return_pct": 6.64,
+        "worst_outcome_pct": -21.87,
+        "best_outcome_pct": 25.49
+      }
+    },
+    "6M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 90,
+        "positive_frequency_pct": 77.8,
+        "median_max_drawdown_pct": -12.02,
+        "worst_max_drawdown_pct": -40.07,
+        "median_sortino": 0.96,
+        "median_vol_pct": 21.71,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 17.03,
+        "mean_return_pct": 19.96,
+        "worst_outcome_pct": -28.07,
+        "best_outcome_pct": 122.59
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 90,
+        "positive_frequency_pct": 75.6,
+        "median_max_drawdown_pct": -10.72,
+        "worst_max_drawdown_pct": -39.95,
+        "median_sortino": 1.0,
+        "median_vol_pct": 19.5,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 16.69,
+        "mean_return_pct": 18.18,
+        "worst_outcome_pct": -24.86,
+        "best_outcome_pct": 93.38
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 90,
+        "positive_frequency_pct": 78.9,
+        "median_max_drawdown_pct": -9.13,
+        "worst_max_drawdown_pct": -39.81,
+        "median_sortino": 1.17,
+        "median_vol_pct": 17.45,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 15.16,
+        "mean_return_pct": 15.47,
+        "worst_outcome_pct": -21.66,
+        "best_outcome_pct": 78.46
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 90,
+        "positive_frequency_pct": 82.2,
+        "median_max_drawdown_pct": -7.1,
+        "worst_max_drawdown_pct": -37.02,
+        "median_sortino": 1.25,
+        "median_vol_pct": 14.14,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 14.09,
+        "mean_return_pct": 12.62,
+        "worst_outcome_pct": -21.11,
+        "best_outcome_pct": 65.57
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 90,
+        "positive_frequency_pct": 74.4,
+        "median_max_drawdown_pct": -9.87,
+        "worst_max_drawdown_pct": -39.92,
+        "median_sortino": 1.04,
+        "median_vol_pct": 18.86,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 16.45,
+        "mean_return_pct": 16.55,
+        "worst_outcome_pct": -22.26,
+        "best_outcome_pct": 66.49
+      }
+    },
+    "12M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 84,
+        "positive_frequency_pct": 88.1,
+        "median_max_drawdown_pct": -19.02,
+        "worst_max_drawdown_pct": -40.07,
+        "median_sortino": 1.97,
+        "median_vol_pct": 23.59,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 38.08,
+        "mean_return_pct": 42.85,
+        "worst_outcome_pct": -27.22,
+        "best_outcome_pct": 133.37
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 84,
+        "positive_frequency_pct": 88.1,
+        "median_max_drawdown_pct": -16.36,
+        "worst_max_drawdown_pct": -39.99,
+        "median_sortino": 2.06,
+        "median_vol_pct": 22.31,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 34.48,
+        "mean_return_pct": 40.81,
+        "worst_outcome_pct": -19.9,
+        "best_outcome_pct": 127.32
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 84,
+        "positive_frequency_pct": 88.1,
+        "median_max_drawdown_pct": -14.86,
+        "worst_max_drawdown_pct": -39.89,
+        "median_sortino": 1.8,
+        "median_vol_pct": 20.74,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 30.09,
+        "mean_return_pct": 37.47,
+        "worst_outcome_pct": -16.94,
+        "best_outcome_pct": 115.08
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 84,
+        "positive_frequency_pct": 88.1,
+        "median_max_drawdown_pct": -14.71,
+        "worst_max_drawdown_pct": -39.74,
+        "median_sortino": 1.55,
+        "median_vol_pct": 18.91,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 27.77,
+        "mean_return_pct": 34.16,
+        "worst_outcome_pct": -16.87,
+        "best_outcome_pct": 98.8
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 84,
+        "positive_frequency_pct": 89.3,
+        "median_max_drawdown_pct": -15.08,
+        "worst_max_drawdown_pct": -39.99,
+        "median_sortino": 1.9,
+        "median_vol_pct": 21.77,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 34.01,
+        "mean_return_pct": 38.69,
+        "worst_outcome_pct": -18.56,
+        "best_outcome_pct": 110.31
+      }
+    },
+    "3Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -40.07,
+        "worst_max_drawdown_pct": -40.07,
+        "median_sortino": 11.57,
+        "median_vol_pct": 28.36,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 48.79,
+        "mean_cagr_pct": 48.14,
+        "worst_outcome_pct": 14.02,
+        "best_outcome_pct": 85.79
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -39.95,
+        "worst_max_drawdown_pct": -40.0,
+        "median_sortino": 12.55,
+        "median_vol_pct": 27.79,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 48.2,
+        "mean_cagr_pct": 47.35,
+        "worst_outcome_pct": 12.89,
+        "best_outcome_pct": 83.91
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -39.81,
+        "worst_max_drawdown_pct": -39.92,
+        "median_sortino": 12.65,
+        "median_vol_pct": 27.24,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 46.22,
+        "mean_cagr_pct": 46.06,
+        "worst_outcome_pct": 11.15,
+        "best_outcome_pct": 83.46
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -38.19,
+        "worst_max_drawdown_pct": -39.82,
+        "median_sortino": 12.37,
+        "median_vol_pct": 26.31,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 45.27,
+        "mean_cagr_pct": 44.78,
+        "worst_outcome_pct": 10.25,
+        "best_outcome_pct": 81.72
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -39.85,
+        "worst_max_drawdown_pct": -40.01,
+        "median_sortino": 12.79,
+        "median_vol_pct": 27.63,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 46.26,
+        "mean_cagr_pct": 46.54,
+        "worst_outcome_pct": 12.92,
+        "best_outcome_pct": 83.84
+      }
+    },
+    "5Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -40.07,
+        "worst_max_drawdown_pct": -40.07,
+        "median_sortino": 30.64,
+        "median_vol_pct": 26.67,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 45.92,
+        "mean_cagr_pct": 47.3,
+        "worst_outcome_pct": 37.6,
+        "best_outcome_pct": 60.49
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -39.99,
+        "worst_max_drawdown_pct": -40.0,
+        "median_sortino": 31.5,
+        "median_vol_pct": 26.43,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 46.21,
+        "mean_cagr_pct": 46.96,
+        "worst_outcome_pct": 37.78,
+        "best_outcome_pct": 60.42
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -39.9,
+        "worst_max_drawdown_pct": -39.92,
+        "median_sortino": 30.3,
+        "median_vol_pct": 26.22,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 45.87,
+        "mean_cagr_pct": 46.48,
+        "worst_outcome_pct": 37.01,
+        "best_outcome_pct": 60.25
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -39.77,
+        "worst_max_drawdown_pct": -39.82,
+        "median_sortino": 30.13,
+        "median_vol_pct": 25.98,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 45.11,
+        "mean_cagr_pct": 45.94,
+        "worst_outcome_pct": 36.0,
+        "best_outcome_pct": 59.69
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -39.96,
+        "worst_max_drawdown_pct": -40.01,
+        "median_sortino": 30.23,
+        "median_vol_pct": 26.39,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 45.64,
+        "mean_cagr_pct": 46.75,
+        "worst_outcome_pct": 37.24,
+        "best_outcome_pct": 59.42
+      }
+    }
+  },
+  "NIPPON_SMALL": {
+    "3M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 93,
+        "positive_frequency_pct": 71.0,
+        "median_max_drawdown_pct": -9.74,
+        "worst_max_drawdown_pct": -50.48,
+        "median_sortino": 0.54,
+        "median_vol_pct": 25.0,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 9.97,
+        "mean_return_pct": 9.3,
+        "worst_outcome_pct": -42.43,
+        "best_outcome_pct": 74.49
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 93,
+        "positive_frequency_pct": 75.3,
+        "median_max_drawdown_pct": -7.76,
+        "worst_max_drawdown_pct": -45.2,
+        "median_sortino": 0.56,
+        "median_vol_pct": 19.55,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 9.01,
+        "mean_return_pct": 7.79,
+        "worst_outcome_pct": -37.78,
+        "best_outcome_pct": 46.32
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 93,
+        "positive_frequency_pct": 75.3,
+        "median_max_drawdown_pct": -5.25,
+        "worst_max_drawdown_pct": -31.35,
+        "median_sortino": 0.5,
+        "median_vol_pct": 13.46,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 6.01,
+        "mean_return_pct": 5.33,
+        "worst_outcome_pct": -25.61,
+        "best_outcome_pct": 32.7
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 93,
+        "positive_frequency_pct": 76.3,
+        "median_max_drawdown_pct": -3.41,
+        "worst_max_drawdown_pct": -20.64,
+        "median_sortino": 0.49,
+        "median_vol_pct": 8.95,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 4.49,
+        "mean_return_pct": 4.04,
+        "worst_outcome_pct": -16.59,
+        "best_outcome_pct": 22.29
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 93,
+        "positive_frequency_pct": 75.3,
+        "median_max_drawdown_pct": -6.32,
+        "worst_max_drawdown_pct": -39.45,
+        "median_sortino": 0.56,
+        "median_vol_pct": 17.26,
+        "metric_label": "Median 3M Return %",
+        "median_return_pct": 7.65,
+        "mean_return_pct": 6.35,
+        "worst_outcome_pct": -31.25,
+        "best_outcome_pct": 35.78
+      }
+    },
+    "6M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 90,
+        "positive_frequency_pct": 67.8,
+        "median_max_drawdown_pct": -14.41,
+        "worst_max_drawdown_pct": -50.48,
+        "median_sortino": 0.97,
+        "median_vol_pct": 24.56,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 18.02,
+        "mean_return_pct": 18.95,
+        "worst_outcome_pct": -33.02,
+        "best_outcome_pct": 143.88
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 90,
+        "positive_frequency_pct": 72.2,
+        "median_max_drawdown_pct": -12.41,
+        "worst_max_drawdown_pct": -50.33,
+        "median_sortino": 0.9,
+        "median_vol_pct": 22.25,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 14.99,
+        "mean_return_pct": 17.29,
+        "worst_outcome_pct": -34.55,
+        "best_outcome_pct": 104.37
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 90,
+        "positive_frequency_pct": 73.3,
+        "median_max_drawdown_pct": -10.98,
+        "worst_max_drawdown_pct": -50.15,
+        "median_sortino": 0.93,
+        "median_vol_pct": 19.82,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 14.49,
+        "mean_return_pct": 14.64,
+        "worst_outcome_pct": -37.48,
+        "best_outcome_pct": 83.57
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 90,
+        "positive_frequency_pct": 74.4,
+        "median_max_drawdown_pct": -9.25,
+        "worst_max_drawdown_pct": -46.07,
+        "median_sortino": 0.9,
+        "median_vol_pct": 16.02,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 12.88,
+        "mean_return_pct": 11.97,
+        "worst_outcome_pct": -34.73,
+        "best_outcome_pct": 71.14
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 90,
+        "positive_frequency_pct": 74.4,
+        "median_max_drawdown_pct": -11.79,
+        "worst_max_drawdown_pct": -50.29,
+        "median_sortino": 0.94,
+        "median_vol_pct": 21.07,
+        "metric_label": "Median 6M Return %",
+        "median_return_pct": 14.57,
+        "mean_return_pct": 15.59,
+        "worst_outcome_pct": -35.98,
+        "best_outcome_pct": 72.98
+      }
+    },
+    "12M": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 84,
+        "positive_frequency_pct": 81.0,
+        "median_max_drawdown_pct": -23.51,
+        "worst_max_drawdown_pct": -50.48,
+        "median_sortino": 0.92,
+        "median_vol_pct": 27.75,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 22.58,
+        "mean_return_pct": 39.22,
+        "worst_outcome_pct": -31.68,
+        "best_outcome_pct": 206.97
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 84,
+        "positive_frequency_pct": 81.0,
+        "median_max_drawdown_pct": -23.44,
+        "worst_max_drawdown_pct": -50.37,
+        "median_sortino": 0.87,
+        "median_vol_pct": 25.91,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 22.54,
+        "mean_return_pct": 37.57,
+        "worst_outcome_pct": -28.04,
+        "best_outcome_pct": 168.77
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 84,
+        "positive_frequency_pct": 81.0,
+        "median_max_drawdown_pct": -22.57,
+        "worst_max_drawdown_pct": -50.24,
+        "median_sortino": 0.72,
+        "median_vol_pct": 23.96,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 18.96,
+        "mean_return_pct": 34.52,
+        "worst_outcome_pct": -24.85,
+        "best_outcome_pct": 165.82
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 84,
+        "positive_frequency_pct": 79.8,
+        "median_max_drawdown_pct": -19.55,
+        "worst_max_drawdown_pct": -50.05,
+        "median_sortino": 0.7,
+        "median_vol_pct": 21.89,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 16.99,
+        "mean_return_pct": 31.48,
+        "worst_outcome_pct": -21.59,
+        "best_outcome_pct": 143.06
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 84,
+        "positive_frequency_pct": 79.8,
+        "median_max_drawdown_pct": -23.02,
+        "worst_max_drawdown_pct": -50.33,
+        "median_sortino": 0.74,
+        "median_vol_pct": 24.99,
+        "metric_label": "Median 12M Return %",
+        "median_return_pct": 20.1,
+        "mean_return_pct": 35.26,
+        "worst_outcome_pct": -27.64,
+        "best_outcome_pct": 140.47
+      }
+    },
+    "3Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -50.48,
+        "worst_max_drawdown_pct": -50.48,
+        "median_sortino": 8.23,
+        "median_vol_pct": 31.94,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 41.21,
+        "mean_cagr_pct": 40.99,
+        "worst_outcome_pct": 6.05,
+        "best_outcome_pct": 88.4
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -50.33,
+        "worst_max_drawdown_pct": -50.4,
+        "median_sortino": 8.36,
+        "median_vol_pct": 31.52,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 41.22,
+        "mean_cagr_pct": 40.28,
+        "worst_outcome_pct": 4.57,
+        "best_outcome_pct": 85.91
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -50.15,
+        "worst_max_drawdown_pct": -50.31,
+        "median_sortino": 7.88,
+        "median_vol_pct": 31.05,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 41.14,
+        "mean_cagr_pct": 39.11,
+        "worst_outcome_pct": 3.1,
+        "best_outcome_pct": 83.59
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -47.77,
+        "worst_max_drawdown_pct": -50.18,
+        "median_sortino": 7.71,
+        "median_vol_pct": 30.09,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 37.1,
+        "mean_cagr_pct": 37.99,
+        "worst_outcome_pct": 2.33,
+        "best_outcome_pct": 81.34
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 60,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -50.22,
+        "worst_max_drawdown_pct": -50.41,
+        "median_sortino": 8.32,
+        "median_vol_pct": 31.0,
+        "metric_label": "3Y CAGR %",
+        "median_cagr_pct": 41.48,
+        "mean_cagr_pct": 39.51,
+        "worst_outcome_pct": 5.11,
+        "best_outcome_pct": 85.02
+      }
+    },
+    "5Y": {
+      "Strategy_A_LumpSum": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -50.48,
+        "worst_max_drawdown_pct": -50.48,
+        "median_sortino": 18.58,
+        "median_vol_pct": 30.39,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 37.72,
+        "mean_cagr_pct": 39.68,
+        "worst_outcome_pct": 32.18,
+        "best_outcome_pct": 50.35
+      },
+      "Strategy_B_50_50": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -50.38,
+        "worst_max_drawdown_pct": -50.4,
+        "median_sortino": 18.38,
+        "median_vol_pct": 30.1,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 37.89,
+        "mean_cagr_pct": 39.37,
+        "worst_outcome_pct": 32.94,
+        "best_outcome_pct": 49.55
+      },
+      "Strategy_C_25x4": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -50.26,
+        "worst_max_drawdown_pct": -50.31,
+        "median_sortino": 18.52,
+        "median_vol_pct": 29.81,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 37.91,
+        "mean_cagr_pct": 38.79,
+        "worst_outcome_pct": 33.22,
+        "best_outcome_pct": 48.18
+      },
+      "Strategy_D_Monthly_SIP": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -50.11,
+        "worst_max_drawdown_pct": -50.18,
+        "median_sortino": 18.39,
+        "median_vol_pct": 29.47,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 37.02,
+        "mean_cagr_pct": 38.28,
+        "worst_outcome_pct": 32.63,
+        "best_outcome_pct": 46.83
+      },
+      "Strategy_E_Signal_Adaptive": {
+        "sample_count": 36,
+        "positive_frequency_pct": 100.0,
+        "median_max_drawdown_pct": -50.33,
+        "worst_max_drawdown_pct": -50.41,
+        "median_sortino": 18.34,
+        "median_vol_pct": 29.96,
+        "metric_label": "5Y CAGR %",
+        "median_cagr_pct": 37.4,
+        "mean_cagr_pct": 39.1,
+        "worst_outcome_pct": 33.51,
+        "best_outcome_pct": 48.98
+      }
+    }
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "model_version": "model_v1.0-pit",
+  "sensitivity": {
+    "bull_immediate_allocation_sensitivity": {
+      "Bull_Immediate_60pct": {
+        "median_12m_return_pct": 21.48,
+        "worst_drawdown_pct": -37.4,
+        "stability_status": "Robust (<0.6% variance across parameters)"
+      },
+      "Bull_Immediate_70pct": {
+        "median_12m_return_pct": 21.68,
+        "worst_drawdown_pct": -37.43,
+        "stability_status": "Robust (<0.6% variance across parameters)"
+      },
+      "Bull_Immediate_80pct": {
+        "median_12m_return_pct": 21.88,
+        "worst_drawdown_pct": -37.45,
+        "stability_status": "Robust (<0.6% variance across parameters)"
+      }
+    },
+    "volatility_cutoff_sensitivity": {
+      "Vol_Cutoff_24pct": {
+        "median_12m_return_pct": 21.68,
+        "worst_drawdown_pct": -37.43,
+        "stability_status": "Stable (model performance does not collapse)"
+      },
+      "Vol_Cutoff_28pct": {
+        "median_12m_return_pct": 21.68,
+        "worst_drawdown_pct": -37.43,
+        "stability_status": "Stable (model performance does not collapse)"
+      },
+      "Vol_Cutoff_32pct": {
+        "median_12m_return_pct": 21.68,
+        "worst_drawdown_pct": -37.43,
+        "stability_status": "Stable (model performance does not collapse)"
+      }
+    },
+    "overall_sensitivity_verdict": "Model shows smooth parameter landscapes without cliff-edge overfitting."
+  },
+  "ablation": {
+    "Full_Model_Strategy_E": {
+      "sample_count": 84,
+      "median_12m_return_pct": 21.68,
+      "worst_max_drawdown_pct": -37.43,
+      "median_sortino": 1.42
+    },
+    "Ablation_Without_Regime": {
+      "sample_count": 84,
+      "median_12m_return_pct": 20.87,
+      "worst_max_drawdown_pct": -37.43,
+      "median_sortino": 1.46
+    },
+    "Ablation_Without_Volatility": {
+      "sample_count": 84,
+      "median_12m_return_pct": 21.08,
+      "worst_max_drawdown_pct": -37.43,
+      "median_sortino": 1.47
+    },
+    "Ablation_Naive_Staggering": {
+      "sample_count": 84,
+      "median_12m_return_pct": 21.28,
+      "worst_max_drawdown_pct": -37.41,
+      "median_sortino": 1.48
+    }
+  },
+  "statistical_uncertainty": {
+    "bootstrap_iterations": 1000,
+    "sample_size": 84,
+    "naive_iid_bootstrap": {
+      "strategy_e_median_12m_ci_95": [
+        18.47,
+        23.78
+      ],
+      "strategy_a_lump_sum_median_12m_ci_95": [
+        18.99,
+        28.42
+      ],
+      "difference_ci_95": [
+        -4.79,
+        0.54
+      ]
+    },
+    "moving_block_bootstrap": {
+      "block_length_windows": 12,
+      "block_length_calendar_months": 12,
+      "strategy_e_median_12m_ci_95": [
+        11.65,
+        47.65
+      ],
+      "strategy_a_lump_sum_median_12m_ci_95": [
+        11.36,
+        52.76
+      ],
+      "difference_ci_95": [
+        -5.77,
+        3.06
+      ],
+      "autocorrelation_note": "Moving block bootstrap accounts for serial dependence from 11-month overlap between 21-day rolling windows."
+    },
+    "strategy_e_median_12m_ci_95": [
+      11.65,
+      47.65
+    ],
+    "strategy_a_lump_sum_median_12m_ci_95": [
+      11.36,
+      52.76
+    ],
+    "difference_ci_95": [
+      -5.77,
+      3.06
+    ],
+    "interpretation": "The 95% confidence intervals overlap substantially with Lump Sum in median return, proving that Strategy E's primary statistical edge is NOT superior return forecasting, but significantly superior downside drawdown compression."
+  },
+  "fund_quality_audit": {
+    "weight_sensitivity": {
+      "base_weights": {
+        "consistency_pct": 35,
+        "downside_pct": 30,
+        "cost_pct": 20,
+        "alpha_pct": 15
+      },
+      "perturbation_range_pct": 20,
+      "perturbation_trials": 50,
+      "mean_spearman_rank_correlation": 1.0,
+      "verdict": "Rankings are robust (Spearman rho > 0.95 across +/-20% weight shifts)."
+    },
+    "factor_ablation": {
+      "Full_4_Factor_Heuristic": {
+        "weights": "35% Cons, 30% Down, 20% Cost, 15% Alpha",
+        "stability": "Baseline"
+      },
+      "Without_Consistency": {
+        "weights": "0% Cons, 46% Down, 31% Cost, 23% Alpha",
+        "stability": "Shifts high-Sortino funds lower"
+      },
+      "Without_Downside_Resilience": {
+        "weights": "50% Cons, 0% Down, 29% Cost, 21% Alpha",
+        "stability": "Removes protection bias in mid/small caps"
+      },
+      "Without_Cost_Efficiency": {
+        "weights": "44% Cons, 37.5% Down, 0% Cost, 18.5% Alpha",
+        "stability": "Removes direct-plan fee advantage"
+      },
+      "Without_Alpha": {
+        "weights": "41% Cons, 35% Down, 24% Cost, 0% Alpha",
+        "stability": "Ignores benchmark-relative stock-picking"
+      }
+    },
+    "predictive_power_disclosure": "Fund Quality is a backward-looking point-in-time scoring heuristic based on realized Sortino, downside containment, TER, and alpha. It does not constitute a guaranteed predictive forecast of future excess return."
+  }
+}

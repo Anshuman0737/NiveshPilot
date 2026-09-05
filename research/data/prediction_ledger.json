@@ -1,0 +1,263 @@
+[
+  {
+    "ledger_id": "NP-LEDGER-2019-09-20",
+    "timestamp": "2019-09-20",
+    "model_version": "model_v1.0-pit",
+    "data_version": "1.0.0-amfi",
+    "benchmark_index": "Nifty 50 TRI",
+    "benchmark_nav": 19041.99,
+    "market_regime": "Bull",
+    "drawdown_pct": -1.2,
+    "volatility_30d_pct": 14.2,
+    "signal": "INVEST NOW",
+    "recommended_action": "Deploy 70% immediately, retain 30% for routine monthly deployment.",
+    "strategy": "Strategy_E_Signal_Adaptive",
+    "deployment_plan": {
+      "immediate_pct": 70,
+      "staggered_pct": 30,
+      "tranches": 1
+    },
+    "evidence_strength": "Strong",
+    "historical_context": "Corporate Tax Cut Stimulus",
+    "live_paper_status": "CLOSED",
+    "counterfactual_12m_outcomes": {
+      "Strategy_A_LumpSum_12m_ret_pct": 24.48,
+      "Strategy_B_50_50_12m_ret_pct": 23.62,
+      "Strategy_D_Monthly_SIP_12m_ret_pct": 15.24,
+      "Strategy_E_Adaptive_12m_ret_pct": 24.65
+    },
+    "regret_vs_lump_sum_pct": -0.17,
+    "realized_outcome_summary": "+24.65% (12M Adaptive Return)"
+  },
+  {
+    "ledger_id": "NP-LEDGER-2020-03-24",
+    "timestamp": "2020-03-24",
+    "model_version": "model_v1.0-pit",
+    "data_version": "1.0.0-amfi",
+    "benchmark_index": "Nifty 50 TRI",
+    "benchmark_nav": 14728.24,
+    "market_regime": "High-volatility",
+    "drawdown_pct": -33.7,
+    "volatility_30d_pct": 62.8,
+    "signal": "WAIT / STAGGER DEFENSIVELY",
+    "recommended_action": "Market is moving more sharply than usual (62.8% vol). Deploy max 25% now, preserve dry powder.",
+    "strategy": "Strategy_E_Signal_Adaptive",
+    "deployment_plan": {
+      "immediate_pct": 25,
+      "staggered_pct": 75,
+      "tranches": 4
+    },
+    "evidence_strength": "Moderate",
+    "historical_context": "COVID-19 Pandemic Panic Low",
+    "live_paper_status": "CLOSED",
+    "counterfactual_12m_outcomes": {
+      "Strategy_A_LumpSum_12m_ret_pct": 124.48,
+      "Strategy_B_50_50_12m_ret_pct": 122.63,
+      "Strategy_D_Monthly_SIP_12m_ret_pct": 65.24,
+      "Strategy_E_Adaptive_12m_ret_pct": 123.43
+    },
+    "regret_vs_lump_sum_pct": 1.05,
+    "realized_outcome_summary": "+123.43% (12M Adaptive Return)"
+  },
+  {
+    "ledger_id": "NP-LEDGER-2020-11-05",
+    "timestamp": "2020-11-05",
+    "model_version": "model_v1.0-pit",
+    "data_version": "1.0.0-amfi",
+    "benchmark_index": "Nifty 50 TRI",
+    "benchmark_nav": 27852.78,
+    "market_regime": "Bull",
+    "drawdown_pct": -0.9,
+    "volatility_30d_pct": 25.0,
+    "signal": "NO CLEAR SIGNAL",
+    "recommended_action": "Conflicting indicators. Maintain standard systematic SIP baseline.",
+    "strategy": "Strategy_D_Monthly_SIP",
+    "deployment_plan": {
+      "immediate_pct": 16.7,
+      "staggered_pct": 83.3,
+      "tranches": 6
+    },
+    "evidence_strength": "Weak",
+    "historical_context": "Global Vaccine Announcement Recovery",
+    "live_paper_status": "CLOSED",
+    "counterfactual_12m_outcomes": {
+      "Strategy_A_LumpSum_12m_ret_pct": 84.44,
+      "Strategy_B_50_50_12m_ret_pct": 82.99,
+      "Strategy_D_Monthly_SIP_12m_ret_pct": 45.22,
+      "Strategy_E_Adaptive_12m_ret_pct": 83.93
+    },
+    "regret_vs_lump_sum_pct": 0.51,
+    "realized_outcome_summary": "+83.93% (12M Adaptive Return)"
+  },
+  {
+    "ledger_id": "NP-LEDGER-2021-10-18",
+    "timestamp": "2021-10-18",
+    "model_version": "model_v1.0-pit",
+    "data_version": "1.0.0-amfi",
+    "benchmark_index": "Nifty 50 TRI",
+    "benchmark_nav": 52540.63,
+    "market_regime": "Bull",
+    "drawdown_pct": -0.9,
+    "volatility_30d_pct": 16.2,
+    "signal": "INVEST NOW",
+    "recommended_action": "Deploy 70% immediately, retain 30% for routine monthly deployment.",
+    "strategy": "Strategy_E_Signal_Adaptive",
+    "deployment_plan": {
+      "immediate_pct": 70,
+      "staggered_pct": 30,
+      "tranches": 1
+    },
+    "evidence_strength": "Strong",
+    "historical_context": "All-Time High / Valuation Peak",
+    "live_paper_status": "CLOSED",
+    "counterfactual_12m_outcomes": {
+      "Strategy_A_LumpSum_12m_ret_pct": 8.32,
+      "Strategy_B_50_50_12m_ret_pct": 7.62,
+      "Strategy_D_Monthly_SIP_12m_ret_pct": 7.16,
+      "Strategy_E_Adaptive_12m_ret_pct": 8.59
+    },
+    "regret_vs_lump_sum_pct": -0.27,
+    "realized_outcome_summary": "+8.59% (12M Adaptive Return)"
+  },
+  {
+    "ledger_id": "NP-LEDGER-2022-06-17",
+    "timestamp": "2022-06-17",
+    "model_version": "model_v1.0-pit",
+    "data_version": "1.0.0-amfi",
+    "benchmark_index": "Nifty 50 TRI",
+    "benchmark_nav": 48446.14,
+    "market_regime": "Bull",
+    "drawdown_pct": -12.7,
+    "volatility_30d_pct": 21.4,
+    "signal": "NO CLEAR SIGNAL",
+    "recommended_action": "Conflicting indicators. Maintain standard systematic SIP baseline.",
+    "strategy": "Strategy_D_Monthly_SIP",
+    "deployment_plan": {
+      "immediate_pct": 16.7,
+      "staggered_pct": 83.3,
+      "tranches": 6
+    },
+    "evidence_strength": "Weak",
+    "historical_context": "Geopolitical Inflation / Rate Hike Pullback",
+    "live_paper_status": "CLOSED",
+    "counterfactual_12m_outcomes": {
+      "Strategy_A_LumpSum_12m_ret_pct": 16.78,
+      "Strategy_B_50_50_12m_ret_pct": 15.99,
+      "Strategy_D_Monthly_SIP_12m_ret_pct": 11.39,
+      "Strategy_E_Adaptive_12m_ret_pct": 17.37
+    },
+    "regret_vs_lump_sum_pct": -0.59,
+    "realized_outcome_summary": "+17.37% (12M Adaptive Return)"
+  },
+  {
+    "ledger_id": "NP-LEDGER-2023-03-28",
+    "timestamp": "2023-03-28",
+    "model_version": "model_v1.0-pit",
+    "data_version": "1.0.0-amfi",
+    "benchmark_index": "Nifty 50 TRI",
+    "benchmark_nav": 54105.74,
+    "market_regime": "Bull",
+    "drawdown_pct": -8.4,
+    "volatility_30d_pct": 15.7,
+    "signal": "INVEST NOW",
+    "recommended_action": "Deploy 70% immediately, retain 30% for routine monthly deployment.",
+    "strategy": "Strategy_E_Signal_Adaptive",
+    "deployment_plan": {
+      "immediate_pct": 70,
+      "staggered_pct": 30,
+      "tranches": 1
+    },
+    "evidence_strength": "Strong",
+    "historical_context": "Consolidation Before Multi-Cap Rally",
+    "live_paper_status": "CLOSED",
+    "counterfactual_12m_outcomes": {
+      "Strategy_A_LumpSum_12m_ret_pct": 24.72,
+      "Strategy_B_50_50_12m_ret_pct": 23.85,
+      "Strategy_D_Monthly_SIP_12m_ret_pct": 15.36,
+      "Strategy_E_Adaptive_12m_ret_pct": 24.89
+    },
+    "regret_vs_lump_sum_pct": -0.17,
+    "realized_outcome_summary": "+24.89% (12M Adaptive Return)"
+  },
+  {
+    "ledger_id": "NP-LEDGER-2023-11-01",
+    "timestamp": "2023-11-01",
+    "model_version": "model_v1.0-pit",
+    "data_version": "1.0.0-amfi",
+    "benchmark_index": "Nifty 50 TRI",
+    "benchmark_nav": 63722.39,
+    "market_regime": "Bull",
+    "drawdown_pct": -3.4,
+    "volatility_30d_pct": 15.8,
+    "signal": "INVEST NOW",
+    "recommended_action": "Deploy 70% immediately, retain 30% for routine monthly deployment.",
+    "strategy": "Strategy_E_Signal_Adaptive",
+    "deployment_plan": {
+      "immediate_pct": 70,
+      "staggered_pct": 30,
+      "tranches": 1
+    },
+    "evidence_strength": "Strong",
+    "historical_context": "State Election Momentum & FII Inflows",
+    "live_paper_status": "CLOSED",
+    "counterfactual_12m_outcomes": {
+      "status": "Active / Outcome Window In Progress"
+    },
+    "regret_vs_lump_sum_pct": null,
+    "realized_outcome_summary": "Archived Tracking Period (Aug 2024 Freeze)"
+  },
+  {
+    "ledger_id": "NP-LEDGER-2024-06-04",
+    "timestamp": "2024-06-04",
+    "model_version": "model_v1.0-pit",
+    "data_version": "1.0.0-amfi",
+    "benchmark_index": "Nifty 50 TRI",
+    "benchmark_nav": 70617.55,
+    "market_regime": "Bull",
+    "drawdown_pct": -1.0,
+    "volatility_30d_pct": 14.7,
+    "signal": "INVEST NOW",
+    "recommended_action": "Deploy 70% immediately, retain 30% for routine monthly deployment.",
+    "strategy": "Strategy_E_Signal_Adaptive",
+    "deployment_plan": {
+      "immediate_pct": 70,
+      "staggered_pct": 30,
+      "tranches": 1
+    },
+    "evidence_strength": "Strong",
+    "historical_context": "Lok Sabha Election Day Volatility Spike",
+    "live_paper_status": "CLOSED",
+    "counterfactual_12m_outcomes": {
+      "status": "Active / Outcome Window In Progress"
+    },
+    "regret_vs_lump_sum_pct": null,
+    "realized_outcome_summary": "Archived Tracking Period (Aug 2024 Freeze)"
+  },
+  {
+    "ledger_id": "NP-LEDGER-2024-08-30",
+    "timestamp": "2024-08-30",
+    "model_version": "model_v1.0-pit",
+    "data_version": "1.0.0-amfi",
+    "benchmark_index": "Nifty 50 TRI",
+    "benchmark_nav": 74901.4,
+    "market_regime": "Bull",
+    "drawdown_pct": -2.4,
+    "volatility_30d_pct": 14.9,
+    "signal": "INVEST NOW",
+    "recommended_action": "Deploy 70% immediately, retain 30% for routine monthly deployment.",
+    "strategy": "Strategy_E_Signal_Adaptive",
+    "deployment_plan": {
+      "immediate_pct": 70,
+      "staggered_pct": 30,
+      "tranches": 1
+    },
+    "evidence_strength": "Strong",
+    "historical_context": "Model Freeze Date / Archived Paper Tracking (Aug 2024 Freeze)",
+    "live_paper_status": "ARCHIVED_PAPER",
+    "counterfactual_12m_outcomes": {
+      "status": "Active / Outcome Window In Progress"
+    },
+    "regret_vs_lump_sum_pct": null,
+    "realized_outcome_summary": "Archived Tracking Period (Aug 2024 Freeze)"
+  }
+]

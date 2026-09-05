@@ -1,0 +1,86 @@
+[
+  {
+    "internal_id": "NIFTY50_TRI",
+    "amfi_code": "BENCHMARK_001",
+    "scheme_name": "Nifty 50 Total Return Index",
+    "category": "Benchmark",
+    "amc": "NSE Indices Ltd",
+    "plan": "Growth",
+    "expense_ratio": 0.0,
+    "aum_cr": 0.0,
+    "inception_date": "1999-06-30",
+    "benchmark": "N/A"
+  },
+  {
+    "internal_id": "PPFAS_FLEXI",
+    "amfi_code": "122639",
+    "scheme_name": "Parag Parikh Flexi Cap Fund - Direct Plan - Growth",
+    "category": "Flexi Cap Fund",
+    "amc": "PPFAS Mutual Fund",
+    "plan": "Direct",
+    "expense_ratio": 0.63,
+    "aum_cr": 68500.0,
+    "inception_date": "2013-05-24",
+    "benchmark": "NIFTY50_TRI"
+  },
+  {
+    "internal_id": "MIRAE_LARGE",
+    "amfi_code": "118834",
+    "scheme_name": "Mirae Asset Large Cap Fund - Direct Plan - Growth",
+    "category": "Large Cap Fund",
+    "amc": "Mirae Asset Mutual Fund",
+    "plan": "Direct",
+    "expense_ratio": 0.54,
+    "aum_cr": 35200.0,
+    "inception_date": "2008-04-04",
+    "benchmark": "NIFTY50_TRI"
+  },
+  {
+    "internal_id": "HDFC_MIDCAP",
+    "amfi_code": "118989",
+    "scheme_name": "HDFC Mid-Cap Opportunities Fund - Direct Plan - Growth",
+    "category": "Mid Cap Fund",
+    "amc": "HDFC Mutual Fund",
+    "plan": "Direct",
+    "expense_ratio": 0.76,
+    "aum_cr": 62400.0,
+    "inception_date": "2007-06-25",
+    "benchmark": "NIFTY50_TRI"
+  },
+  {
+    "internal_id": "NIPPON_SMALL",
+    "amfi_code": "118778",
+    "scheme_name": "Nippon India Small Cap Fund - Direct Plan - Growth",
+    "category": "Small Cap Fund",
+    "amc": "Nippon India Mutual Fund",
+    "plan": "Direct",
+    "expense_ratio": 0.72,
+    "aum_cr": 51200.0,
+    "inception_date": "2010-09-16",
+    "benchmark": "NIFTY50_TRI"
+  },
+  {
+    "internal_id": "ICICI_HYBRID",
+    "amfi_code": "120251",
+    "scheme_name": "ICICI Prudential Equity & Debt Fund - Direct Plan - Growth",
+    "category": "Aggressive Hybrid Fund",
+    "amc": "ICICI Prudential Mutual Fund",
+    "plan": "Direct",
+    "expense_ratio": 0.81,
+    "aum_cr": 36100.0,
+    "inception_date": "1999-11-03",
+    "benchmark": "NIFTY50_TRI"
+  },
+  {
+    "internal_id": "SBI_LIQUID",
+    "amfi_code": "119598",
+    "scheme_name": "SBI Liquid Fund - Direct Plan - Growth",
+    "category": "Liquid Fund",
+    "amc": "SBI Mutual Fund",
+    "plan": "Direct",
+    "expense_ratio": 0.18,
+    "aum_cr": 72000.0,
+    "inception_date": "2003-11-24",
+    "benchmark": "CRISIL_LIQUID"
+  }
+]

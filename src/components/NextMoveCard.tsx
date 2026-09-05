@@ -27,6 +27,7 @@ import {
 } from 'lucide-react'
 import { InteractiveStrategyChart } from './InteractiveStrategyChart'
 import { DeploymentTimelineGraph } from './DeploymentTimelineGraph'
+import { AICoPilotCard } from './AICoPilotCard'
 
 interface NextMoveCardProps {
   evidence: EvidenceObject
@@ -35,6 +36,7 @@ interface NextMoveCardProps {
   onSelectFund: (fund: FundSnapshot) => void
   allFunds: FundSnapshot[]
   onModifyProfile: () => void
+  onOpenAISettings?: () => void
 }
 
 export const NextMoveCard: React.FC<NextMoveCardProps> = ({
@@ -43,7 +45,8 @@ export const NextMoveCard: React.FC<NextMoveCardProps> = ({
   profile,
   onSelectFund,
   allFunds,
-  onModifyProfile
+  onModifyProfile,
+  onOpenAISettings
 }) => {
   const [explanationLevel, setExplanationLevel] = useState<ExplanationLevel>('Beginner')
   const [showDeepDiagnostics, setShowDeepDiagnostics] = useState<boolean>(false)
@@ -271,6 +274,14 @@ export const NextMoveCard: React.FC<NextMoveCardProps> = ({
             deployment={deployment}
             totalCapital={profile.amount || 10000}
             fundName={fund.scheme_name}
+          />
+
+          {/* AI Co-Pilot & Adversarial Decision Audit Card */}
+          <AICoPilotCard
+            evidence={evidence}
+            fund={fund}
+            profile={profile}
+            onOpenSettings={onOpenAISettings || (() => {})}
           />
 
           {/* SECTION 2: WHY (Primary Rationale) */}

@@ -19,6 +19,7 @@ import { Navbar, ActiveTab } from './components/Navbar'
 import { LiveMarketPulse, SimulatedMarketState } from './components/LiveMarketPulse'
 import { HeroSection } from './components/HeroSection'
 import { OnboardingModal } from './components/OnboardingModal'
+import { AISettingsModal } from './components/AISettingsModal'
 import { NextMoveCard } from './components/NextMoveCard'
 import { IHaveXMode } from './components/IHaveXMode'
 import { ShouldIWaitMode } from './components/ShouldIWaitMode'
@@ -33,6 +34,7 @@ export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('home')
   const [advancedMode, setAdvancedMode] = useState<boolean>(false)
   const [isOnboardingOpen, setIsOnboardingOpen] = useState<boolean>(false)
+  const [isAISettingsOpen, setIsAISettingsOpen] = useState<boolean>(false)
 
   // Initial user financial suitability profile
   const [profile, setProfile] = useState<SuitabilityProfile>({
@@ -96,6 +98,7 @@ export const App: React.FC = () => {
         advancedMode={advancedMode}
         setAdvancedMode={setAdvancedMode}
         onOpenOnboarding={() => setIsOnboardingOpen(true)}
+        onOpenAISettings={() => setIsAISettingsOpen(true)}
         isSuitableForEquity={suitability.isSuitableForEquity}
       />
 
@@ -113,6 +116,12 @@ export const App: React.FC = () => {
             setProfile(newProf)
             setActiveTab('home')
           }}
+        />
+
+        {/* AI Co-Pilot & Model Settings Modal */}
+        <AISettingsModal
+          isOpen={isAISettingsOpen}
+          onClose={() => setIsAISettingsOpen(false)}
         />
 
         {/* VIEW ROUTING */}
@@ -134,6 +143,7 @@ export const App: React.FC = () => {
                 onSelectFund={(f) => setSelectedFundId(f.internal_id)}
                 allFunds={funds}
                 onModifyProfile={() => setIsOnboardingOpen(true)}
+                onOpenAISettings={() => setIsAISettingsOpen(true)}
               />
             </section>
 

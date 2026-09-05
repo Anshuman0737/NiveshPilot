@@ -138,6 +138,14 @@ flowchart TD
 * Parameter sensitivity sweeps, factor ablation studies, and Moving Block Bootstrap confidence intervals.
 * Frozen, timestamped prediction ledger documenting out-of-sample paper tracking.
 
+### 10. 🤖 Dual-Key AI Co-Pilot & Decision Audit Layer
+* **Actor-Critic Verification**: The deterministic quant core calculates the math; the pluggable AI layer audits emotional alignment, assigns an **AI Confidence Rating (0–100%)**, and generates an adversarial **Pre-Mortem checklist** ("What could break this thesis?").
+* **Pluggable Providers**:
+  * **Offline Heuristics (Default)**: Zero-dependency, 0ms latency, runs 100% offline at ₹0 cost.
+  * **Local Ollama (100% Private)**: Connects to `localhost:11434` (`llama3.2`, `deepseek-r1:8b`, `qwen2.5`) with zero data leaving the user's laptop.
+  * **Groq Cloud (Free API Tier)**: Blazing-fast Llama 3.3 70B inference at ~500 tokens/sec.
+* **Interactive Conversational Q&A**: Embedded Q&A box answering beginner questions like *"Why park ₹X in liquid fund?"* or *"Explain in simple Hinglish"*.
+
 ---
 
 ## 📊 Empirical Research & Forensic Reconciliations

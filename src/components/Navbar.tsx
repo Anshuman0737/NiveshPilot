@@ -1,5 +1,5 @@
 import React from 'react'
-import { Compass, Sparkles, Sliders, ShieldCheck, BarChart3, Clock, AlertTriangle, Layers } from 'lucide-react'
+import { Compass, Sparkles, Sliders, ShieldCheck, BarChart3, Clock, AlertTriangle, Layers, Bot } from 'lucide-react'
 
 export type ActiveTab =
   | 'home'
@@ -16,6 +16,7 @@ interface NavbarProps {
   advancedMode: boolean
   setAdvancedMode: (v: boolean) => void
   onOpenOnboarding: () => void
+  onOpenAISettings?: () => void
   isSuitableForEquity: boolean
 }
 
@@ -25,6 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   advancedMode,
   setAdvancedMode,
   onOpenOnboarding,
+  onOpenAISettings,
   isSuitableForEquity
 }) => {
   return (
@@ -131,6 +133,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {isSuitableForEquity ? 'Profile: Equity Suitable' : 'Profile: Safety First'}
               </span>
               <span className="sm:hidden">Profile</span>
+            </button>
+
+            {/* AI Co-Pilot Settings Trigger */}
+            <button
+              onClick={onOpenAISettings}
+              className="flex items-center space-x-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-lg border bg-teal-500/10 text-teal-300 border-teal-500/30 hover:bg-teal-500/20 transition-all shadow-sm"
+              title="Configure AI Co-Pilot (Ollama, Groq, Offline Heuristics)"
+            >
+              <Bot className="w-3.5 h-3.5 text-teal-400" />
+              <span className="hidden sm:inline">AI Co-Pilot</span>
             </button>
 
             {/* Advanced Research Mode Toggle */}

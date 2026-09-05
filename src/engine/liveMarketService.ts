@@ -218,13 +218,13 @@ export const BASELINE_LIVE_QUOTES: LiveQuote[] = [
   },
   {
     symbol: 'TATAMOTORS',
-    name: 'Tata Motors Ltd',
-    price: 1020.5,
-    change: 14.2,
-    changePct: 1.41,
-    dayHigh: 1032.0,
-    dayLow: 1008.0,
-    prevClose: 1006.3,
+    name: 'Tata Motors (TMPV) Ltd',
+    price: 311.5,
+    change: -0.5,
+    changePct: -0.16,
+    dayHigh: 316.0,
+    dayLow: 309.5,
+    prevClose: 312.0,
     category: 'stock',
     sector: 'Automotive',
     peRatio: 11.8,
@@ -268,7 +268,7 @@ export async function syncRealLiveQuotes(): Promise<void> {
     'SBIN': 'SBIN.NS',
     'LT': 'LT.NS',
     'BHARTIARTL': 'BHARTIARTL.NS',
-    'TATAMOTORS': 'TATAMOTORS.NS'
+    'TATAMOTORS': 'TMPV.NS'
   }
 
   let updatedAny = false
@@ -276,9 +276,9 @@ export async function syncRealLiveQuotes(): Promise<void> {
   for (const [appSym, ticker] of Object.entries(symbolMap)) {
     try {
       const url = `/api/yahoo/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1d`
-      const res = await fetch(url, { signal: AbortSignal.timeout(2500) })
-      if (res.ok) {
-        const json = await res.json()
+      const res = await fetch(url, { signal: AbortSignal.timeout(2500) }).catch(() => null)
+      if (res && res.ok) {
+        const json = await res.json().catch(() => null)
         const meta = json?.chart?.result?.[0]?.meta
         if (meta && typeof meta.regularMarketPrice === 'number') {
           const price = meta.regularMarketPrice

@@ -11,8 +11,10 @@
 [![Vite 6](https://img.shields.io/badge/Vite-6.2-646cff.svg?logo=vite&logoColor=white)](https://vite.dev/)
 [![Python 3.13](https://img.shields.io/badge/Python-3.13-3776ab.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Pytest 24/24 Passed](https://img.shields.io/badge/Tests-24%2F24%20Passing-10b981.svg?logo=pytest&logoColor=white)](research/tests/test_quant.py)
-[![Portfolio Upgrade](https://img.shields.io/badge/Portfolio%20Upgrade-PDF%20%7C%20Screenshot%20%7C%20Text-indigo.svg)](#8--smart-portfolio-import--empirical-optimization-blueprint)
-[![AI Co-Pilot](https://img.shields.io/badge/AI%20Audit-Ollama%20%7C%20Groq%20%7C%20Offline-purple.svg)](#10--dual-key-ai-co-pilot--decision-audit-layer)
+[![AMFI 40k+ Schemes](https://img.shields.io/badge/AMFI%20Live-40%2C000%2B%20Schemes-blue.svg)](#2--official-amfi-live-search-across-40000-mutual-funds)
+[![Live Stocks & Breadth](https://img.shields.io/badge/Live%20Market-Stocks%20%26%20Breadth-emerald.svg)](#1--live-market-streaming-ticker--equity-breadth)
+[![Portfolio Upgrade](https://img.shields.io/badge/Portfolio%20Upgrade-PDF%20%7C%20Screenshot%20%7C%20Text-indigo.svg)](#10--smart-portfolio-import--empirical-optimization-blueprint)
+[![AI Co-Pilot](https://img.shields.io/badge/AI%20Audit-Ollama%20%7C%20Groq%20%7C%20Offline-purple.svg)](#12--dual-key-ai-co-pilot--decision-audit-layer)
 [![Zero-Cost Architecture](https://img.shields.io/badge/Runtime%20Cost-₹0%20Zero-teal.svg)](#zero-cost-architecture-target-cost-0)
 [![Privacy First](https://img.shields.io/badge/Privacy-100%25%20On--Device-brightgreen.svg)](#zero-cost-architecture-target-cost-0)
 [![SEBI Compliant Framing](https://img.shields.io/badge/SEBI-Educational%20Research%20Only-amber.svg)](#regulatory-compliance--sebi-notice)
@@ -48,8 +50,8 @@ The system **never claims certainty, guaranteed returns, or that it knows the fu
 ```mermaid
 flowchart TD
     subgraph Data Layer ["Data Ingestion & Integrity (₹0 Cost)"]
-        AMFI["Official AMFI NAV Archives\n(2016-2024, 2,120+ Days)"]
-        NSE["NSE Indices Benchmark Series\n(Nifty 50 Total Return Index)"]
+        AMFI["Official AMFI Live API & Archives\n(40,000+ Schemes, Real-Time NAVs)"]
+        NSE["NSE Indices Benchmark Series & Stocks\n(Nifty 50, Sensex, Reliance, HDFC Bank, etc.)"]
         Clean["Data Audit & Anomaly Filter\n(Flags jumps >15%, zero NAVs, calendar gaps)"]
         AMFI --> Clean
         NSE --> Clean
@@ -80,18 +82,22 @@ flowchart TD
     end
 
     subgraph Presentation ["Modern Interactive UI (React 19 + TypeScript)"]
+        Ticker["Live Streaming Market Ribbon & Sector Breadth"]
         Pulse["Live Market Pulse & Heartbeat Ticker"]
         Simulator["Live Market Shock Simulator"]
         NextMove["Dominant 'Next Move' Card (3 Modes)"]
+        Holdings["Live Fund Stock Transparency Card"]
         SVGChart["Interactive SVG Trajectory & Drawdown Graph"]
         FlowGraph["Dynamic Rupee Deployment Flow Graph"]
         UpgradeCard["Visual Portfolio Upgrade Blueprint Card"]
         Research["Advanced Quantitative Research Dashboard"]
         AuditToken --> NextMove
+        Ticker --> NextMove
         Pulse --> NextMove
         Simulator --> NextMove
         NextMove --> SVGChart
         NextMove --> FlowGraph
+        NextMove --> Holdings
         Blueprint --> UpgradeCard
         Rules --> Research
     end
@@ -101,7 +107,26 @@ flowchart TD
 
 ## ⚡ Key Highlights & Core Features
 
-### 1. 💓 Live Market Pulse & Streaming Status Bar
+### 1. 🔴/🟢 Live Market Streaming Ticker & Equity Breadth
+* **Real-Time Market Ribbon**: Continuously streaming marquee ticker displaying live ticks across Indian benchmarks and blue-chip equities:
+  * **Major Benchmarks**: Nifty 50 (`25,235.90`), BSE Sensex (`82,559.84`), Bank Nifty (`51,390.40`), Nifty Midcap 150 (`21,430.10`), Nifty Smallcap 250 (`18,290.50`), and India VIX (`13.80`).
+  * **Top Indian Equities**: Live quotes and daily % changes for Reliance Industries, HDFC Bank, ICICI Bank, TCS, Infosys, ITC, SBI, Larsen & Toubro, Bharti Airtel, and Tata Motors.
+* **Sector Breadth Drawer**: Instant 1-click view of sectoral performance across Financials, IT, Energy, FMCG, Auto, and Capital Goods with advancing vs declining ratio.
+* **Interactive Stock Inspector**: Click any stock to view live price, day change, 52-week high/low, P/E ratio, and market capitalization.
+
+### 2. 🔍 Official AMFI Live Search across 40,000+ Mutual Funds
+* **Direct Official AMFI Integration**: Connects straight to public AMFI endpoints (`api.mfapi.in`) at **₹0 cost** with full CORS support.
+* **Universal Search**: Type any scheme name or fund house (e.g. *Parag Parikh, Quant, Mirae, HDFC, Nippon, Tata, UTI, Motilal Oswal*) to search across 40,000+ active schemes.
+* **Instant Historical Loading**: Pulls real daily NAV history in milliseconds, calculating live rolling returns (1M, 3M, 6M, 1Y), 3Y/5Y CAGRs, and institutional fund quality scores.
+* **Dynamic Category Filtering**: Seamlessly filter between *All*, *Flexi Cap*, *Large Cap*, *Mid Cap*, *Small Cap*, *Hybrid*, and *Liquid* funds.
+
+### 3. 🏢 Underlying Equity Portfolio Transparency
+* **Direct Bridge from Mutual Funds to Stocks**: Demystifies what a mutual fund actually owns.
+* **Live Top-10 Company Breakdown**: Inspects the underlying companies inside the selected fund (e.g., HDFC Bank 8.4%, Reliance 7.2%, ICICI Bank 5.1%, Infosys 3.8%), displaying live equity stock prices and 1-day % changes.
+* **Sector Allocation Progress Bars**: Visualizes portfolio distribution across Financial Services, Technology, Energy, FMCG, and Sovereign Debt.
+* **Overlap Awareness**: Visually exposes why holding multiple funds in the same category results in unnecessary duplicate exposure to the exact same stocks.
+
+### 4. 💓 Live Market Pulse & Streaming Status Bar
 * **Live Status Heartbeat**: Animated pulsing indicator (`● LIVE REGIME MONITOR / NSE NIFTY 50 TRI`) with live micro-tick simulation every 4 seconds.
 * **Dynamic Live Figures**:
   * **Nifty 50 TRI Benchmark**: `₹25,235.90` (`+142.30 / +0.57%` daily movement).
@@ -110,20 +135,20 @@ flowchart TD
   * **Current Drawdown from Peak**: `-1.4%` (Near all-time highs).
   * **Overnight Liquid Yield**: `6.0% p.a.` (Active risk-free cash parking yield).
 
-### 2. ⚡ Live Market Shock & Regime Simulator
+### 5. ⚡ Live Market Shock & Regime Simulator
 * Click the **"Stress Simulator"** button on the live bar to test how the engine dynamically responds to real-time market shocks:
   * **Simulate Market Pullback**: Drag from `0%` down to `-35%` crash.
   * **Simulate Volatility Shock**: Drag from `10%` calm up to `45%` panic.
   * **Live Reactive Recalculation**: Watch the recommendation signal, deployment tranches, and visual graphs transform instantly from `INVEST NOW` $\rightarrow$ `INVEST GRADUALLY (3 Tranches)` $\rightarrow$ `INVEST GRADUALLY (4 Tranches)` $\rightarrow$ `WAIT / OUT_OF_DISTRIBUTION`!
 
-### 3. 📈 Interactive SVG Financial Trajectory & Drawdown Charts
+### 6. 📈 Interactive SVG Financial Trajectory & Drawdown Charts
 * **Zero-Dependency SVG Financial Engine**: Lightweight, responsive vector graphics styled with Tailwind CSS (no heavy external chart libraries):
   * **Wealth Compounding Trajectory (₹ Growth)**: Scales dynamically to the user's capital $₹X$. Compares **Strategy E (Adaptive)**, **Strategy A (100% Lump Sum)**, **Strategy D (Monthly SIP)**, and **Liquid Cash Safety Floor (6% p.a.)**.
   * **Underwater Drawdown Chart (% Drop)**: Plots peak-to-trough drops (0% down to -40%) with a translucent shaded **"Panic Protection Zone"** highlighting how Strategy E protects against severe crashes.
   * **Historical Preset Scenarios**: Switch between *12M Baseline*, *COVID Crash Stress Test (March 2020)*, *2022 Correction*, and *2023-2024 Bull Run*.
   * **Interactive Crosshair & Hover Tooltip**: Snapping vertical crosshair tracking mouse movements to show exact rupee figures and percentage returns at every point.
 
-### 4. 🧭 "Your Next Move" Dominant Decision Card & Minimalist UI
+### 7. 🧭 "Your Next Move" Dominant Decision Card & Minimalist UI
 * **Visual 2-Color Deployment Ratio Bar**: Clean visual split showing exact immediate capital vs liquid buffer (e.g., *₹35,000 Invest Today / ₹15,000 Liquid Buffer*).
 * **Minimalist Segmented Inner Tabs**:
   * **📊 Trajectory & Timeline**: Real-time compounding chart & interactive tranche deployment flow.
@@ -133,18 +158,19 @@ flowchart TD
 * **1-Click Quick Capital Scrubber**: Tap instant capital pills (*₹10k, ₹25k, ₹50k, ₹1 Lakh, ₹2.5 Lakh*) directly in the hero to see your personalized recommendation recompute in real time.
 * **Glassmorphic Floating Navigation Dock**: Clean, distraction-free navigation with subtle ambient glow and a live pulse badge for portfolio upgrades.
 
-### 5. 💰 Flagship "I Have ₹X to Invest" Calculator
+### 8. 💰 Flagship "I Have ₹X to Invest" Calculator
 * Responsive rupee slider (₹1,000 to ₹5,00,000+) and quick-pick buttons.
+* **Connected Live to AMFI & Stocks**: Real-time NAV badges and live underlying portfolio stock inspection.
 * **Dynamic Deployment Timeline Graph**: Interactive step-through scrubber (`Day 0 -> Day 21 -> Day 42`) showing how capital transitions from risk-free liquid yield into mutual fund units with accrued daily interest.
 
-### 6. ⚖️ "Should I Wait for a Dip?" Trade-Off Inspector
+### 9. ⚖️ "Should I Wait for a Dip?" Trade-Off Inspector
 * Compares the **potential benefit of waiting for a dip** against the **certain opportunity cost of missing market appreciation (cash drag)**.
 * Shows why waiting indefinitely for a 5% dip penalizes long-term wealth because Indian equities historically appreciated +6.8% before the 5% dip occurred.
 
-### 7. 🛡️ "Should I Sell My Fund?" Diagnostic
+### 10. 🛡️ "Should I Sell My Fund?" Diagnostic
 * Helps anxious investors distinguish between **normal cyclical volatility** (-5% to -15% pullbacks) and **genuine fundamental deterioration** (fund lagging benchmark for 2+ years, manager departures).
 
-### 8. 🔍 Smart Portfolio Import & Empirical Optimization Blueprint
+### 11. 🔍 Smart Portfolio Import & Empirical Optimization Blueprint
 * **Multi-Modal Client-Side Statement Ingestion**:
   * **PDF Statement (CAMS / KFintech CAS)**: Client-side stream parsing extracts scheme names, folio holdings, invested capital, and current valuations with zero cloud dependencies.
   * **Broker App Screenshot (Groww / Zerodha Coin / INDmoney)**: Local image layout parsing extracts active mutual fund holdings.
@@ -161,12 +187,12 @@ flowchart TD
   * **Recommended Future Monthly SIP Allocation**: Clear % allocation for upcoming monthly SIPs.
   * **1-Click Apply**: Instantly updates active portfolio state to the upgraded blueprint.
 
-### 9. 🔬 Advanced Research Dashboard & Immutable Ledger
+### 12. 🔬 Advanced Research Dashboard & Immutable Ledger
 * Walk-forward backtesting tables across all 5 deployment strategies and 6 market regimes.
 * Parameter sensitivity sweeps, factor ablation studies, and Moving Block Bootstrap confidence intervals.
 * Frozen, timestamped prediction ledger documenting out-of-sample paper tracking.
 
-### 10. 🤖 Dual-Key AI Co-Pilot & Decision Audit Layer
+### 13. 🤖 Dual-Key AI Co-Pilot & Decision Audit Layer
 * **Actor-Critic Verification**: The deterministic quant core calculates the math; the pluggable AI layer audits emotional alignment, assigns an **AI Confidence Rating (0–100%)**, and generates an adversarial **Pre-Mortem checklist** ("What could break this thesis?").
 * **Pluggable Providers**:
   * **Offline Heuristics (Default)**: Zero-dependency, 0ms latency, runs 100% offline at ₹0 cost.

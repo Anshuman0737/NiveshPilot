@@ -16,7 +16,9 @@ import {
 import { computeInvestmentDecision } from './engine/decision'
 import { evaluateSuitability } from './engine/suitability'
 import { Navbar, ActiveTab } from './components/Navbar'
+import { LiveMarketTicker } from './components/LiveMarketTicker'
 import { LiveMarketPulse, SimulatedMarketState } from './components/LiveMarketPulse'
+import { syncActiveFundsWithLiveAMFI } from './engine/liveMfService'
 import { HeroSection } from './components/HeroSection'
 import { OnboardingModal } from './components/OnboardingModal'
 import { AISettingsModal } from './components/AISettingsModal'
@@ -56,8 +58,16 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     // Asynchronously fetch fresh data if available
-    fetchFundSnapshots().then((res) => {
-      if (res && res.length > 0) setFunds(res)
+    fetchFundSnapshots().then(async (res) => {
+      const initial = res && res.length > 0 ? res : FALLBACK_SNAPSHOTS
+      setFunds(initial)
+      // Connect to official AMFI API to sync latest live NAVs in real time
+      try {
+        const synced = await syncActiveFundsWithLiveAMFI(initial)
+        if (synced && synced.length > 0) setFunds(synced)
+      } catch (err) {
+        console.warn('Live AMFI initial sync caught error:', err)
+      }
     })
     fetchPredictionLedger().then((res) => {
       if (res && res.length > 0) setLedger(res)
@@ -66,6 +76,16 @@ export const App: React.FC = () => {
       if (res) setBacktest(res)
     })
   }, [])
+
+  const handleAddLiveFund = (newFund: FundSnapshot) => {
+    setFunds((prev) => {
+      if (prev.some((f) => f.internal_id === newFund.internal_id)) {
+        return prev.map((f) => (f.internal_id === newFund.internal_id ? newFund : f))
+      }
+      return [newFund, ...prev]
+    })
+    setSelectedFundId(newFund.internal_id)
+  }
 
   const selectedFund = funds.find((f) => f.internal_id === selectedFundId) || funds[0]
 
@@ -101,6 +121,9 @@ export const App: React.FC = () => {
         onOpenAISettings={() => setIsAISettingsOpen(true)}
         isSuitableForEquity={suitability.isSuitableForEquity}
       />
+
+      {/* Live Market Streaming Ticker Ribbon */}
+      <LiveMarketTicker />
 
       {/* Dynamic Live Market Pulse & Stress Simulator */}
       <LiveMarketPulse onSimulateStateChange={setSimulatedState} />
@@ -237,6 +260,7 @@ export const App: React.FC = () => {
               setSelectedFundId(f.internal_id)
               setActiveTab('home')
             }}
+            onAddFund={handleAddLiveFund}
           />
         )}
 

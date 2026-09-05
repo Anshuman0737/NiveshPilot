@@ -114,12 +114,13 @@ function runTests() {
   console.log('✓ Test 1 Passed: Client-side text parsing correctly extracted Indian mutual funds and amounts')
 
   // Test 2: Sample presets validity
+  const presetCount = Object.keys(SAMPLE_PORTFOLIO_PRESETS).length
   for (const [key, preset] of Object.entries(SAMPLE_PORTFOLIO_PRESETS)) {
     if (!preset.title || preset.holdings.length === 0) {
       throw new Error(`Preset ${key} is malformed`)
     }
   }
-  console.log('✓ Test 2 Passed: All 4 real-world sample presets validated')
+  console.log(`✓ Test 2 Passed: All ${presetCount} real-world sample presets validated (including ICICI Direct Equity)`)
 
   // Test 3: Optimization blueprint on Overlap-Heavy portfolio
   const overlapHoldings = SAMPLE_PORTFOLIO_PRESETS.overlap_heavy.holdings

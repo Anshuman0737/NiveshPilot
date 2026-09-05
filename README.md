@@ -13,8 +13,10 @@
 [![Pytest 24/24 Passed](https://img.shields.io/badge/Tests-24%2F24%20Passing-10b981.svg?logo=pytest&logoColor=white)](research/tests/test_quant.py)
 [![AMFI 40k+ Schemes](https://img.shields.io/badge/AMFI%20Live-40%2C000%2B%20Schemes-blue.svg)](#2--official-amfi-live-search-across-40000-mutual-funds)
 [![Live Stocks & Breadth](https://img.shields.io/badge/Live%20Market-Stocks%20%26%20Breadth-emerald.svg)](#1--live-market-streaming-ticker--equity-breadth)
-[![Portfolio Upgrade](https://img.shields.io/badge/Portfolio%20Upgrade-PDF%20%7C%20Screenshot%20%7C%20Text-indigo.svg)](#10--smart-portfolio-import--empirical-optimization-blueprint)
-[![AI Co-Pilot](https://img.shields.io/badge/AI%20Audit-Ollama%20%7C%20Groq%20%7C%20Offline-purple.svg)](#12--dual-key-ai-co-pilot--decision-audit-layer)
+[![Zerodha Margin](https://img.shields.io/badge/Zerodha%20Kite-Free%20Margin%20API-orange.svg)](#1--live-market-streaming-ticker--equity-breadth)
+[![ICICI Direct Analyser](https://img.shields.io/badge/ICICI%20Direct-Portfolio%20Analyser-red.svg)](#11--institutional-portfolio-analyser--icici-direct-grade)
+[![Portfolio Upgrade](https://img.shields.io/badge/Portfolio%20Upgrade-PDF%20%7C%20Screenshot%20%7C%20Text-indigo.svg)](#12--smart-portfolio-import--empirical-optimization-blueprint)
+[![AI Co-Pilot](https://img.shields.io/badge/AI%20Audit-Ollama%20%7C%20Groq%20%7C%20Offline-purple.svg)](#14--dual-key-ai-co-pilot--decision-audit-layer)
 [![Zero-Cost Architecture](https://img.shields.io/badge/Runtime%20Cost-₹0%20Zero-teal.svg)](#zero-cost-architecture-target-cost-0)
 [![Privacy First](https://img.shields.io/badge/Privacy-100%25%20On--Device-brightgreen.svg)](#zero-cost-architecture-target-cost-0)
 [![SEBI Compliant Framing](https://img.shields.io/badge/SEBI-Educational%20Research%20Only-amber.svg)](#regulatory-compliance--sebi-notice)
@@ -52,13 +54,15 @@ flowchart TD
     subgraph Data Layer ["Data Ingestion & Integrity (₹0 Cost)"]
         AMFI["Official AMFI Live API & Archives\n(40,000+ Schemes, Real-Time NAVs)"]
         NSE["NSE Indices Benchmark Series & Stocks\n(Nifty 50, Sensex, Reliance, HDFC Bank, etc.)"]
+        Kite["Zerodha Kite Open Margins API\n(1,600+ Equities, MIS Multipliers, Leverage)"]
         Clean["Data Audit & Anomaly Filter\n(Flags jumps >15%, zero NAVs, calendar gaps)"]
         AMFI --> Clean
         NSE --> Clean
+        Kite --> Clean
     end
 
     subgraph Quant Engine ["Point-in-Time Quantitative Research Core"]
-        PIT["Point-in-Time Features\n(Rolling Vol, Drawdown, Sortino, Momentum)"]
+        PIT["Point-in-Time Features\n(Rolling Vol, 252D Peak Drawdown, Sortino)"]
         Regime["6-Regime Classifier\n(Bull, Bear, Correction, Recovery, Sideways, High-Vol)"]
         Quality["4-Factor Fund Quality\n(Consistency 35%, Downside 30%, TER 20%, Alpha 15%)"]
         Clean --> PIT --> Regime
@@ -74,11 +78,12 @@ flowchart TD
         Quality --> Rules
     end
 
-    subgraph PortfolioEngine ["Smart Portfolio Upgrade Core (100% On-Device)"]
+    subgraph PortfolioEngine ["Institutional Portfolio Core & Analyser (100% On-Device)"]
         Parser["Multi-Modal Ingestion\n(PDF CAS, Broker Screenshots, Text, Presets)"]
+        Analyser["ICICI Direct-Style Analyser\n(Market Cap Bifurcation, Consolidated Stocks, Sector Exposure)"]
         Optimizer["Optimization Engine\n(Score Delta, 10-Yr Compounded Fee Drag, Overlap Mitigation)"]
         Blueprint["Step-by-Step Action Roadmap\n(Keep / Prune / Add / Future SIP)"]
-        Parser --> Optimizer --> Blueprint
+        Parser --> Analyser --> Optimizer --> Blueprint
     end
 
     subgraph Presentation ["Modern Interactive UI (React 19 + TypeScript)"]
@@ -178,12 +183,25 @@ flowchart TD
 ### 10. 🛡️ "Should I Sell My Fund?" Diagnostic
 * Helps anxious investors distinguish between **normal cyclical volatility** (-5% to -15% pullbacks) and **genuine fundamental deterioration** (fund lagging benchmark for 2+ years, manager departures).
 
-### 11. 🔍 Smart Portfolio Import & Empirical Optimization Blueprint
+### 11. 🏛️ Institutional Portfolio Analyser (ICICI Direct Grade, ₹0 Cost)
+* **SEBI Market Capitalization Bifurcation**:
+  * Calculates exact weighted equity distribution across **Giant / Large Cap (Top 100)**, **Mid Cap (101st - 250th)**, **Small Cap (251st+)**, and **Debt / Liquid Cash Reserves**.
+  * Interactive segmented multi-colored stack bar and percentage metric chips for institutional asset allocation audit.
+* **Consolidated Underlying Equities Concentration**:
+  * Demystifies fund holdings by aggregating all individual equities owned across every fund in your portfolio.
+  * Calculates **exact rupee exposure**, **portfolio weight percentage**, **sector tags**, and **multi-fund ownership** (e.g. HDFC Bank held in both *Parag Parikh Flexi Cap* and *Mirae Asset Large Cap*).
+  * Real-time live quotes and price change synchronization.
+* **Sector Allocation Breakdown**:
+  * Visual distribution bars showing portfolio allocation percentages and rupee values across Financial Services, Technology, Energy, FMCG, Healthcare, Automobile, and Consumer Goods.
+* **1-Click ICICI Direct Portfolio Preset**:
+  * Pre-configured ICICI Direct sample portfolio in the statement import modal for immediate evaluation.
+
+### 12. 🔍 Smart Portfolio Import & Empirical Optimization Blueprint
 * **Multi-Modal Client-Side Statement Ingestion**:
   * **PDF Statement (CAMS / KFintech CAS)**: Client-side stream parsing extracts scheme names, folio holdings, invested capital, and current valuations with zero cloud dependencies.
   * **Broker App Screenshot (Groww / Zerodha Coin / INDmoney)**: Local image layout parsing extracts active mutual fund holdings.
   * **Free-Form Text Paste**: Ingests email summaries, CAS text rows, or broker table snippets.
-  * **1-Click Real-World Presets**: Instant testing with pre-built scenarios (*High Overlap Trap*, *High-Fee Regular Drag*, *Small-Cap Over-Concentration*, and *Balanced Diversified*).
+  * **1-Click Real-World Presets**: Instant testing with pre-built scenarios (*High Overlap Trap*, *High-Fee Regular Drag*, *Small-Cap Over-Concentration*, *ICICI Direct Equity*, and *Balanced Diversified*).
 * **100% Client-Side Privacy (₹0 Cost)**:
   * Zero financial statements, holdings, or balances are uploaded to external servers.
   * Zero broker login credentials or passwords required.
@@ -195,12 +213,12 @@ flowchart TD
   * **Recommended Future Monthly SIP Allocation**: Clear % allocation for upcoming monthly SIPs.
   * **1-Click Apply**: Instantly updates active portfolio state to the upgraded blueprint.
 
-### 12. 🔬 Advanced Research Dashboard & Immutable Ledger
+### 13. 🔬 Advanced Research Dashboard & Immutable Ledger
 * Walk-forward backtesting tables across all 5 deployment strategies and 6 market regimes.
 * Parameter sensitivity sweeps, factor ablation studies, and Moving Block Bootstrap confidence intervals.
 * Frozen, timestamped prediction ledger documenting out-of-sample paper tracking.
 
-### 13. 🤖 Dual-Key AI Co-Pilot & Decision Audit Layer
+### 14. 🤖 Dual-Key AI Co-Pilot & Decision Audit Layer
 * **Actor-Critic Verification**: The deterministic quant core calculates the math; the pluggable AI layer audits emotional alignment, assigns an **AI Confidence Rating (0–100%)**, and generates an adversarial **Pre-Mortem checklist** ("What could break this thesis?").
 * **Pluggable Providers**:
   * **Offline Heuristics (Default)**: Zero-dependency, 0ms latency, runs 100% offline at ₹0 cost.
@@ -346,7 +364,7 @@ npx tsx src/tests/portfolioUpgrade.test.ts
 ```
 --- Starting Portfolio Import & Optimization Engine Verification ---
 ✓ Test 1 Passed: Client-side text parsing correctly extracted Indian mutual funds and amounts
-✓ Test 2 Passed: All 4 real-world sample presets validated
+✓ Test 2 Passed: All 5 real-world sample presets validated (including ICICI Direct Equity)
 ✓ Test 3 Passed: Overlap-Heavy portfolio score improved from 66 to 93 (Peak Overlap reduced from 51% to 18%)
 ✓ Test 4 Passed: Regular Plan Fee Drag calculated 10-year compounded savings of ₹43,272 with expense drop 1.65% -> 0.62%
 ✓ Test 5 Passed: Upgraded monthly SIP allocation distribution exactly equals 100%
@@ -383,6 +401,7 @@ NiveshPilot/
 │   │
 │   ├── components/              # Interactive UI Components
 │   │   ├── Navbar.tsx           # Global header with mode switch & suitability badge
+│   │   ├── LiveMarketTicker.tsx # Streaming ticker ribbon with Zerodha margin modal
 │   │   ├── LiveMarketPulse.tsx  # Live market heartbeat ticker & shock simulator
 │   │   ├── InteractiveStrategyChart.tsx # SVG financial graph (Wealth & Drawdown views)
 │   │   ├── DeploymentTimelineGraph.tsx  # Dynamic rupee allocation & timeline scrubber
@@ -391,7 +410,9 @@ NiveshPilot/
 │   │   ├── IHaveXMode.tsx       # Flagship ₹X calculator with dynamic charts
 │   │   ├── ShouldIWaitMode.tsx  # Timing dilemma & opportunity cost analyzer
 │   │   ├── ShouldISellMode.tsx  # Panic diagnostic & thesis check
-│   │   ├── PortfolioHealthMode.tsx # Portfolio asset allocation & stock overlap
+│   │   ├── PortfolioHealthMode.tsx # ICICI Direct-style analyser, cap split & overlap
+│   │   ├── PortfolioImportModal.tsx # Multi-modal PDF/screenshot/preset ingestion
+│   │   ├── PortfolioUpgradeCard.tsx # Visual upgrade blueprint with 10-yr fee savings
 │   │   ├── FundComparisonMode.tsx  # Head-to-head scheme matcher
 │   │   ├── ResearchDashboard.tsx   # Deep quantitative research portal & ledger
 │   │   ├── OnboardingModal.tsx  # 5-question suitability wizard
@@ -401,8 +422,15 @@ NiveshPilot/
 │       ├── types.ts             # Strong TypeScript definitions & domain interfaces
 │       ├── suitability.ts       # Suitability gate logic & risk capacity rules
 │       ├── decision.ts          # Strategy allocator & SHA-256 decision ID generator
-│       ├── portfolio.ts         # Portfolio overlap & concentration analyzer
-│       └── dataService.ts       # Asynchronous data fetcher with high-fidelity fallbacks
+│       ├── portfolio.ts         # Consolidated stocks & market-cap bifurcation analyser
+│       ├── portfolioParser.ts   # Multi-modal PDF/screenshot/text CAS statement parser
+│       ├── portfolioOptimizer.ts # Overlap elimination & 10-yr fee savings blueprint
+│       ├── liveMarketService.ts # Real-time Yahoo Finance quote sync & market breadth
+│       ├── liveMfService.ts     # Official AMFI 40k+ scheme search & dynamic math
+│       ├── zerodhaService.ts    # Official Zerodha Kite open margin & leverage API
+│       ├── stockHoldingsData.ts # Underlying equity holdings database across funds
+│       ├── aiAuditService.ts    # Pluggable AI Co-Pilot (Offline, Ollama, Groq)
+│       └── dataService.ts       # Fallback repository with high-fidelity datasets
 │
 └── research/                    # Python Quantitative Research Pipeline
     ├── download_data.py         # Official AMFI & NSE benchmark data ingestion

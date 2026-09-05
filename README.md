@@ -123,13 +123,15 @@ flowchart TD
   * **Historical Preset Scenarios**: Switch between *12M Baseline*, *COVID Crash Stress Test (March 2020)*, *2022 Correction*, and *2023-2024 Bull Run*.
   * **Interactive Crosshair & Hover Tooltip**: Snapping vertical crosshair tracking mouse movements to show exact rupee figures and percentage returns at every point.
 
-### 4. 🧭 "Your Next Move" Dominant Decision Card
-* **Clear Rupee Deployment Split**: Shows exact immediate capital vs liquid reserve (e.g., *₹7,000 now / ₹3,000 later*).
-* **3-Tier Explanation Toggle**:
-  * **Beginner**: High-level clarity without complex finance jargon.
-  * **Intermediate**: Factor insights and comparative reasoning.
-  * **Research**: Mathematical invalidation thresholds, rolling volatility numbers, and counterfactuals.
-* **Deterministic Decision ID**: Every recommendation generates an immutable SHA-256 hash token (e.g. `NP-DEC-7f3a91c2...`) for full auditability and replay.
+### 4. 🧭 "Your Next Move" Dominant Decision Card & Minimalist UI
+* **Visual 2-Color Deployment Ratio Bar**: Clean visual split showing exact immediate capital vs liquid buffer (e.g., *₹35,000 Invest Today / ₹15,000 Liquid Buffer*).
+* **Minimalist Segmented Inner Tabs**:
+  * **📊 Trajectory & Timeline**: Real-time compounding chart & interactive tranche deployment flow.
+  * **💡 Why & Risk Scenarios**: Plain-English rationale, downside scenarios, and 12-month historical precedent stats.
+  * **🤖 AI Co-Pilot Audit**: Adversarial pre-mortem stress test and conversational financial Q&A.
+  * **🔍 Audit & Transparency**: Deterministic SHA-256 decision replay token and collapsible invalidation rules.
+* **1-Click Quick Capital Scrubber**: Tap instant capital pills (*₹10k, ₹25k, ₹50k, ₹1 Lakh, ₹2.5 Lakh*) directly in the hero to see your personalized recommendation recompute in real time.
+* **Glassmorphic Floating Navigation Dock**: Clean, distraction-free navigation with subtle ambient glow and a live pulse badge for portfolio upgrades.
 
 ### 5. 💰 Flagship "I Have ₹X to Invest" Calculator
 * Responsive rupee slider (₹1,000 to ₹5,00,000+) and quick-pick buttons.

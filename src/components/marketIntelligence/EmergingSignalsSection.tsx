@@ -1,12 +1,44 @@
 import React from 'react'
+import { AssetMetadata, DirectionalForecast, AssetPricePoint } from '../../engine/marketIntelligence/types'
+import { LiveMarketQuote } from '../../engine/marketIntelligence/providers/MarketDataProvider'
+
+export interface EmergingSignalItem {
+  asset: AssetMetadata
+  quote: LiveMarketQuote | null
+  forecast: DirectionalForecast
+  prices: AssetPricePoint[]
+}
 
 interface EmergingSignalsSectionProps {
+  signals?: EmergingSignalItem[]
   onInspectAsset: (symbol: string) => void
 }
 
 export const EmergingSignalsSection: React.FC<EmergingSignalsSectionProps> = ({
+  signals = [],
   onInspectAsset
 }) => {
+  // Generate real SVG sparkline coordinates from actual prices
+  const generateSparklinePath = (prices: AssetPricePoint[]): { path: string; isUp: boolean } => {
+    const recent = prices.slice(-20)
+    if (recent.length < 2) {
+      return { path: 'M 0,24 L 180,24', isUp: true }
+    }
+    const closes = recent.map((p) => p.close)
+    const min = Math.min(...closes)
+    const max = Math.max(...closes)
+    const range = Math.max(0.01, max - min)
+    const isUp = closes[closes.length - 1] >= closes[0]
+
+    const points = recent.map((p, idx) => {
+      const x = +((idx / (recent.length - 1)) * 180).toFixed(1)
+      const y = +(44 - ((p.close - min) / range) * 38).toFixed(1)
+      return `${x},${y}`
+    })
+
+    return { path: `M ${points.join(' L ')}`, isUp }
+  }
+
   return (
     <div className="mb-space-md">
       {/* Section Header */}
@@ -16,408 +48,153 @@ export const EmergingSignalsSection: React.FC<EmergingSignalsSectionProps> = ({
             Emerging Quantitative Signals
           </span>
           <span className="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-data-mono-compact text-data-mono-compact">
-            3 High-Conviction Sets
+            {signals.length} High-Conviction Sets
           </span>
         </div>
         <span className="font-data-mono-compact text-data-mono-compact text-on-surface-variant">
-          Markov Inference Pipeline v4.8 · Updated Continuous
+          Empirical Markov Inference Engine · Calibrated Live
         </span>
       </div>
 
       {/* 3 Institutional Signal Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
-        {/* CARD 1: RELIANCE */}
-        <div className="bg-surface-container-low p-space-md flex flex-col justify-between shadow-md hover:bg-surface-container transition-all rounded">
-          <div>
-            {/* Header */}
-            <div className="flex items-start justify-between pb-space-xs mb-space-xs bg-surface-container/60 p-space-xs rounded">
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-headline-md text-headline-md text-on-surface font-semibold">
-                    RELIANCE
-                  </span>
-                  <span className="font-data-mono-compact text-data-mono-compact px-1 py-0.5 rounded bg-surface-container-highest text-secondary">
-                    NSE · EQ
-                  </span>
-                </div>
-                <span className="font-body-compact text-body-compact text-on-surface-variant">
-                  Reliance Industries Ltd.
-                </span>
-              </div>
-              <div className="text-right">
-                <span className="px-2 py-0.5 rounded bg-tertiary/20 text-tertiary font-label-caps text-label-caps uppercase font-semibold">
-                  MODERATELY BULLISH
-                </span>
-                <div className="font-data-mono-compact text-data-mono-compact text-on-surface-variant mt-0.5">
-                  5D Horizon
-                </div>
-              </div>
-            </div>
+        {signals.map((sig) => {
+          const { asset, quote, forecast, prices } = sig
+          const bullProb = Math.round(forecast.probability_bullish * 100)
+          const neuProb = Math.round(forecast.probability_neutral * 100)
+          const bearProb = Math.round(forecast.probability_bearish * 100)
+          const spark = generateSparklinePath(prices)
+          const isBullish = forecast.expected_direction.includes('BULLISH')
+          const isBearish = forecast.expected_direction.includes('BEARISH')
 
-            {/* Probability Distribution */}
-            <div className="mb-space-sm bg-surface-container-lowest p-space-xs rounded">
-              <div className="flex justify-between items-center font-data-mono-compact text-data-mono-compact text-on-surface-variant mb-1">
-                <span>PROBABILITY DISTRIBUTION</span>
-                <span className="text-tertiary font-semibold">Delta: +9.0 pts (4h)</span>
-              </div>
-              <div className="w-full h-2 rounded overflow-hidden flex bg-surface-container-high mb-1.5">
-                <div className="bg-tertiary h-full" style={{ width: '67%' }} title="67% Bullish"></div>
-                <div className="bg-secondary h-full" style={{ width: '18%' }} title="18% Neutral"></div>
-                <div className="bg-error h-full" style={{ width: '15%' }} title="15% Bearish"></div>
-              </div>
-              <div className="flex justify-between font-data-mono-compact text-data-mono-compact">
-                <span className="text-tertiary">↑ 67% Bullish</span>
-                <span className="text-secondary">→ 18% Neutral</span>
-                <span className="text-error">↓ 15% Bearish</span>
-              </div>
-            </div>
+          const directionColor = isBullish
+            ? 'bg-tertiary/20 text-tertiary'
+            : isBearish
+            ? 'bg-error/20 text-error'
+            : 'bg-secondary/20 text-secondary'
 
-            {/* Mini Price Visual with Event Timestamp & 5D Probability Cone */}
-            <div className="mb-space-sm bg-surface-container-lowest p-space-xs rounded">
-              <div className="flex justify-between items-center font-label-caps text-label-caps text-on-surface-variant mb-1">
-                <span>PRICE PATH & 5D FAN CHART</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-on-surface font-semibold">
-                  ₹2,984.50 (+2.8%)
-                </span>
-              </div>
-              <div className="relative w-full h-16 bg-surface-container-low overflow-hidden rounded">
-                <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 260 64">
-                  {/* Forecast Cone Area */}
-                  <polygon fill="rgba(78, 222, 163, 0.15)" points="160,34 260,12 260,42" />
-                  {/* Historical Line */}
-                  <polyline fill="none" points="0,48 40,46 80,44 120,40 160,34" stroke="#adc6ff" strokeWidth="1.5" />
-                  {/* Projected Median */}
-                  <polyline fill="none" points="160,34 210,26 260,20" stroke="#4edea3" strokeDasharray="3,3" strokeWidth="1.5" />
-                  {/* Event Dot */}
-                  <circle cx="160" cy="34" fill="#4edea3" r="3.5" />
-                  <line stroke="#464554" strokeDasharray="2,2" strokeWidth="1" x1="160" x2="160" y1="0" y2="64" />
-                </svg>
-                <span className="absolute top-1 left-[62%] font-label-caps text-label-caps bg-surface-container-highest px-1 text-tertiary rounded">
-                  09:12 Event
-                </span>
-              </div>
-            </div>
+          const priceStr = quote?.price
+            ? `₹${quote.price.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`
+            : prices.length > 0
+            ? `₹${prices[prices.length - 1].close.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`
+            : 'N/A'
 
-            {/* Supporting Drivers */}
-            <div className="space-y-1 mb-space-sm">
-              <span className="font-label-caps text-label-caps text-on-surface-variant uppercase">
-                SUPPORTING DRIVERS (+ Attribution)
-              </span>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">5G monetization & clean energy tie-up</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold whitespace-nowrap">
-                  +6.2%
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">News attention velocity (+340%)</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold whitespace-nowrap">
-                  +3.4%
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">Energy & Telecom relative momentum</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold whitespace-nowrap">
-                  +2.1%
-                </span>
-              </div>
-            </div>
-
-            {/* Headwinds */}
-            <div className="space-y-1 mb-space-sm">
-              <span className="font-label-caps text-label-caps text-on-surface-variant uppercase">
-                HEADWINDS (- Penalty)
-              </span>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">Elevated trailing 12M P/E multiple</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-error font-semibold whitespace-nowrap">
-                  -1.7%
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">Broader mid-cap breadth fatigue</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-error font-semibold whitespace-nowrap">
-                  -1.2%
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Metrics Footer & Action */}
-          <div className="pt-space-xs bg-surface-container p-space-xs mt-space-xs rounded">
-            <div className="flex items-center justify-between font-data-mono-compact text-data-mono-compact text-on-surface-variant mb-space-xs">
-              <span>Confidence: <strong className="text-tertiary font-semibold">MED (74%)</strong></span>
-              <span>Signal: <strong className="text-on-surface">7.8/10</strong></span>
-              <span>2m ago</span>
-            </div>
-            <button
-              type="button"
-              onClick={() => onInspectAsset('RELIANCE.NS')}
-              className="w-full py-1.5 px-space-sm bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-compact text-body-compact font-semibold rounded flex items-center justify-center gap-1 transition-all"
+          return (
+            <div
+              key={asset.symbol}
+              className="bg-surface-container-low p-space-md flex flex-col justify-between shadow-md hover:bg-surface-container transition-all rounded border border-outline-variant/30"
             >
-              <span>View Intelligence Diagnostic</span>
-              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-            </button>
-          </div>
-        </div>
-
-        {/* CARD 2: TCS */}
-        <div className="bg-surface-container-low p-space-md flex flex-col justify-between shadow-md hover:bg-surface-container transition-all rounded">
-          <div>
-            {/* Header */}
-            <div className="flex items-start justify-between pb-space-xs mb-space-xs bg-surface-container/60 p-space-xs rounded">
               <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-headline-md text-headline-md text-on-surface font-semibold">
-                    TCS
-                  </span>
-                  <span className="font-data-mono-compact text-data-mono-compact px-1 py-0.5 rounded bg-surface-container-highest text-secondary">
-                    NSE · EQ
-                  </span>
+                {/* Header */}
+                <div className="flex items-start justify-between pb-space-xs mb-space-xs bg-surface-container/60 p-space-xs rounded">
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-headline-md text-headline-md text-on-surface font-semibold">
+                        {asset.symbol.split('.')[0]}
+                      </span>
+                      <span className="font-data-mono-compact text-data-mono-compact px-1 py-0.5 rounded bg-surface-container-highest text-secondary uppercase">
+                        {asset.exchange} · {asset.asset_class.slice(0, 3)}
+                      </span>
+                    </div>
+                    <span className="font-body-compact text-body-compact text-on-surface-variant block truncate max-w-[180px]">
+                      {asset.name}
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <span
+                      className={`px-2 py-0.5 rounded font-label-caps text-label-caps uppercase font-semibold ${directionColor}`}
+                    >
+                      {forecast.expected_direction}
+                    </span>
+                    <div className="font-data-mono-compact text-data-mono-compact text-on-surface-variant mt-0.5">
+                      {forecast.horizon} · {priceStr}
+                    </div>
+                  </div>
                 </div>
-                <span className="font-body-compact text-body-compact text-on-surface-variant">
-                  Tata Consultancy Services
-                </span>
-              </div>
-              <div className="text-right">
-                <span className="px-2 py-0.5 rounded bg-secondary-container text-on-secondary font-label-caps text-label-caps uppercase font-semibold">
-                  NEUTRAL / RANGE
-                </span>
-                <div className="font-data-mono-compact text-data-mono-compact text-on-surface-variant mt-0.5">
-                  5D Horizon
+
+                {/* Probability Distribution */}
+                <div className="mb-space-sm bg-surface-container-lowest p-space-xs rounded">
+                  <div className="flex justify-between items-center font-data-mono-compact text-data-mono-compact text-on-surface-variant mb-1">
+                    <span>PLATT-SCALED PROBABILITY</span>
+                    <span className={isBullish ? 'text-tertiary font-semibold' : 'text-error font-semibold'}>
+                      Quality: {(forecast.signal_quality * 10).toFixed(1)}/10
+                    </span>
+                  </div>
+                  <div className="w-full h-2 rounded overflow-hidden flex bg-surface-container-high mb-1.5">
+                    <div
+                      className="bg-tertiary h-full transition-all"
+                      style={{ width: `${bullProb}%` }}
+                      title={`${bullProb}% Bullish`}
+                    ></div>
+                    <div
+                      className="bg-secondary h-full transition-all"
+                      style={{ width: `${neuProb}%` }}
+                      title={`${neuProb}% Neutral`}
+                    ></div>
+                    <div
+                      className="bg-error h-full transition-all"
+                      style={{ width: `${bearProb}%` }}
+                      title={`${bearProb}% Bearish`}
+                    ></div>
+                  </div>
+                  <div className="flex justify-between font-data-mono-compact text-data-mono-compact">
+                    <span className="text-tertiary">↑ {bullProb}% Bullish</span>
+                    <span className="text-secondary">→ {neuProb}% Neutral</span>
+                    <span className="text-error">↓ {bearProb}% Bearish</span>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Probability Distribution */}
-            <div className="mb-space-sm bg-surface-container-lowest p-space-xs rounded">
-              <div className="flex justify-between items-center font-data-mono-compact text-data-mono-compact text-on-surface-variant mb-1">
-                <span>PROBABILITY DISTRIBUTION</span>
-                <span className="text-error font-semibold">Delta: -4.2 pts (4h)</span>
-              </div>
-              <div className="w-full h-2 rounded overflow-hidden flex bg-surface-container-high mb-1.5">
-                <div className="bg-tertiary h-full" style={{ width: '28%' }} title="28% Bullish"></div>
-                <div className="bg-secondary h-full" style={{ width: '54%' }} title="54% Neutral"></div>
-                <div className="bg-error h-full" style={{ width: '18%' }} title="18% Bearish"></div>
-              </div>
-              <div className="flex justify-between font-data-mono-compact text-data-mono-compact">
-                <span className="text-tertiary">↑ 28% Bullish</span>
-                <span className="text-secondary">→ 54% Neutral</span>
-                <span className="text-error">↓ 18% Bearish</span>
-              </div>
-            </div>
-
-            {/* Mini Price Visual */}
-            <div className="mb-space-sm bg-surface-container-lowest p-space-xs rounded">
-              <div className="flex justify-between items-center font-label-caps text-label-caps text-on-surface-variant mb-1">
-                <span>PRICE PATH & 5D FAN CHART</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-on-surface font-semibold">
-                  ₹4,290.10 (-0.12%)
-                </span>
-              </div>
-              <div className="relative w-full h-16 bg-surface-container-low overflow-hidden rounded">
-                <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 260 64">
-                  {/* Forecast Cone Area Flat */}
-                  <polygon fill="rgba(173, 198, 255, 0.15)" points="160,30 260,22 260,40" />
-                  {/* Historical Line */}
-                  <polyline fill="none" points="0,28 50,32 100,27 130,34 160,30" stroke="#adc6ff" strokeWidth="1.5" />
-                  {/* Projected Median */}
-                  <polyline fill="none" points="160,30 210,31 260,31" stroke="#adc6ff" strokeDasharray="3,3" strokeWidth="1.5" />
-                  {/* Event Dot */}
-                  <circle cx="160" cy="30" fill="#adc6ff" r="3.5" />
-                  <line stroke="#464554" strokeDasharray="2,2" strokeWidth="1" x1="160" x2="160" y1="0" y2="64" />
-                </svg>
-                <span className="absolute top-1 left-[62%] font-label-caps text-label-caps bg-surface-container-highest px-1 text-on-surface-variant rounded">
-                  Range Bind
-                </span>
-              </div>
-            </div>
-
-            {/* Supporting Drivers */}
-            <div className="space-y-1 mb-space-sm">
-              <span className="font-label-caps text-label-caps text-on-surface-variant uppercase">
-                SUPPORTING DRIVERS (+ Attribution)
-              </span>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">EU Cloud enterprise migration win</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold whitespace-nowrap">
-                  +3.4%
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">Dividend yield support floor</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold whitespace-nowrap">
-                  +1.1%
-                </span>
-              </div>
-            </div>
-
-            {/* Headwinds */}
-            <div className="space-y-1 mb-space-sm">
-              <span className="font-label-caps text-label-caps text-on-surface-variant uppercase">
-                HEADWINDS (- Penalty)
-              </span>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">US BFSI discretionary contract delay</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-error font-semibold whitespace-nowrap">
-                  -4.1%
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">Forex currency conversion drag</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-error font-semibold whitespace-nowrap">
-                  -1.5%
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Metrics Footer & Action */}
-          <div className="pt-space-xs bg-surface-container p-space-xs mt-space-xs rounded">
-            <div className="flex items-center justify-between font-data-mono-compact text-data-mono-compact text-on-surface-variant mb-space-xs">
-              <span>Confidence: <strong className="text-primary font-semibold">HIGH (88%)</strong></span>
-              <span>Signal: <strong className="text-on-surface">8.2/10</strong></span>
-              <span>5m ago</span>
-            </div>
-            <button
-              type="button"
-              onClick={() => onInspectAsset('TCS.NS')}
-              className="w-full py-1.5 px-space-sm bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-compact text-body-compact font-semibold rounded flex items-center justify-center gap-1 transition-all"
-            >
-              <span>View Intelligence Diagnostic</span>
-              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-            </button>
-          </div>
-        </div>
-
-        {/* CARD 3: HDFCBANK */}
-        <div className="bg-surface-container-low p-space-md flex flex-col justify-between shadow-md hover:bg-surface-container transition-all rounded">
-          <div>
-            {/* Header */}
-            <div className="flex items-start justify-between pb-space-xs mb-space-xs bg-surface-container/60 p-space-xs rounded">
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-headline-md text-headline-md text-on-surface font-semibold">
-                    HDFCBANK
-                  </span>
-                  <span className="font-data-mono-compact text-data-mono-compact px-1 py-0.5 rounded bg-surface-container-highest text-secondary">
-                    NSE · EQ
-                  </span>
+                {/* Real Empirical SVG Price Path */}
+                <div className="mb-space-sm bg-surface-container-lowest p-space-xs rounded">
+                  <div className="flex justify-between items-center font-data-mono-compact text-data-mono-compact text-on-surface-variant mb-1">
+                    <span>RECENT REAL PRICE ACTION (20D)</span>
+                    <span className={spark.isUp ? 'text-tertiary' : 'text-error'}>
+                      {spark.isUp ? '▲ Upward Momentum' : '▼ Mean Reversion'}
+                    </span>
+                  </div>
+                  <div className="w-full h-12 relative flex items-center justify-center">
+                    <svg className="w-full h-full" viewBox="0 0 180 48" preserveAspectRatio="none">
+                      <path
+                        d={spark.path}
+                        fill="none"
+                        stroke={spark.isUp ? '#4edea3' : '#ffb4ab'}
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
                 </div>
-                <span className="font-body-compact text-body-compact text-on-surface-variant">
-                  HDFC Bank Limited
-                </span>
-              </div>
-              <div className="text-right">
-                <span className="px-2 py-0.5 rounded bg-tertiary text-on-tertiary font-label-caps text-label-caps uppercase font-semibold">
-                  STRONGLY BULLISH
-                </span>
-                <div className="font-data-mono-compact text-data-mono-compact text-on-surface-variant mt-0.5">
-                  5D Horizon
+
+                {/* Causal Driver & Contradiction Factors */}
+                <div className="space-y-1 bg-surface-container-lowest p-space-xs rounded mb-space-sm font-data-mono-compact text-data-mono-compact">
+                  <div className="flex items-center gap-1.5 text-tertiary">
+                    <span className="material-symbols-outlined text-[13px]">trending_up</span>
+                    <span className="text-on-surface font-semibold truncate">
+                      {forecast.top_bullish_drivers[0] || 'Technical Trend Continuation'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-error">
+                    <span className="material-symbols-outlined text-[13px]">warning</span>
+                    <span className="text-on-surface-variant truncate">
+                      {forecast.top_bearish_drivers[0] || 'Macro Volatility Headwind'}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Probability Distribution */}
-            <div className="mb-space-sm bg-surface-container-lowest p-space-xs rounded">
-              <div className="flex justify-between items-center font-data-mono-compact text-data-mono-compact text-on-surface-variant mb-1">
-                <span>PROBABILITY DISTRIBUTION</span>
-                <span className="text-tertiary font-semibold">Delta: +12.5 pts (4h)</span>
-              </div>
-              <div className="w-full h-2 rounded overflow-hidden flex bg-surface-container-high mb-1.5">
-                <div className="bg-tertiary h-full" style={{ width: '74%' }} title="74% Bullish"></div>
-                <div className="bg-secondary h-full" style={{ width: '16%' }} title="16% Neutral"></div>
-                <div className="bg-error h-full" style={{ width: '10%' }} title="10% Bearish"></div>
-              </div>
-              <div className="flex justify-between font-data-mono-compact text-data-mono-compact">
-                <span className="text-tertiary">↑ 74% Bullish</span>
-                <span className="text-secondary">→ 16% Neutral</span>
-                <span className="text-error">↓ 10% Bearish</span>
-              </div>
+              {/* Action Button */}
+              <button
+                type="button"
+                onClick={() => onInspectAsset(asset.symbol)}
+                className="w-full py-1.5 px-space-sm bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-compact text-body-compact font-semibold rounded flex items-center justify-center gap-1 transition-all cursor-pointer border border-outline-variant/40"
+              >
+                <span>Inspect Intelligence Diagnostic</span>
+                <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </button>
             </div>
-
-            {/* Mini Price Visual */}
-            <div className="mb-space-sm bg-surface-container-lowest p-space-xs rounded">
-              <div className="flex justify-between items-center font-label-caps text-label-caps text-on-surface-variant mb-1">
-                <span>PRICE PATH & 5D FAN CHART</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-on-surface font-semibold">
-                  ₹1,672.40 (+1.8%)
-                </span>
-              </div>
-              <div className="relative w-full h-16 bg-surface-container-low overflow-hidden rounded">
-                <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 260 64">
-                  {/* Steep Bullish Fan Cone */}
-                  <polygon fill="rgba(78, 222, 163, 0.2)" points="160,38 260,8 260,34" />
-                  {/* Historical Line */}
-                  <polyline fill="none" points="0,52 45,50 90,44 125,43 160,38" stroke="#adc6ff" strokeWidth="1.5" />
-                  {/* Projected Median */}
-                  <polyline fill="none" points="160,38 210,24 260,16" stroke="#4edea3" strokeDasharray="3,3" strokeWidth="1.5" />
-                  {/* Event Dot */}
-                  <circle cx="160" cy="38" fill="#4edea3" r="3.5" />
-                  <line stroke="#464554" strokeDasharray="2,2" strokeWidth="1" x1="160" x2="160" y1="0" y2="64" />
-                </svg>
-                <span className="absolute top-1 left-[62%] font-label-caps text-label-caps bg-surface-container-highest px-1 text-tertiary rounded">
-                  FII Accumulation
-                </span>
-              </div>
-            </div>
-
-            {/* Supporting Drivers */}
-            <div className="space-y-1 mb-space-sm">
-              <span className="font-label-caps text-label-caps text-on-surface-variant uppercase">
-                SUPPORTING DRIVERS (+ Attribution)
-              </span>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">Deposit growth acceleration ahead of peers</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold whitespace-nowrap">
-                  +7.1%
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">Asset credit cost normalization run-rate</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold whitespace-nowrap">
-                  +3.8%
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">Foreign institutional net buy imbalance</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold whitespace-nowrap">
-                  +3.2%
-                </span>
-              </div>
-            </div>
-
-            {/* Headwinds */}
-            <div className="space-y-1 mb-space-sm">
-              <span className="font-label-caps text-label-caps text-on-surface-variant uppercase">
-                HEADWINDS (- Penalty)
-              </span>
-              <div className="flex items-center justify-between text-body-compact font-body-compact bg-surface-container-lowest p-1 rounded">
-                <span className="text-on-surface truncate pr-2">NIM net interest margin compression</span>
-                <span className="font-data-mono-compact text-data-mono-compact text-error font-semibold whitespace-nowrap">
-                  -1.6%
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Metrics Footer & Action */}
-          <div className="pt-space-xs bg-surface-container p-space-xs mt-space-xs rounded">
-            <div className="flex items-center justify-between font-data-mono-compact text-data-mono-compact text-on-surface-variant mb-space-xs">
-              <span>Confidence: <strong className="text-primary font-semibold">HIGH (86%)</strong></span>
-              <span>Signal: <strong className="text-on-surface">8.7/10</strong></span>
-              <span>1m ago</span>
-            </div>
-            <button
-              type="button"
-              onClick={() => onInspectAsset('HDFCBANK.NS')}
-              className="w-full py-1.5 px-space-sm bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-compact text-body-compact font-semibold rounded flex items-center justify-center gap-1 transition-all"
-            >
-              <span>View Intelligence Diagnostic</span>
-              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-            </button>
-          </div>
-        </div>
+          )
+        })}
       </div>
     </div>
   )

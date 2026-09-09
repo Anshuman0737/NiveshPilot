@@ -1,4 +1,5 @@
 import React from 'react'
+import { AssetPricePoint } from '../../engine/marketIntelligence/types'
 
 export interface MarketIndexItem {
   id: string
@@ -14,10 +15,32 @@ export interface MarketIndexItem {
 
 interface MarketStateStripProps {
   onSelectAsset?: (symbol: string) => void
+  liveQuotes?: Record<string, { price: number; change: number; changePct: number }>
+  pricesMap?: Record<string, AssetPricePoint[]>
 }
 
-export const MarketStateStrip: React.FC<MarketStateStripProps> = ({ onSelectAsset }) => {
-  const items: MarketIndexItem[] = [
+export const MarketStateStrip: React.FC<MarketStateStripProps> = ({
+  onSelectAsset,
+  liveQuotes = {},
+  pricesMap = {}
+}) => {
+  const generatePolyline = (prices: AssetPricePoint[] | undefined, fallback: string): string => {
+    if (!prices || prices.length < 4) return fallback
+    const recent = prices.slice(-7)
+    const closes = recent.map((p) => p.close)
+    const min = Math.min(...closes)
+    const max = Math.max(...closes)
+    const range = Math.max(0.01, max - min)
+    return recent
+      .map((p, idx) => {
+        const x = Math.round((idx / (recent.length - 1)) * 50)
+        const y = Math.round(14 - ((p.close - min) / range) * 12)
+        return `${x},${y}`
+      })
+      .join(' ')
+  }
+
+  const baseItems: MarketIndexItem[] = [
     {
       id: 'nifty50',
       symbol: '^NSEI',
@@ -97,85 +120,89 @@ export const MarketStateStrip: React.FC<MarketStateStripProps> = ({ onSelectAsse
     }
   ]
 
+  // Hydrate with real quotes and real SVG sparklines
+  const items = baseItems.map((item) => {
+    const q = liveQuotes[item.symbol]
+    const pSeries = pricesMap[item.symbol]
+    const pts = generatePolyline(pSeries, item.points)
+
+    if (q) {
+      const isPos = q.changePct > 0.05 ? true : q.changePct < -0.05 ? false : null
+      return {
+        ...item,
+        price: item.symbol.startsWith('^') || item.symbol.includes('=') ? q.price.toLocaleString('en-IN', { maximumFractionDigits: 2 }) : `₹${q.price.toLocaleString('en-IN', { maximumFractionDigits: 2 })}`,
+        changePct: `${q.changePct >= 0 ? '+' : ''}${q.changePct.toFixed(2)}%`,
+        changeAbs: `${q.change >= 0 ? '+' : ''}${q.change.toFixed(2)}`,
+        isPositive: isPos,
+        points: pts
+      }
+    }
+    return { ...item, points: pts }
+  })
+
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-px bg-surface-container-highest p-px mb-space-md shadow-sm rounded overflow-hidden">
-      {items.map((item, idx) => {
-        const isLastOnMobile = idx === items.length - 1
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-space-xs mb-space-sm">
+      {items.map((item) => {
+        const isUp = item.isPositive === true
+        const isDown = item.isPositive === false
+        const strokeColor = isUp ? '#4edea3' : isDown ? '#ffb4ab' : '#908fa0'
+        const badgeColor =
+          item.status === 'OPEN'
+            ? 'bg-tertiary-container text-on-tertiary-container'
+            : item.status === 'CLOSED'
+            ? 'bg-surface-container-high text-on-surface-variant'
+            : 'bg-surface-container-highest text-secondary'
+
         return (
           <div
             key={item.id}
             onClick={() => onSelectAsset && onSelectAsset(item.symbol)}
-            className={`bg-surface-container-low p-space-xs hover:bg-surface-container transition-colors flex flex-col justify-between cursor-pointer group ${
-              isLastOnMobile ? 'col-span-2 sm:col-span-1' : ''
-            }`}
+            className="bg-surface-container-low p-2 rounded flex flex-col justify-between shadow-sm hover:bg-surface-container transition-all cursor-pointer border border-outline-variant/30"
           >
-            {/* Header: Name + Status */}
-            <div className="flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant">
-              <span className="group-hover:text-on-surface transition-colors">{item.name}</span>
-              {item.status === 'OPEN' ? (
-                <span className="text-tertiary flex items-center gap-0.5 font-data-mono-compact text-data-mono-compact">
-                  <span className="w-1 h-1 rounded-full bg-tertiary animate-pulse"></span>
-                  OPEN
-                </span>
-              ) : item.status === 'CLOSED' ? (
-                <span className="text-outline font-data-mono-compact text-data-mono-compact">
-                  CLOSED
-                </span>
-              ) : (
-                <span className="text-secondary font-data-mono-compact text-data-mono-compact">
-                  TRADING
-                </span>
-              )}
+            {/* Top row: Name & Status */}
+            <div className="flex items-center justify-between font-label-caps text-label-caps mb-1">
+              <span className="text-on-surface-variant font-bold truncate max-w-[85px]">
+                {item.name}
+              </span>
+              <span className={`px-1 py-0.2 rounded font-semibold text-[9px] ${badgeColor}`}>
+                {item.status}
+              </span>
             </div>
 
-            {/* Price & Change % */}
-            <div className="flex items-baseline justify-between mt-1">
-              <span className="font-data-mono-default text-data-mono-default text-on-surface font-semibold">
+            {/* Middle row: Price & Sparkline */}
+            <div className="flex items-baseline justify-between gap-1 my-0.5">
+              <span className="font-data-mono-default text-data-mono-default font-bold text-on-surface tracking-tight truncate">
                 {item.price}
               </span>
+              {/* Micro Sparkline SVG */}
+              <div className="w-12 h-4 shrink-0">
+                <svg
+                  className="w-full h-full overflow-visible"
+                  viewBox="0 0 50 16"
+                  preserveAspectRatio="none"
+                >
+                  <polyline
+                    fill="none"
+                    points={item.points}
+                    stroke={strokeColor}
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            {/* Bottom row: Delta absolute & percentage */}
+            <div className="flex items-center justify-between font-data-mono-compact text-data-mono-compact text-[10px]">
+              <span className="text-on-surface-variant truncate">{item.changeAbs}</span>
               <span
-                className={`font-data-mono-compact text-data-mono-compact font-medium ${
-                  item.isPositive === true
-                    ? 'text-tertiary'
-                    : item.isPositive === false
-                    ? 'text-error'
-                    : 'text-outline'
+                className={`font-semibold ${
+                  isUp ? 'text-tertiary' : isDown ? 'text-error' : 'text-on-surface-variant'
                 }`}
               >
                 {item.changePct}
               </span>
-            </div>
-
-            {/* Change Abs & Sparkline */}
-            <div className="flex items-center justify-between text-on-surface-variant font-data-mono-compact text-data-mono-compact mt-1">
-              <span
-                className={
-                  item.isPositive === true
-                    ? 'text-tertiary/90'
-                    : item.isPositive === false
-                    ? 'text-error/90'
-                    : 'text-on-surface-variant'
-                }
-              >
-                {item.changeAbs}
-              </span>
-              <svg
-                className={`w-12 sm:w-14 h-4 overflow-visible ${
-                  item.isPositive === true
-                    ? 'text-tertiary stroke-current fill-none'
-                    : item.isPositive === false
-                    ? 'text-error stroke-current fill-none'
-                    : 'text-outline stroke-current fill-none'
-                }`}
-                viewBox="0 0 50 16"
-              >
-                <polyline
-                  points={item.points}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                />
-              </svg>
             </div>
           </div>
         )

@@ -33,6 +33,11 @@ export async function loadAssetsMetadata(): Promise<AssetMetadata[]> {
 }
 
 export async function loadHistoricalPrices(symbol: string): Promise<AssetPricePoint[]> {
+  const all = await loadAllHistoricalPrices()
+  return all[symbol] || []
+}
+
+export async function loadAllHistoricalPrices(): Promise<Record<string, AssetPricePoint[]>> {
   if (!cachedHistoricalPrices) {
     try {
       const res = await fetch('/data/market_intelligence/historical_prices.json')
@@ -41,10 +46,10 @@ export async function loadHistoricalPrices(symbol: string): Promise<AssetPricePo
       }
     } catch (err) {
       console.warn('Could not fetch historical prices:', err)
-      return []
+      return {}
     }
   }
-  return cachedHistoricalPrices ? cachedHistoricalPrices[symbol] || [] : []
+  return cachedHistoricalPrices || {}
 }
 
 export async function fetchLiveAssetQuote(asset: AssetMetadata): Promise<LiveMarketQuote> {

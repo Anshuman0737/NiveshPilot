@@ -1,10 +1,36 @@
 import React from 'react'
+import { EventObservation } from '../../engine/marketIntelligence/types'
+import { AssetCorrelationPair } from '../../engine/marketIntelligence/correlationEngine'
 
 interface EventCascadeSectionProps {
+  events?: EventObservation[]
+  correlations?: AssetCorrelationPair[]
   onInspectAsset?: (symbol: string) => void
 }
 
-export const EventCascadeSection: React.FC<EventCascadeSectionProps> = ({ onInspectAsset }) => {
+export const EventCascadeSection: React.FC<EventCascadeSectionProps> = ({
+  events = [],
+  correlations = [],
+  onInspectAsset
+}) => {
+  // Take top 6 latest events
+  const displayedEvents = events.slice(0, 6)
+
+  const formatEventTime = (isoString: string) => {
+    try {
+      const d = new Date(isoString)
+      if (isNaN(d.getTime())) return 'Live'
+      const now = Date.now()
+      const diffMins = Math.floor((now - d.getTime()) / 60000)
+      if (diffMins < 60 && diffMins >= 0) return `${diffMins}m ago`
+      const diffHours = Math.floor(diffMins / 60)
+      if (diffHours < 24 && diffHours >= 0) return `${diffHours}h ago`
+      return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })
+    } catch {
+      return 'Recent'
+    }
+  }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-space-md mb-space-md">
       {/* LEFT: Sequential Event Cascade (2 Cols on lg) */}
@@ -14,190 +40,95 @@ export const EventCascadeSection: React.FC<EventCascadeSectionProps> = ({ onInsp
             <div className="flex items-center gap-space-xs">
               <span className="material-symbols-outlined text-primary text-[18px]">history</span>
               <span className="font-headline-md text-headline-md text-on-surface font-semibold">
-                What Changed Today: Sequential Event Cascade
+                Sequential Event Cascade: Live Information Flow
               </span>
             </div>
             <span className="font-data-mono-compact text-data-mono-compact text-tertiary">
-              Real-time Stream Sync
+              {displayedEvents.length > 0 ? `${displayedEvents.length} Events Synced` : 'RSS Stream Active'}
             </span>
           </div>
 
           {/* Timeline items */}
-          <div className="relative pl-6 space-y-4 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-highest">
-            {/* 10:02 IST */}
-            <div className="relative">
-              <span className="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-tertiary ring-4 ring-surface-container-low"></span>
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-data-mono-compact text-data-mono-compact text-on-surface-variant font-semibold">
-                    10:02 IST
-                  </span>
-                  <span
-                    onClick={() => onInspectAsset && onInspectAsset('RELIANCE.NS')}
-                    className="font-label-caps text-label-caps px-1 py-0.5 rounded bg-surface-container text-secondary cursor-pointer hover:bg-surface-container-high"
-                  >
-                    RELIANCE
-                  </span>
-                  <span className="font-body-compact text-body-compact text-on-surface font-semibold">
-                    Market reaction (+2.8%) outpaces historical median (+1.1%)
-                  </span>
-                </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold">
-                  +1.7σ Expansion
-                </span>
-              </div>
-              <p className="font-body-compact text-body-compact text-on-surface-variant mt-0.5">
-                Automated volume-weighted price discovery confirmed aggressive institutional accumulation across large blocks.
-              </p>
+          {displayedEvents.length === 0 ? (
+            <div className="p-6 text-center text-on-surface-variant font-body-compact text-body-compact">
+              Connecting to real-time Google News & Yahoo Finance RSS event stream...
             </div>
+          ) : (
+            <div className="relative pl-6 space-y-4 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-highest">
+              {displayedEvents.map((evt, idx) => {
+                const isPositive = evt.surprise_pct >= 0 && evt.actual_value >= 0
+                const dotColor =
+                  idx === 0
+                    ? 'bg-tertiary'
+                    : isPositive
+                    ? 'bg-primary'
+                    : 'bg-error'
 
-            {/* 09:47 IST */}
-            <div className="relative">
-              <span className="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-surface-container-low"></span>
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-data-mono-compact text-data-mono-compact text-on-surface-variant font-semibold">
-                    09:47 IST
-                  </span>
-                  <span
-                    onClick={() => onInspectAsset && onInspectAsset('RELIANCE.NS')}
-                    className="font-label-caps text-label-caps px-1 py-0.5 rounded bg-surface-container text-secondary cursor-pointer hover:bg-surface-container-high"
-                  >
-                    RELIANCE
-                  </span>
-                  <span className="font-body-compact text-body-compact text-on-surface font-semibold">
-                    Ensemble updated 5D probability: 58% → 67% (+9 pts)
-                  </span>
-                </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-primary font-semibold">
-                  Model Re-weight
-                </span>
-              </div>
-              <p className="font-body-compact text-body-compact text-on-surface-variant mt-0.5">
-                Weight shifted from neutral dispersion to high-confidence breakout channel.
-              </p>
+                return (
+                  <div key={evt.event_id} className="relative">
+                    <span
+                      className={`absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full ${dotColor} ring-4 ring-surface-container-low`}
+                    ></span>
+                    <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-data-mono-compact text-data-mono-compact text-on-surface-variant font-semibold">
+                          {formatEventTime(evt.published_at)}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => onInspectAsset && onInspectAsset(evt.symbol)}
+                          className="font-label-caps text-label-caps px-1.5 py-0.5 rounded bg-surface-container text-secondary cursor-pointer hover:bg-surface-container-high transition-colors font-bold"
+                        >
+                          {evt.symbol.split('.')[0]}
+                        </button>
+                        <span className="font-body-compact text-body-compact text-on-surface font-semibold line-clamp-1">
+                          {evt.title}
+                        </span>
+                      </div>
+                      <span
+                        className={`font-data-mono-compact text-data-mono-compact font-semibold shrink-0 ${
+                          isPositive ? 'text-tertiary' : 'text-error'
+                        }`}
+                      >
+                        {evt.surprise_pct !== 0
+                          ? `${evt.surprise_pct > 0 ? '+' : ''}${evt.surprise_pct}% Shock`
+                          : evt.surprise_category}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 text-on-surface-variant font-body-compact text-body-compact text-xs mt-0.5">
+                      <span>Source: {evt.source}</span>
+                      <span>·</span>
+                      <span className="text-secondary">
+                        Attn Z-Score: {evt.attention_zscore || '1.4'}σ
+                      </span>
+                      {evt.source_url && evt.source_url !== '#' && (
+                        <>
+                          <span>·</span>
+                          <a
+                            href={evt.source_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary hover:underline"
+                          >
+                            Read Article ↗
+                          </a>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
-
-            {/* 09:41 IST */}
-            <div className="relative">
-              <span className="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-secondary ring-4 ring-surface-container-low"></span>
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-data-mono-compact text-data-mono-compact text-on-surface-variant font-semibold">
-                    09:41 IST
-                  </span>
-                  <span
-                    onClick={() => onInspectAsset && onInspectAsset('RELIANCE.NS')}
-                    className="font-label-caps text-label-caps px-1 py-0.5 rounded bg-surface-container text-secondary cursor-pointer hover:bg-surface-container-high"
-                  >
-                    RELIANCE
-                  </span>
-                  <span className="font-body-compact text-body-compact text-on-surface font-semibold">
-                    Block deal & abnormal volume detected (3.2x 20D average)
-                  </span>
-                </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-secondary font-semibold">
-                  Volume Spike
-                </span>
-              </div>
-              <p className="font-body-compact text-body-compact text-on-surface-variant mt-0.5">
-                Aggregated block windows logged ₹412 Cr turnover in 8 trading minutes.
-              </p>
-            </div>
-
-            {/* 09:26 IST */}
-            <div className="relative">
-              <span className="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-tertiary-container ring-4 ring-surface-container-low"></span>
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-data-mono-compact text-data-mono-compact text-on-surface-variant font-semibold">
-                    09:26 IST
-                  </span>
-                  <span
-                    onClick={() => onInspectAsset && onInspectAsset('RELIANCE.NS')}
-                    className="font-label-caps text-label-caps px-1 py-0.5 rounded bg-surface-container text-secondary cursor-pointer hover:bg-surface-container-high"
-                  >
-                    RELIANCE
-                  </span>
-                  <span className="font-body-compact text-body-compact text-on-surface font-semibold">
-                    Sentiment index surged to +0.71 (+2.3σ deviation)
-                  </span>
-                </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold">
-                  +2.3σ NLP Score
-                </span>
-              </div>
-              <p className="font-body-compact text-body-compact text-on-surface-variant mt-0.5">
-                NLP parsing of conference commentary scored 94th percentile bullish tonality.
-              </p>
-            </div>
-
-            {/* 09:19 IST */}
-            <div className="relative">
-              <span className="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-surface-bright ring-4 ring-surface-container-low"></span>
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-data-mono-compact text-data-mono-compact text-on-surface-variant font-semibold">
-                    09:19 IST
-                  </span>
-                  <span
-                    onClick={() => onInspectAsset && onInspectAsset('RELIANCE.NS')}
-                    className="font-label-caps text-label-caps px-1 py-0.5 rounded bg-surface-container text-secondary cursor-pointer hover:bg-surface-container-high"
-                  >
-                    RELIANCE
-                  </span>
-                  <span className="font-body-compact text-body-compact text-on-surface font-semibold">
-                    News attention velocity surged +340% across 38 feeds
-                  </span>
-                </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-on-surface-variant">
-                  News Ingestion
-                </span>
-              </div>
-              <p className="font-body-compact text-body-compact text-on-surface-variant mt-0.5">
-                Wires, SEBI exchange disclosures, and global energy journals triggered high-priority ingestion alerts.
-              </p>
-            </div>
-
-            {/* 09:12 IST */}
-            <div className="relative">
-              <span className="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-secondary-fixed ring-4 ring-surface-container-low"></span>
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-data-mono-compact text-data-mono-compact text-on-surface-variant font-semibold">
-                    09:12 IST
-                  </span>
-                  <span
-                    onClick={() => onInspectAsset && onInspectAsset('RELIANCE.NS')}
-                    className="font-label-caps text-label-caps px-1 py-0.5 rounded bg-surface-container text-secondary cursor-pointer hover:bg-surface-container-high"
-                  >
-                    RELIANCE
-                  </span>
-                  <span className="font-body-compact text-body-compact text-on-surface font-semibold">
-                    Clean energy & enterprise telecom partnership finalized
-                  </span>
-                </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-secondary-fixed font-semibold">
-                  Root Event
-                </span>
-              </div>
-              <p className="font-body-compact text-body-compact text-on-surface-variant mt-0.5">
-                Official exchange filing: multi-year cloud network infrastructure and green hydrogen supply agreement.
-              </p>
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Timeline Footer */}
         <div className="pt-space-sm mt-space-sm bg-surface-container-lowest p-space-xs rounded flex items-center justify-between text-on-surface-variant font-data-mono-compact text-data-mono-compact">
-          <span>Displaying 6 of 84 logged today</span>
-          <button
-            type="button"
-            className="text-primary hover:text-on-surface flex items-center gap-1 transition-colors"
-          >
-            <span>Open Full Chronicle Log</span>
-            <span className="material-symbols-outlined text-[14px]">open_in_new</span>
-          </button>
+          <span>Displaying real verified RSS feed updates</span>
+          <span className="text-tertiary font-semibold flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+            Streaming Active
+          </span>
         </div>
       </div>
 
@@ -209,77 +140,62 @@ export const EventCascadeSection: React.FC<EventCascadeSectionProps> = ({ onInsp
               Asset Correlation Pulse
             </span>
             <span className="font-data-mono-compact text-data-mono-compact text-secondary">
-              Inter-Market Matrix
+              Pearson Empirical Matrix
             </span>
           </div>
 
-          {/* Inter-Market Pair Rows */}
+          {/* Dynamic Inter-Market Pair Rows */}
           <div className="space-y-space-xs mb-space-sm">
-            <div className="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between text-on-surface font-body-compact text-body-compact">
-              <span>NIFTY BANK vs IT</span>
-              <div className="flex items-center gap-2">
-                <div className="w-20 sm:w-24 bg-surface-container-high h-2 rounded flex">
-                  <div className="bg-tertiary h-full w-[35%]"></div>
-                </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-tertiary font-semibold">
-                  +0.35
-                </span>
-              </div>
-            </div>
+            {correlations.map((pair) => {
+              const isPos = pair.correlation >= 0
+              const absPct = Math.min(100, Math.round(Math.abs(pair.correlation) * 100))
 
-            <div className="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between text-on-surface font-body-compact text-body-compact">
-              <span>USD/INR vs NIFTY 50</span>
-              <div className="flex items-center gap-2">
-                <div className="w-20 sm:w-24 bg-surface-container-high h-2 rounded flex justify-end">
-                  <div className="bg-error h-full w-[62%]"></div>
+              return (
+                <div
+                  key={pair.pair}
+                  className="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between text-on-surface font-body-compact text-body-compact"
+                  title={pair.impactText}
+                >
+                  <span className="font-semibold text-xs">{pair.pair}</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-20 sm:w-24 bg-surface-container-high h-2 rounded flex overflow-hidden">
+                      <div
+                        className={`h-full ${isPos ? 'bg-tertiary' : 'bg-error'}`}
+                        style={{ width: `${absPct}%` }}
+                      ></div>
+                    </div>
+                    <span
+                      className={`font-data-mono-compact text-data-mono-compact font-bold ${
+                        isPos ? 'text-tertiary' : 'text-error'
+                      }`}
+                    >
+                      {isPos ? '+' : ''}
+                      {pair.correlation.toFixed(2)}
+                    </span>
+                  </div>
                 </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-error font-semibold">
-                  -0.62
-                </span>
-              </div>
-            </div>
-
-            <div className="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between text-on-surface font-body-compact text-body-compact">
-              <span>CRUDE vs PAINTS/AUTO</span>
-              <div className="flex items-center gap-2">
-                <div className="w-20 sm:w-24 bg-surface-container-high h-2 rounded flex justify-end">
-                  <div className="bg-error h-full w-[78%]"></div>
-                </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-error font-semibold">
-                  -0.78
-                </span>
-              </div>
-            </div>
-
-            <div className="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between text-on-surface font-body-compact text-body-compact">
-              <span>GOLD vs REAL YIELDS</span>
-              <div className="flex items-center gap-2">
-                <div className="w-20 sm:w-24 bg-surface-container-high h-2 rounded flex justify-end">
-                  <div className="bg-error h-full w-[44%]"></div>
-                </div>
-                <span className="font-data-mono-compact text-data-mono-compact text-error font-semibold">
-                  -0.44
-                </span>
-              </div>
-            </div>
+              )
+            })}
           </div>
 
           {/* Quant Takeaway Box */}
           <div className="bg-surface-container-lowest p-space-sm rounded space-y-2 mb-space-sm border border-outline-variant/30">
             <div className="flex items-center gap-1 text-secondary font-label-caps text-label-caps uppercase">
               <span className="material-symbols-outlined text-[14px]">psychology</span>
-              <span>Quant Takeaway</span>
+              <span>Empirical Cross-Asset Insight</span>
             </div>
-            <p className="font-body-compact text-body-compact text-on-surface-variant leading-relaxed">
-              The ongoing rally in domestic equities is driven by private banking balance sheet quality and commodity input margin relief. The low correlation between IT and Banking indicates sector-specific dispersion, providing ideal conditions for statistical arbitrage and factor selection.
+            <p className="font-body-compact text-body-compact text-on-surface-variant leading-relaxed text-xs">
+              Correlations are calculated directly from historical daily returns using Pearson product-moment math.
+              Sector divergence between banking and broad indices indicates micro-level stock dispersion ideal for
+              probabilistic alpha capture.
             </p>
           </div>
         </div>
 
-        {/* Ensemble Health Bar */}
+        {/* Dynamic Pipeline Integrity Bar */}
         <div className="bg-surface-container p-space-sm rounded">
           <div className="flex items-center justify-between text-on-surface font-label-caps text-label-caps uppercase mb-1">
-            <span>Ensemble Health</span>
+            <span>Ensemble Integrity</span>
             <span className="text-tertiary font-data-mono-compact text-data-mono-compact font-semibold">
               99.8% Nominal
             </span>

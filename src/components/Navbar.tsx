@@ -8,11 +8,13 @@ import {
   Clock,
   AlertTriangle,
   Layers,
-  Bot
+  Bot,
+  Activity
 } from 'lucide-react'
 
 export type ActiveTab =
   | 'home'
+  | 'market-intelligence'
   | 'ihavex'
   | 'wait'
   | 'sell'
@@ -74,6 +76,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               Next Move
+            </button>
+            <button
+              onClick={() => setActiveTab('market-intelligence')}
+              className={`px-3.5 py-1.5 rounded-full transition-all flex items-center space-x-1.5 ${
+                activeTab === 'market-intelligence'
+                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-sm font-semibold'
+                  : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
+              }`}
+            >
+              <Activity className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Market Intelligence</span>
+              <span className="text-[9px] font-mono font-black px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                PROB
+              </span>
             </button>
             <button
               onClick={() => setActiveTab('ihavex')}
@@ -187,6 +203,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             Next Move
+          </button>
+          <button
+            onClick={() => setActiveTab('market-intelligence')}
+            className={`px-3 py-1 rounded-full whitespace-nowrap transition-all flex items-center space-x-1 ${
+              activeTab === 'market-intelligence' ? 'bg-cyan-500/20 text-cyan-300 font-semibold' : 'text-slate-400'
+            }`}
+          >
+            <Activity className="w-3 h-3 text-cyan-400" />
+            <span>Market Intel</span>
           </button>
           <button
             onClick={() => setActiveTab('ihavex')}

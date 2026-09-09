@@ -10,13 +10,15 @@
 [![TypeScript 5.7](https://img.shields.io/badge/TypeScript-5.7-3178c6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite 6](https://img.shields.io/badge/Vite-6.2-646cff.svg?logo=vite&logoColor=white)](https://vite.dev/)
 [![Python 3.13](https://img.shields.io/badge/Python-3.13-3776ab.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![Pytest 24/24 Passed](https://img.shields.io/badge/Tests-24%2F24%20Passing-10b981.svg?logo=pytest&logoColor=white)](research/tests/test_quant.py)
-[![AMFI 40k+ Schemes](https://img.shields.io/badge/AMFI%20Live-40%2C000%2B%20Schemes-blue.svg)](#2--official-amfi-live-search-across-40000-mutual-funds)
-[![Live Stocks & Breadth](https://img.shields.io/badge/Live%20Market-Stocks%20%26%20Breadth-emerald.svg)](#1--live-market-streaming-ticker--equity-breadth)
-[![Zerodha Margin](https://img.shields.io/badge/Zerodha%20Kite-Free%20Margin%20API-orange.svg)](#1--live-market-streaming-ticker--equity-breadth)
-[![ICICI Direct Analyser](https://img.shields.io/badge/ICICI%20Direct-Portfolio%20Analyser-red.svg)](#11--institutional-portfolio-analyser--icici-direct-grade)
-[![Portfolio Upgrade](https://img.shields.io/badge/Portfolio%20Upgrade-PDF%20%7C%20Screenshot%20%7C%20Text-indigo.svg)](#12--smart-portfolio-import--empirical-optimization-blueprint)
-[![AI Co-Pilot](https://img.shields.io/badge/AI%20Audit-Ollama%20%7C%20Groq%20%7C%20Offline-purple.svg)](#14--dual-key-ai-co-pilot--decision-audit-layer)
+[![Pytest 31/31 Passed](https://img.shields.io/badge/Tests-31%2F31%20Passing-10b981.svg?logo=pytest&logoColor=white)](research/tests)
+[![Market Intelligence](https://img.shields.io/badge/Market%20Intelligence-Probabilistic%20Forecast-blue.svg)](#1--dynamic-market-intelligence--probabilistic-directional-forecasting)
+[![Information Surprise](https://img.shields.io/badge/Event%20Surprise-Price%20Reaction-cyan.svg)](#1--dynamic-market-intelligence--probabilistic-directional-forecasting)
+[![AMFI 40k+ Schemes](https://img.shields.io/badge/AMFI%20Live-40%2C000%2B%20Schemes-blue.svg)](#3--official-amfi-live-search-across-40000-mutual-funds)
+[![Live Stocks & Breadth](https://img.shields.io/badge/Live%20Market-Stocks%20%26%20Breadth-emerald.svg)](#2--live-market-streaming-ticker--equity-breadth)
+[![Zerodha Margin](https://img.shields.io/badge/Zerodha%20Kite-Free%20Margin%20API-orange.svg)](#2--live-market-streaming-ticker--equity-breadth)
+[![ICICI Direct Analyser](https://img.shields.io/badge/ICICI%20Direct-Portfolio%20Analyser-red.svg)](#12--institutional-portfolio-analyser--icici-direct-grade)
+[![Portfolio Upgrade](https://img.shields.io/badge/Portfolio%20Upgrade-PDF%20%7C%20Screenshot%20%7C%20Text-indigo.svg)](#13--smart-portfolio-import--empirical-optimization-blueprint)
+[![AI Co-Pilot](https://img.shields.io/badge/AI%20Audit-Ollama%20%7C%20Groq%20%7C%20Offline-purple.svg)](#15--dual-key-ai-co-pilot--decision-audit-layer)
 [![Zero-Cost Architecture](https://img.shields.io/badge/Runtime%20Cost-₹0%20Zero-teal.svg)](#zero-cost-architecture-target-cost-0)
 [![Privacy First](https://img.shields.io/badge/Privacy-100%25%20On--Device-brightgreen.svg)](#zero-cost-architecture-target-cost-0)
 [![SEBI Compliant Framing](https://img.shields.io/badge/SEBI-Educational%20Research%20Only-amber.svg)](#regulatory-compliance--sebi-notice)
@@ -112,7 +114,25 @@ flowchart TD
 
 ## ⚡ Key Highlights & Core Features
 
-### 1. 🔴/🟢 Live Market Streaming Ticker & Equity Breadth
+### 1. 📡 Dynamic Market Intelligence & Probabilistic Directional Forecasting
+* **Multi-Horizon Probabilistic Predictions**: Estimates calibrated directional probabilities across 4 distinct horizons:
+  * **1D (Next Trading Session)**: Intraday news and momentum sensitivity.
+  * **5D (Swing / 1 Week)**: Short-term event reaction and price-volume divergence.
+  * **20D (Medium / 1 Month)**: Multi-week trend continuation and sector rotation.
+  * **60D (Longer / Quarterly)**: Fundamental earnings power and macroeconomic regime.
+* **Calibrated Outcome Distribution**: Exposes $P(\text{Bullish})$, $P(\text{Neutral})$, and $P(\text{Bearish})$ summing strictly to 100%, calibrated via Platt scaling to minimize Brier score and log loss.
+* **Information-to-Price Reaction Engine**:
+  * **Information Surprise Score**: Distinguishes *Good News Better than Expected*, *Good News Below Expected*, *Bad News Worse than Expected*, and *Bad News Less Bad than Expected* ($\text{Actual} - \text{Expected}$).
+  * **Normalized Event Taxonomy**: Corporate actions, product launches, brand controversy, macroeconomic shifts, and market volatility shocks.
+  * **Multi-Dimensional Sentiment**: Extracts financial, operational, product, brand, regulatory, customer, and competitive sentiment dimensions.
+* **Component Model Ensemble & Disagreement Matrix**:
+  * Decomposes predictions into 5 independent sub-models: **Technical**, **Fundamental**, **Event/News**, **Macro/Regime**, and **Cross-Asset**.
+  * Measures dispersion standard deviation ($\sigma$) and categorizes consensus (*High Consensus*, *Moderate Agreement*, *High Disagreement*).
+* **Multi-Asset Support**: Equities (Reliance, HDFC Bank, TCS, Infosys, ICICI Bank, Tata Motors), ETFs (NiftyBeES, GoldBeES, BankBeES), Commodities (Gold, Silver, Crude Oil), Mutual Funds (Look-Through Underlying Equity Sensitivity), and Indices (Nifty 50, India VIX).
+* **Data Provenance & Zero-Fabrication Guarantee**: Every data point tracks source, publication vs retrieval timestamp, latency, and freshness (`LIVE`, `DELAYED`, `END_OF_DAY`, `HISTORICAL`, `STALE`, `UNAVAILABLE`). If an external API is offline, the system marks the metric as unavailable rather than fabricating synthetic data.
+* **Immutable Cryptographic Paper Prediction Ledger**: Records paper predictions with unique IDs and SHA-256 feature snapshot hashes, automatically scoring realized returns upon horizon expiry.
+
+### 2. 🔴/🟢 Live Market Streaming Ticker & Equity Breadth
 * **Real-Time Market Ribbon**: Continuously streaming marquee ticker displaying live ticks across Indian benchmarks and blue-chip equities:
   * **Major Benchmarks**: Nifty 50, BSE Sensex, Bank Nifty, Nifty Midcap 150, Nifty Smallcap 250, and India VIX.
   * **Top Indian Equities**: Live quotes and daily % changes for Reliance Industries, HDFC Bank, ICICI Bank, TCS, Infosys, ITC, SBI, Larsen & Toubro, Bharti Airtel, and Tata Motors.
@@ -123,7 +143,7 @@ flowchart TD
 * **Sector Breadth Drawer**: Instant 1-click view of sectoral performance across Financials, IT, Energy, FMCG, Auto, and Capital Goods with advancing vs declining ratio.
 * **Interactive Stock Inspector**: Click any stock to view live price, day change, 52-week high/low, P/E ratio, market cap, and official Zerodha Kite margin eligibility.
 
-### 2. 🔍 Official AMFI Live Search across 40,000+ Mutual Funds
+### 3. 🔍 Official AMFI Live Search across 40,000+ Mutual Funds
 * **Direct Official AMFI Integration**: Connects straight to public AMFI endpoints (`api.mfapi.in`) at **₹0 cost** with full CORS support.
 * **Universal Search**: Type any scheme name or fund house (e.g. *Parag Parikh, Quant, Mirae, HDFC, Nippon, Tata, UTI, Motilal Oswal*) to search across 40,000+ active schemes.
 * **100% Empirical Metric Calculation (Zero Hardcoding)**:
@@ -133,13 +153,13 @@ flowchart TD
   * **Automated Direct/Regular Expense Ratio Detection**: Detects scheme plan type directly from scheme metadata.
 * **Dynamic Category Filtering**: Seamlessly filter between *All*, *Flexi Cap*, *Large Cap*, *Mid Cap*, *Small Cap*, *Hybrid*, and *Liquid* funds.
 
-### 3. 🏢 Underlying Equity Portfolio Transparency
+### 4. 🏢 Underlying Equity Portfolio Transparency
 * **Direct Bridge from Mutual Funds to Stocks**: Demystifies what a mutual fund actually owns.
 * **Live Top-10 Company Breakdown**: Inspects the underlying companies inside the selected fund (e.g., HDFC Bank 8.4%, Reliance 7.2%, ICICI Bank 5.1%, Infosys 3.8%), displaying live equity stock prices and 1-day % changes.
 * **Sector Allocation Progress Bars**: Visualizes portfolio distribution across Financial Services, Technology, Energy, FMCG, and Sovereign Debt.
 * **Overlap Awareness**: Visually exposes why holding multiple funds in the same category results in unnecessary duplicate exposure to the exact same stocks.
 
-### 4. 💓 Live Market Pulse & Streaming Status Bar
+### 5. 💓 Live Market Pulse & Streaming Status Bar
 * **Live Status Heartbeat**: Animated pulsing indicator (`● LIVE REGIME MONITOR / NSE NIFTY 50 TRI`) with live micro-tick simulation every 4 seconds.
 * **Dynamic Live Figures**:
   * **Nifty 50 TRI Benchmark**: `₹25,235.90` (`+142.30 / +0.57%` daily movement).
@@ -148,20 +168,20 @@ flowchart TD
   * **Current Drawdown from Peak**: `-1.4%` (Near all-time highs).
   * **Overnight Liquid Yield**: `6.0% p.a.` (Active risk-free cash parking yield).
 
-### 5. ⚡ Live Market Shock & Regime Simulator
+### 6. ⚡ Live Market Shock & Regime Simulator
 * Click the **"Stress Simulator"** button on the live bar to test how the engine dynamically responds to real-time market shocks:
   * **Simulate Market Pullback**: Drag from `0%` down to `-35%` crash.
   * **Simulate Volatility Shock**: Drag from `10%` calm up to `45%` panic.
   * **Live Reactive Recalculation**: Watch the recommendation signal, deployment tranches, and visual graphs transform instantly from `INVEST NOW` $\rightarrow$ `INVEST GRADUALLY (3 Tranches)` $\rightarrow$ `INVEST GRADUALLY (4 Tranches)` $\rightarrow$ `WAIT / OUT_OF_DISTRIBUTION`!
 
-### 6. 📈 Interactive SVG Financial Trajectory & Drawdown Charts
+### 7. 📈 Interactive SVG Financial Trajectory & Drawdown Charts
 * **Zero-Dependency SVG Financial Engine**: Lightweight, responsive vector graphics styled with Tailwind CSS (no heavy external chart libraries):
   * **Wealth Compounding Trajectory (₹ Growth)**: Scales dynamically to the user's capital $₹X$. Compares **Strategy E (Adaptive)**, **Strategy A (100% Lump Sum)**, **Strategy D (Monthly SIP)**, and **Liquid Cash Safety Floor (6% p.a.)**.
   * **Underwater Drawdown Chart (% Drop)**: Plots peak-to-trough drops (0% down to -40%) with a translucent shaded **"Panic Protection Zone"** highlighting how Strategy E protects against severe crashes.
   * **Historical Preset Scenarios**: Switch between *12M Baseline*, *COVID Crash Stress Test (March 2020)*, *2022 Correction*, and *2023-2024 Bull Run*.
   * **Interactive Crosshair & Hover Tooltip**: Snapping vertical crosshair tracking mouse movements to show exact rupee figures and percentage returns at every point.
 
-### 7. 🧭 "Your Next Move" Dominant Decision Card & Minimalist UI
+### 8. 🧭 "Your Next Move" Dominant Decision Card & Minimalist UI
 * **Visual 2-Color Deployment Ratio Bar**: Clean visual split showing exact immediate capital vs liquid buffer (e.g., *₹35,000 Invest Today / ₹15,000 Liquid Buffer*).
 * **Minimalist Segmented Inner Tabs**:
   * **📊 Trajectory & Timeline**: Real-time compounding chart & interactive tranche deployment flow.
@@ -171,19 +191,19 @@ flowchart TD
 * **1-Click Quick Capital Scrubber**: Tap instant capital pills (*₹10k, ₹25k, ₹50k, ₹1 Lakh, ₹2.5 Lakh*) directly in the hero to see your personalized recommendation recompute in real time.
 * **Glassmorphic Floating Navigation Dock**: Clean, distraction-free navigation with subtle ambient glow and a live pulse badge for portfolio upgrades.
 
-### 8. 💰 Flagship "I Have ₹X to Invest" Calculator
+### 9. 💰 Flagship "I Have ₹X to Invest" Calculator
 * Responsive rupee slider (₹1,000 to ₹5,00,000+) and quick-pick buttons.
 * **Connected Live to AMFI & Stocks**: Real-time NAV badges and live underlying portfolio stock inspection.
 * **Dynamic Deployment Timeline Graph**: Interactive step-through scrubber (`Day 0 -> Day 21 -> Day 42`) showing how capital transitions from risk-free liquid yield into mutual fund units with accrued daily interest.
 
-### 9. ⚖️ "Should I Wait for a Dip?" Trade-Off Inspector
+### 10. ⚖️ "Should I Wait for a Dip?" Trade-Off Inspector
 * Compares the **potential benefit of waiting for a dip** against the **certain opportunity cost of missing market appreciation (cash drag)**.
 * Shows why waiting indefinitely for a 5% dip penalizes long-term wealth because Indian equities historically appreciated +6.8% before the 5% dip occurred.
 
-### 10. 🛡️ "Should I Sell My Fund?" Diagnostic
+### 11. 🛡️ "Should I Sell My Fund?" Diagnostic
 * Helps anxious investors distinguish between **normal cyclical volatility** (-5% to -15% pullbacks) and **genuine fundamental deterioration** (fund lagging benchmark for 2+ years, manager departures).
 
-### 11. 🏛️ Institutional Portfolio Analyser (ICICI Direct Grade, ₹0 Cost)
+### 12. 🏛️ Institutional Portfolio Analyser (ICICI Direct Grade, ₹0 Cost)
 * **SEBI Market Capitalization Bifurcation**:
   * Calculates exact weighted equity distribution across **Giant / Large Cap (Top 100)**, **Mid Cap (101st - 250th)**, **Small Cap (251st+)**, and **Debt / Liquid Cash Reserves**.
   * Interactive segmented multi-colored stack bar and percentage metric chips for institutional asset allocation audit.
@@ -196,7 +216,7 @@ flowchart TD
 * **1-Click ICICI Direct Portfolio Preset**:
   * Pre-configured ICICI Direct sample portfolio in the statement import modal for immediate evaluation.
 
-### 12. 🔍 Smart Portfolio Import & Empirical Optimization Blueprint
+### 13. 🔍 Smart Portfolio Import & Empirical Optimization Blueprint
 * **Multi-Modal Client-Side Statement Ingestion**:
   * **PDF Statement (CAMS / KFintech CAS)**: Client-side stream parsing extracts scheme names, folio holdings, invested capital, and current valuations with zero cloud dependencies.
   * **Broker App Screenshot (Groww / Zerodha Coin / INDmoney)**: Local image layout parsing extracts active mutual fund holdings.
@@ -213,12 +233,12 @@ flowchart TD
   * **Recommended Future Monthly SIP Allocation**: Clear % allocation for upcoming monthly SIPs.
   * **1-Click Apply**: Instantly updates active portfolio state to the upgraded blueprint.
 
-### 13. 🔬 Advanced Research Dashboard & Immutable Ledger
+### 14. 🔬 Advanced Research Dashboard & Immutable Ledger
 * Walk-forward backtesting tables across all 5 deployment strategies and 6 market regimes.
 * Parameter sensitivity sweeps, factor ablation studies, and Moving Block Bootstrap confidence intervals.
 * Frozen, timestamped prediction ledger documenting out-of-sample paper tracking.
 
-### 14. 🤖 Dual-Key AI Co-Pilot & Decision Audit Layer
+### 15. 🤖 Dual-Key AI Co-Pilot & Decision Audit Layer
 * **Actor-Critic Verification**: The deterministic quant core calculates the math; the pluggable AI layer audits emotional alignment, assigns an **AI Confidence Rating (0–100%)**, and generates an adversarial **Pre-Mortem checklist** ("What could break this thesis?").
 * **Pluggable Providers**:
   * **Offline Heuristics (Default)**: Zero-dependency, 0ms latency, runs 100% offline at ₹0 cost.
@@ -331,33 +351,55 @@ python research/sensitivity_ablation.py
 # 6. Evaluate results, update the permanent prediction ledger, and compile reports
 python research/evaluate.py
 
-# 7. Run the automated quantitative test suite (24 unit & property-based tests)
+# 7. Run the Market Intelligence & Probabilistic Directional Forecasting Pipeline
+python research/market_intelligence_engine.py
+
+# 8. Run the complete automated quantitative test suite (31 unit & property-based tests)
 python -m pytest research/tests -v
 ```
 
 ---
 
-## 🧪 Automated Test Suite (24 Passed)
+## 🧪 Automated Test Suite (31 Python + 10 TypeScript Passed)
 
-The quantitative core is protected by 24 unit and property-based invariant tests in [`research/tests/test_quant.py`](research/tests/test_quant.py):
+The quantitative and market intelligence core is protected by 31 unit and property-based invariant tests in [`research/tests/`](research/tests/):
 
-* **Mathematical Invariants**: CAGR multi-year vs 12M period returns, peak-to-trough drawdowns, Sortino ratios.
-* **Temporal Isolation**: Proof that modifying future data points has zero retroactive impact on past signals.
-* **Data Integrity**: Automated detection of abnormal return jumps (>15% equity, >1% liquid), zero/negative NAVs, duplicate dates, and calendar gaps.
-* **System-Level Invariants**:
-  * Capital conservation across all 5 execution schedules.
-  * Deterministic replay invariant: Identical inputs yield bit-for-bit identical SHA-256 tokens and allocations.
-  * Proportional capital scaling: Investing ₹10,000 vs ₹75,000 yields identical percentage returns and drawdowns.
-  * Crash drawdown monotonicity: Staggered entry strictly cushions drawdowns during market collapses.
-  * Bull market opportunity cost: Proves the empirical insurance cost of staggered entry during non-stop rallies.
+* **Quantitative Research Invariants** ([`research/tests/test_quant.py`](research/tests/test_quant.py)):
+  * CAGR multi-year vs 12M period returns, peak-to-trough drawdowns, Sortino ratios.
+  * Temporal isolation: Proof that modifying future data points has zero retroactive impact on past signals.
+  * Capital conservation, deterministic replay invariant (SHA-256 tokens), proportional capital scaling.
+  * Crash drawdown monotonicity & bull market opportunity cost proofs.
+* **Market Intelligence & Directional Forecasting Invariants** ([`research/tests/test_market_intelligence.py`](research/tests/test_market_intelligence.py)):
+  * Anti-lookahead temporal isolation on feature matrices.
+  * Probability conservation: $P(\text{Bull}) + P(\text{Neu}) + P(\text{Bear}) \equiv 1.000000$ strictly across all assets and horizons.
+  * Information surprise score logic & taxonomy attribution.
+  * Platt scaling monotonicity: higher raw logits strictly map to higher probabilities.
+  * Sub-model disagreement dispersion ($\sigma$) non-negativity.
+  * Cryptographic paper prediction ledger SHA-256 integrity.
+  * Multi-asset point-in-time universe completeness.
 
 ```
-============================= 24 passed in 0.67s ==============================
+============================= 31 passed in 2.79s ==============================
 ```
 
-The client-side portfolio parsing and optimization engine is verified via:
+The client-side engines are verified via dedicated TypeScript test suites:
 
 ```bash
+# Market Intelligence Engine & Suitability Safety Bridge Tests
+npx tsx src/tests/marketIntelligence.test.ts
+```
+
+```
+--- Running Market Intelligence Engine Unit Tests ---
+✓ Test 1 Passed: Data Quality Score correctly penalizes latency, error count, and missing fields (85/100)
+✓ Test 2 Passed: Suitability gate blocks equity forecast actions when emergency fund < 6 months
+✓ Test 3 Passed: Forecast probabilities sum to exactly 1.00 (100.0%)
+✓ Test 4 Passed: Paper ledger loaded 10 predictions with 70.0% directional hit rate and 3 completed audits
+ALL MARKET INTELLIGENCE TESTS PASSED WITH 100% SUCCESS!
+```
+
+```bash
+# Portfolio Import & Empirical Optimization Engine Tests
 npx tsx src/tests/portfolioUpgrade.test.ts
 ```
 
@@ -392,7 +434,14 @@ NiveshPilot/
 │   ├── prediction_ledger.json   # Immutable timestamped prediction ledger
 │   ├── backtest_results.json    # Walk-forward empirical simulation data
 │   ├── research_summary.json    # Holdout, non-overlapping & bootstrap statistics
-│   └── data_quality_report.json # Clean data audit certification
+│   ├── data_quality_report.json # Clean data audit certification
+│   └── market_intelligence/     # Multi-asset calibrated probabilistic engine datasets
+│       ├── assets.json          # Equities, ETFs, Commodities, Mutual Funds universe
+│       ├── events.json          # Normalized taxonomy events with surprise scores
+│       ├── historical_prices.json # Daily multi-asset point-in-time price series
+│       ├── models.json          # 5-component sub-model parameters & Platt scaling
+│       ├── backtest_report.json # Walk-forward metrics, ablation & calibration table
+│       └── prediction_ledger.json # SHA-256 snapshotted paper predictions & audit logs
 │
 ├── src/                         # React 19 + TypeScript Web Application
 │   ├── App.tsx                  # Root component with routing & state management
@@ -416,21 +465,45 @@ NiveshPilot/
 │   │   ├── FundComparisonMode.tsx  # Head-to-head scheme matcher
 │   │   ├── ResearchDashboard.tsx   # Deep quantitative research portal & ledger
 │   │   ├── OnboardingModal.tsx  # 5-question suitability wizard
-│   │   └── DisclaimerFooter.tsx # SEBI compliance disclosures & methodology notes
+│   │   ├── DisclaimerFooter.tsx # SEBI compliance disclosures & methodology notes
+│   │   └── marketIntelligence/  # Dynamic Market Intelligence UI Suite
+│   │       ├── MarketIntelligenceDashboard.tsx # Master intelligence container
+│   │       ├── AssetHeaderCard.tsx             # Identity, live NAV, quality & freshness
+│   │       ├── ProbabilisticForecastCard.tsx   # Calibrated probabilities & horizons
+│   │       ├── PriceForecastChart.tsx          # SVG chart with probabilistic fan cone
+│   │       ├── EventTimelineView.tsx           # Normalized events & surprise badges
+│   │       ├── ModelDisagreementCard.tsx       # 5 sub-model breakdown & dispersion
+│   │       ├── TopDriversCard.tsx              # Bullish/bearish driver attributions
+│   │       ├── HistoricalPerformanceCard.tsx   # Walk-forward, ablation & reliability
+│   │       ├── PredictionTrackRecordCard.tsx   # Cryptographic paper prediction audit
+│   │       └── ProviderHealthModal.tsx         # Real-time API latency & health registry
 │   │
-│   └── engine/                  # Deterministic Financial & Suitability Engines
-│       ├── types.ts             # Strong TypeScript definitions & domain interfaces
-│       ├── suitability.ts       # Suitability gate logic & risk capacity rules
-│       ├── decision.ts          # Strategy allocator & SHA-256 decision ID generator
-│       ├── portfolio.ts         # Consolidated stocks & market-cap bifurcation analyser
-│       ├── portfolioParser.ts   # Multi-modal PDF/screenshot/text CAS statement parser
-│       ├── portfolioOptimizer.ts # Overlap elimination & 10-yr fee savings blueprint
-│       ├── liveMarketService.ts # Real-time Yahoo Finance quote sync & market breadth
-│       ├── liveMfService.ts     # Official AMFI 40k+ scheme search & dynamic math
-│       ├── zerodhaService.ts    # Official Zerodha Kite open margin & leverage API
-│       ├── stockHoldingsData.ts # Underlying equity holdings database across funds
-│       ├── aiAuditService.ts    # Pluggable AI Co-Pilot (Offline, Ollama, Groq)
-│       └── dataService.ts       # Fallback repository with high-fidelity datasets
+│   ├── engine/                  # Deterministic Financial & Suitability Engines
+│   │   ├── types.ts             # Strong TypeScript definitions & domain interfaces
+│   │   ├── suitability.ts       # Suitability gate logic & risk capacity rules
+│   │   ├── decision.ts          # Strategy allocator & SHA-256 decision ID generator
+│   │   ├── portfolio.ts         # Consolidated stocks & market-cap bifurcation analyser
+│   │   ├── portfolioParser.ts   # Multi-modal PDF/screenshot/text CAS statement parser
+│   │   ├── portfolioOptimizer.ts # Overlap elimination & 10-yr fee savings blueprint
+│   │   ├── liveMarketService.ts # Real-time Yahoo Finance quote sync & market breadth
+│   │   ├── liveMfService.ts     # Official AMFI 40k+ scheme search & dynamic math
+│   │   ├── zerodhaService.ts    # Official Zerodha Kite open margin & leverage API
+│   │   ├── stockHoldingsData.ts # Underlying equity holdings database across funds
+│   │   ├── aiAuditService.ts    # Pluggable AI Co-Pilot (Offline, Ollama, Groq)
+│   │   ├── dataService.ts       # Fallback repository with high-fidelity datasets
+│   │   └── marketIntelligence/  # Market Intelligence Engine & Providers
+│   │       ├── types.ts         # Multi-asset, horizon & event taxonomy types
+│   │       ├── forecastEngine.ts # Calibrated ensemble & multi-horizon scoring
+│   │       ├── paperForecastLedger.ts # SHA-256 cryptographic paper prediction ledger
+│   │       ├── suitabilityBridge.ts   # Safety gate preventing speculative overrides
+│   │       └── providers/
+│   │           ├── MarketDataProvider.ts # Real quotes (Yahoo, AMFI, Zerodha)
+│   │           ├── NewsEventProvider.ts  # Multi-dimensional sentiment extraction
+│   │           └── ProviderManager.ts    # Latency tracking & Data Quality Score
+│   │
+│   └── tests/                   # TypeScript Integration & Verification Tests
+│       ├── marketIntelligence.test.ts # Probabilities, suitability gates & ledger
+│       └── portfolioUpgrade.test.ts   # Parsing, overlap & fee savings tests
 │
 └── research/                    # Python Quantitative Research Pipeline
     ├── download_data.py         # Official AMFI & NSE benchmark data ingestion
@@ -439,8 +512,10 @@ NiveshPilot/
     ├── backtest.py              # Multi-horizon walk-forward backtesting simulator
     ├── sensitivity_ablation.py  # Parameter sweeps & Moving Block Bootstrap (MBB)
     ├── evaluate.py              # Statistical evaluation & report generator
+    ├── market_intelligence_engine.py # Probabilistic forecasting research pipeline
     ├── tests/
-    │   └── test_quant.py        # 24 unit & property-based quantitative tests
+    │   ├── test_quant.py        # 24 unit & property-based quantitative tests
+    │   └── test_market_intelligence.py # 7 market intelligence invariant tests
     │
     └── Governance Documentation/
         ├── RESEARCH_REPORT.md   # 18-section academic evaluation report

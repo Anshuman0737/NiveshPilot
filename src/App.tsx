@@ -31,6 +31,7 @@ import { ShouldISellMode } from './components/ShouldISellMode'
 import { PortfolioHealthMode } from './components/PortfolioHealthMode'
 import { FundComparisonMode } from './components/FundComparisonMode'
 import { ResearchDashboard } from './components/ResearchDashboard'
+import { MarketIntelligenceDashboard } from './components/marketIntelligence/MarketIntelligenceDashboard'
 import { DisclaimerFooter } from './components/DisclaimerFooter'
 import { ArrowRight, ShieldCheck, Sparkles, Scale, Info } from 'lucide-react'
 
@@ -259,6 +260,10 @@ export const App: React.FC = () => {
               </section>
             )}
           </div>
+        )}
+
+        {activeTab === 'market-intelligence' && (
+          <MarketIntelligenceDashboard userProfile={profile} />
         )}
 
         {activeTab === 'ihavex' && (

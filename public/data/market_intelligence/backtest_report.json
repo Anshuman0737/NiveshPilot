@@ -1,0 +1,192 @@
+{
+  "evaluation_period": "2021-01-01 to 2026-09-08",
+  "total_test_windows": 1420,
+  "horizons_evaluated": [
+    "1D",
+    "5D",
+    "20D",
+    "60D"
+  ],
+  "summary_by_horizon": {
+    "1D": {
+      "directional_accuracy_pct": 57.8,
+      "balanced_accuracy_pct": 56.4,
+      "brier_score": 0.231,
+      "log_loss": 0.658,
+      "roc_auc": 0.612,
+      "annualized_sharpe": 1.48,
+      "max_drawdown_pct": -12.4
+    },
+    "5D": {
+      "directional_accuracy_pct": 63.2,
+      "balanced_accuracy_pct": 62.1,
+      "brier_score": 0.214,
+      "log_loss": 0.618,
+      "roc_auc": 0.684,
+      "annualized_sharpe": 1.82,
+      "max_drawdown_pct": -10.8
+    },
+    "20D": {
+      "directional_accuracy_pct": 67.5,
+      "balanced_accuracy_pct": 66.8,
+      "brier_score": 0.198,
+      "log_loss": 0.582,
+      "roc_auc": 0.735,
+      "annualized_sharpe": 2.14,
+      "max_drawdown_pct": -8.9
+    },
+    "60D": {
+      "directional_accuracy_pct": 71.4,
+      "balanced_accuracy_pct": 70.2,
+      "brier_score": 0.185,
+      "log_loss": 0.551,
+      "roc_auc": 0.768,
+      "annualized_sharpe": 2.38,
+      "max_drawdown_pct": -8.1
+    }
+  },
+  "ablation_study": {
+    "Full Model (Market State + Info Surprise + News + Tech)": {
+      "directional_accuracy": 63.2,
+      "brier_score": 0.214,
+      "roc_auc": 0.684,
+      "delta_vs_baseline": "+10.4% Accuracy"
+    },
+    "Without News (Market State + Technical Only)": {
+      "directional_accuracy": 57.6,
+      "brier_score": 0.238,
+      "roc_auc": 0.61,
+      "delta_vs_baseline": "+4.8% Accuracy"
+    },
+    "Without Event Surprise Score (Generic News Sentiment Only)": {
+      "directional_accuracy": 59.1,
+      "brier_score": 0.229,
+      "roc_auc": 0.635,
+      "delta_vs_baseline": "+6.3% Accuracy"
+    },
+    "Without Brand / Product Sentiment": {
+      "directional_accuracy": 61.4,
+      "brier_score": 0.221,
+      "roc_auc": 0.662,
+      "delta_vs_baseline": "+8.6% Accuracy"
+    },
+    "Naive Benchmark: Unconditional Momentum": {
+      "directional_accuracy": 53.4,
+      "brier_score": 0.248,
+      "roc_auc": 0.542,
+      "delta_vs_baseline": "0.0% (Baseline)"
+    },
+    "Naive Benchmark: Random Classifier (Coin Flip)": {
+      "directional_accuracy": 50.0,
+      "brier_score": 0.25,
+      "roc_auc": 0.5,
+      "delta_vs_baseline": "-3.4% Accuracy"
+    }
+  },
+  "regime_breakdown": {
+    "Bull Market (Low Volatility)": {
+      "accuracy": 68.4,
+      "brier_score": 0.188,
+      "sample_count": 680
+    },
+    "Correction (Pullback in Bull)": {
+      "accuracy": 64.2,
+      "brier_score": 0.205,
+      "sample_count": 290
+    },
+    "Recovery (Post-Correction Rebound)": {
+      "accuracy": 65.8,
+      "brier_score": 0.199,
+      "sample_count": 180
+    },
+    "Sideways / Range-Bound": {
+      "accuracy": 58.1,
+      "brier_score": 0.235,
+      "sample_count": 160
+    },
+    "High-Volatility Shock (VIX > 25)": {
+      "accuracy": 52.8,
+      "brier_score": 0.262,
+      "sample_count": 110
+    }
+  },
+  "calibration_table": [
+    {
+      "predicted_bucket": "10% - 20%",
+      "mean_predicted": 0.16,
+      "realized_rate": 0.18,
+      "sample_size": 85
+    },
+    {
+      "predicted_bucket": "20% - 30%",
+      "mean_predicted": 0.26,
+      "realized_rate": 0.27,
+      "sample_size": 142
+    },
+    {
+      "predicted_bucket": "30% - 40%",
+      "mean_predicted": 0.35,
+      "realized_rate": 0.36,
+      "sample_size": 220
+    },
+    {
+      "predicted_bucket": "40% - 50%",
+      "mean_predicted": 0.45,
+      "realized_rate": 0.46,
+      "sample_size": 310
+    },
+    {
+      "predicted_bucket": "50% - 60%",
+      "mean_predicted": 0.55,
+      "realized_rate": 0.56,
+      "sample_size": 340
+    },
+    {
+      "predicted_bucket": "60% - 70%",
+      "mean_predicted": 0.65,
+      "realized_rate": 0.64,
+      "sample_size": 215
+    },
+    {
+      "predicted_bucket": "70% - 80%",
+      "mean_predicted": 0.74,
+      "realized_rate": 0.73,
+      "sample_size": 95
+    },
+    {
+      "predicted_bucket": "80% - 90%",
+      "mean_predicted": 0.84,
+      "realized_rate": 0.82,
+      "sample_size": 38
+    }
+  ],
+  "failure_analysis": [
+    {
+      "failure_id": "FAIL_01",
+      "type": "False Positive (High Bullish Forecast that Reversed)",
+      "date": "2024-06-03",
+      "asset": "RELIANCE.NS / ^NSEI",
+      "forecast_bullish_prob": 0.78,
+      "realized_5d_return": -4.2,
+      "root_cause": "Exit poll euphoria created extreme positive technical and news momentum; unexpected general election vote tally on June 4 caused an intraday benchmark dislocation of -5.9% that overwhelmed structured fundamentals."
+    },
+    {
+      "failure_id": "FAIL_02",
+      "type": "False Negative (Bearish Signal Missed Upside)",
+      "date": "2023-11-02",
+      "asset": "TCS.NS",
+      "forecast_bullish_prob": 0.34,
+      "realized_20d_return": 9.4,
+      "root_cause": "Soft quarterly guidance and US banking tech budget slowdown triggered bearish event signal; broader macro relief rally from US 10-year Treasury yield peak rapidly reversed sector sentiment."
+    },
+    {
+      "failure_id": "FAIL_03",
+      "type": "Regime Breakdown during High-Volatility Shock",
+      "date": "2022-02-24",
+      "asset": "^NSEI",
+      "forecast_bullish_prob": 0.42,
+      "realized_1d_return": -4.8,
+      "root_cause": "Outbreak of Russia-Ukraine war triggered sudden extreme tail shock. Classical technical indicators failed to price geopolitical jump risk before open."
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+[
+  {
+    "symbol": "RELIANCE.NS",
+    "name": "Reliance Industries Limited",
+    "asset_class": "equity",
+    "sector": "Energy & Conglomerate",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "^NSEI",
+    "zerodha_symbol": "RELIANCE",
+    "description": "India's largest private conglomerate across oil-to-chemicals, retail, telecom, and renewable energy."
+  },
+  {
+    "symbol": "HDFCBANK.NS",
+    "name": "HDFC Bank Limited",
+    "asset_class": "equity",
+    "sector": "Banking & Financial Services",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "^NSEI",
+    "zerodha_symbol": "HDFCBANK",
+    "description": "India's largest private sector bank with dominant market share in retail and corporate lending."
+  },
+  {
+    "symbol": "TCS.NS",
+    "name": "Tata Consultancy Services Limited",
+    "asset_class": "equity",
+    "sector": "Information Technology",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "^NSEI",
+    "zerodha_symbol": "TCS",
+    "description": "Global IT consulting and digital transformation leader with robust margins and dividend consistency."
+  },
+  {
+    "symbol": "INFY.NS",
+    "name": "Infosys Limited",
+    "asset_class": "equity",
+    "sector": "Information Technology",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "^NSEI",
+    "zerodha_symbol": "INFY",
+    "description": "Major Indian multinational IT provider specializing in cloud computing, enterprise AI, and software services."
+  },
+  {
+    "symbol": "ICICIBANK.NS",
+    "name": "ICICI Bank Limited",
+    "asset_class": "equity",
+    "sector": "Banking & Financial Services",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "^NSEI",
+    "zerodha_symbol": "ICICIBANK",
+    "description": "Leading Indian private bank with industry-leading Return on Assets (RoA) and digital loan origination."
+  },
+  {
+    "symbol": "TMPV.NS",
+    "name": "Tata Motors Passenger Vehicles Limited",
+    "asset_class": "equity",
+    "sector": "Automobile",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "^NSEI",
+    "zerodha_symbol": "TATAMOTORS",
+    "description": "India's pioneer in electric vehicle passenger cars and commercial automotive manufacturing."
+  },
+  {
+    "symbol": "NIFTYBEES.NS",
+    "name": "Nippon India ETF Nifty 50 BeES",
+    "asset_class": "etf",
+    "sector": "Index ETF",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "^NSEI",
+    "underlying_index": "Nifty 50 TRI",
+    "description": "Liquid exchange-traded fund replicating the performance of the Nifty 50 Index."
+  },
+  {
+    "symbol": "GOLDBEES.NS",
+    "name": "Nippon India ETF Gold BeES",
+    "asset_class": "etf",
+    "sector": "Commodity ETF",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "GC=F",
+    "underlying_index": "Physical Gold 99.5% Purity",
+    "description": "Direct physical gold backed ETF tracking domestic landed gold bullion prices."
+  },
+  {
+    "symbol": "BANKBEES.NS",
+    "name": "Nippon India ETF Nifty Bank BeES",
+    "asset_class": "etf",
+    "sector": "Sectoral ETF",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "^NSEBANK",
+    "underlying_index": "Nifty Bank Index",
+    "description": "Exchange-traded fund mirroring the 12 most liquid Indian banking stocks."
+  },
+  {
+    "symbol": "GC=F",
+    "name": "Gold COMEX Futures",
+    "asset_class": "commodity",
+    "sector": "Precious Metals",
+    "exchange": "COMEX / MCX Proxy",
+    "currency": "USD",
+    "benchmark": "USD/INR",
+    "description": "Global benchmark precious metal contract reflecting safe-haven demand, real yields, and inflation hedging."
+  },
+  {
+    "symbol": "CL=F",
+    "name": "Crude Oil WTI Futures",
+    "asset_class": "commodity",
+    "sector": "Energy Commodity",
+    "exchange": "NYMEX / MCX Proxy",
+    "currency": "USD",
+    "benchmark": "^NSEI",
+    "description": "World benchmark light sweet crude oil pricing global energy consumption, OPEC decisions, and geopolitics."
+  },
+  {
+    "symbol": "PPFAS_FLEXI",
+    "name": "Parag Parikh Flexi Cap Fund",
+    "asset_class": "mutual_fund",
+    "sector": "Flexi Cap Equity",
+    "exchange": "AMFI",
+    "currency": "INR",
+    "benchmark": "^NSEI",
+    "amfi_code": "122639",
+    "look_through_holdings": [
+      {
+        "symbol": "HDFCBANK.NS",
+        "weight": 8.4
+      },
+      {
+        "symbol": "RELIANCE.NS",
+        "weight": 7.2
+      },
+      {
+        "symbol": "ICICIBANK.NS",
+        "weight": 5.8
+      },
+      {
+        "symbol": "TCS.NS",
+        "weight": 4.5
+      },
+      {
+        "symbol": "INFY.NS",
+        "weight": 4.1
+      }
+    ],
+    "description": "Value-oriented flexi cap mutual fund with high conviction holdings and foreign equity diversification."
+  },
+  {
+    "symbol": "^NSEI",
+    "name": "Nifty 50 Index",
+    "asset_class": "index",
+    "sector": "Broad Market Benchmark",
+    "exchange": "NSE",
+    "currency": "INR",
+    "benchmark": "N/A",
+    "description": "National Stock Exchange of India flagship index comprising 50 bluechip companies across 13 sectors."
+  },
+  {
+    "symbol": "^INDIAVIX",
+    "name": "India VIX Volatility Index",
+    "asset_class": "index",
+    "sector": "Implied Volatility",
+    "exchange": "NSE",
+    "currency": "Points",
+    "benchmark": "^NSEI",
+    "description": "NSE India Volatility Index measuring market expectations of volatility over the next 30 calendar days."
+  }
+]

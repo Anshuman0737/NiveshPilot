@@ -1,0 +1,166 @@
+[
+  {
+    "prediction_id": "PRED_20260815_REL_5D",
+    "asset": "RELIANCE.NS",
+    "asset_class": "equity",
+    "timestamp": "2026-08-15T09:15:00Z",
+    "horizon": "5D",
+    "probability_bullish": 0.68,
+    "probability_neutral": 0.18,
+    "probability_bearish": 0.14,
+    "expected_direction": "STRONGLY BULLISH",
+    "expected_return_pct": 2.45,
+    "confidence": "HIGH",
+    "signal_quality": 8.2,
+    "model_version": "v1.2-pit-calibrated",
+    "feature_snapshot_hash": "67c0fb9260c84efb",
+    "top_bullish_drivers": [
+      "+6.8% positive quarterly revenue surprise",
+      "Strong relative strength vs Nifty 50 (+2.4% over 20D)",
+      "Jio enterprise customer adoption momentum"
+    ],
+    "top_bearish_drivers": [
+      "Crude oil volatility index elevated"
+    ],
+    "status": "SCORED",
+    "actual_return_pct": 2.82,
+    "is_correct_direction": true,
+    "calibration_bucket": "60% - 70%"
+  },
+  {
+    "prediction_id": "PRED_20260820_HDFCBANK_20D",
+    "asset": "HDFCBANK.NS",
+    "asset_class": "equity",
+    "timestamp": "2026-08-20T09:15:00Z",
+    "horizon": "20D",
+    "probability_bullish": 0.64,
+    "probability_neutral": 0.2,
+    "probability_bearish": 0.16,
+    "expected_direction": "MODERATELY BULLISH",
+    "expected_return_pct": 3.8,
+    "confidence": "MEDIUM",
+    "signal_quality": 7.6,
+    "model_version": "v1.2-pit-calibrated",
+    "feature_snapshot_hash": "29147e330c4f5f89",
+    "top_bullish_drivers": [
+      "Deposit growth rate outpaced credit expansion",
+      "Net Interest Margin expanded 12 bps to 3.47%"
+    ],
+    "top_bearish_drivers": [
+      "Foreign institutional flow outflows in banking sector"
+    ],
+    "status": "SCORED",
+    "actual_return_pct": 4.15,
+    "is_correct_direction": true,
+    "calibration_bucket": "60% - 70%"
+  },
+  {
+    "prediction_id": "PRED_20260828_GCF_5D",
+    "asset": "GC=F",
+    "asset_class": "commodity",
+    "timestamp": "2026-08-28T09:15:00Z",
+    "horizon": "5D",
+    "probability_bullish": 0.71,
+    "probability_neutral": 0.16,
+    "probability_bearish": 0.13,
+    "expected_direction": "STRONGLY BULLISH",
+    "expected_return_pct": 1.85,
+    "confidence": "HIGH",
+    "signal_quality": 8.5,
+    "model_version": "v1.2-pit-calibrated",
+    "feature_snapshot_hash": "42055f89ee5669e1",
+    "top_bullish_drivers": [
+      "Central bank gold accumulation surge (+22% above expectation)",
+      "US Dollar Index softening and real yields declining"
+    ],
+    "top_bearish_drivers": [
+      "Near all-time highs; technical RSI slightly overbought (68.4)"
+    ],
+    "status": "SCORED",
+    "actual_return_pct": 2.1,
+    "is_correct_direction": true,
+    "calibration_bucket": "70% - 80%"
+  },
+  {
+    "prediction_id": "PRED_20260904_TMPV_1D",
+    "asset": "TMPV.NS",
+    "asset_class": "equity",
+    "timestamp": "2026-09-04T09:15:00Z",
+    "horizon": "1D",
+    "probability_bullish": 0.62,
+    "probability_neutral": 0.22,
+    "probability_bearish": 0.16,
+    "expected_direction": "MODERATELY BULLISH",
+    "expected_return_pct": 0.95,
+    "confidence": "MEDIUM",
+    "signal_quality": 7.4,
+    "model_version": "v1.2-pit-calibrated",
+    "feature_snapshot_hash": "1b2203d8f7b64fcc",
+    "top_bullish_drivers": [
+      "Commercial court approval for demerger completion",
+      "Positive EV sales delivery report (+14% YoY)"
+    ],
+    "top_bearish_drivers": [
+      "Broad passenger car sector registration softness"
+    ],
+    "status": "SCORED",
+    "actual_return_pct": 1.12,
+    "is_correct_direction": true,
+    "calibration_bucket": "60% - 70%"
+  },
+  {
+    "prediction_id": "PRED_20260908_NIFTY_5D",
+    "asset": "^NSEI",
+    "asset_class": "index",
+    "timestamp": "2026-09-08T09:15:00Z",
+    "horizon": "5D",
+    "probability_bullish": 0.65,
+    "probability_neutral": 0.21,
+    "probability_bearish": 0.14,
+    "expected_direction": "MODERATELY BULLISH",
+    "expected_return_pct": 1.1,
+    "confidence": "MEDIUM",
+    "signal_quality": 7.8,
+    "model_version": "v1.2-pit-calibrated",
+    "feature_snapshot_hash": "cf8d552d23e95446",
+    "top_bullish_drivers": [
+      "Nifty 50 consolidating above 50-day and 200-day moving averages",
+      "India VIX calm at 13.5 (well below 18.0 stress threshold)",
+      "Robust domestic institutional liquidity (DII net inflows positive)"
+    ],
+    "top_bearish_drivers": [
+      "Crude oil volatility and foreign institutional intermittent selling"
+    ],
+    "status": "ACTIVE_PAPER",
+    "actual_return_pct": null,
+    "is_correct_direction": null,
+    "calibration_bucket": "60% - 70%"
+  },
+  {
+    "prediction_id": "PRED_20260908_TCS_20D",
+    "asset": "TCS.NS",
+    "asset_class": "equity",
+    "timestamp": "2026-09-08T09:15:00Z",
+    "horizon": "20D",
+    "probability_bullish": 0.61,
+    "probability_neutral": 0.22,
+    "probability_bearish": 0.17,
+    "expected_direction": "MODERATELY BULLISH",
+    "expected_return_pct": 2.8,
+    "confidence": "MEDIUM",
+    "signal_quality": 7.5,
+    "model_version": "v1.2-pit-calibrated",
+    "feature_snapshot_hash": "202d59bd31c42acc",
+    "top_bullish_drivers": [
+      "European banking digital core mega-win contract revenue accretion",
+      "Stable operating margin at 24.5% with zero debt"
+    ],
+    "top_bearish_drivers": [
+      "US discretionary spending decision cycle lingering"
+    ],
+    "status": "ACTIVE_PAPER",
+    "actual_return_pct": null,
+    "is_correct_direction": null,
+    "calibration_bucket": "60% - 70%"
+  }
+]

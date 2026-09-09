@@ -1,0 +1,1374 @@
+{
+  "1D": {
+    "horizon": "1D",
+    "trading_days": 1,
+    "weights": {
+      "tech": {
+        "ret_5d": 0.35,
+        "rsi_14": 0.015,
+        "macd_hist": 0.4,
+        "atr_14_pct": -0.1
+      },
+      "fund": {
+        "rel_strength_20d": 0.65,
+        "drawdown": 0.25
+      },
+      "event": {
+        "surprise_score": 0.85,
+        "sentiment_financial": 0.6,
+        "novelty_score": 0.3
+      },
+      "macro": {
+        "regime_bull": 0.45,
+        "vix_penalty": -0.025
+      },
+      "cross": {
+        "crude_factor": -0.15,
+        "gold_factor": 0.1
+      }
+    },
+    "platt_params": [
+      1.15,
+      -0.08
+    ],
+    "latest_forecasts": {
+      "RELIANCE.NS": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.608,
+        "probability_neutral": 0.181,
+        "probability_bearish": 0.211,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 0.26,
+        "confidence": "HIGH",
+        "signal_quality": 6.1,
+        "model_disagreement": {
+          "components": {
+            "technical": 36.7,
+            "fundamental": -22.1,
+            "event_news": 56.2,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 26.2,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "HDFCBANK.NS": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.601,
+        "probability_neutral": 0.181,
+        "probability_bearish": 0.218,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 0.25,
+        "confidence": "HIGH",
+        "signal_quality": 6.6,
+        "model_disagreement": {
+          "components": {
+            "technical": 38.9,
+            "fundamental": 9.9,
+            "event_news": 43.1,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 13.6,
+          "consensus_level": "High Consensus"
+        }
+      },
+      "TCS.NS": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.716,
+        "probability_neutral": 0.171,
+        "probability_bearish": 0.113,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.39,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.9,
+        "model_disagreement": {
+          "components": {
+            "technical": 56.4,
+            "fundamental": 2.4,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 34.0,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "INFY.NS": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.71,
+        "probability_neutral": 0.172,
+        "probability_bearish": 0.118,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.38,
+        "confidence": "MEDIUM",
+        "signal_quality": 7.0,
+        "model_disagreement": {
+          "components": {
+            "technical": 47.2,
+            "fundamental": 13.7,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 31.2,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "ICICIBANK.NS": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.519,
+        "probability_neutral": 0.189,
+        "probability_bearish": 0.292,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.15,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.5,
+        "model_disagreement": {
+          "components": {
+            "technical": 51.8,
+            "fundamental": 9.8,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 17.8,
+          "consensus_level": "High Consensus"
+        }
+      },
+      "TMPV.NS": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.667,
+        "probability_neutral": 0.175,
+        "probability_bearish": 0.158,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.33,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.4,
+        "model_disagreement": {
+          "components": {
+            "technical": 64.2,
+            "fundamental": 31.5,
+            "event_news": 61.2,
+            "macro_regime": 22.0,
+            "cross_asset": -28.0
+          },
+          "dispersion_std": 33.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "NIFTYBEES.NS": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.508,
+        "probability_neutral": 0.189,
+        "probability_bearish": 0.303,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.13,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.2,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.0,
+            "fundamental": -8.2,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 20.9,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "GOLDBEES.NS": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.49,
+        "probability_neutral": 0.191,
+        "probability_bearish": 0.319,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.11,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.1,
+        "model_disagreement": {
+          "components": {
+            "technical": 44.4,
+            "fundamental": -12.3,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 19.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "BANKBEES.NS": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.479,
+        "probability_neutral": 0.193,
+        "probability_bearish": 0.328,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.1,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.0,
+        "model_disagreement": {
+          "components": {
+            "technical": 39.8,
+            "fundamental": -14.2,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 18.5,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "GC=F": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.708,
+        "probability_neutral": 0.172,
+        "probability_bearish": 0.12,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.38,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.7,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.3,
+            "fundamental": -6.5,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 35.6,
+          "consensus_level": "High Disagreement"
+        }
+      },
+      "CL=F": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.691,
+        "probability_neutral": 0.173,
+        "probability_bearish": 0.136,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.36,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.1,
+        "model_disagreement": {
+          "components": {
+            "technical": 48.8,
+            "fundamental": -40.6,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 44.5,
+          "consensus_level": "High Disagreement"
+        }
+      },
+      "PPFAS_FLEXI": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.531,
+        "probability_neutral": 0.187,
+        "probability_bearish": 0.282,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.16,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.4,
+        "model_disagreement": {
+          "components": {
+            "technical": 60.0,
+            "fundamental": 3.1,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 21.7,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "^NSEI": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.559,
+        "probability_neutral": 0.185,
+        "probability_bearish": 0.256,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 0.2,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.8,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.0,
+            "fundamental": -8.0,
+            "event_news": 20.2,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 19.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "^INDIAVIX": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.296,
+        "probability_neutral": 0.19,
+        "probability_bearish": 0.514,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": -0.14,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.1,
+        "model_disagreement": {
+          "components": {
+            "technical": -31.2,
+            "fundamental": -43.8,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": -28.0
+          },
+          "dispersion_std": 23.9,
+          "consensus_level": "Moderate Agreement"
+        }
+      }
+    }
+  },
+  "5D": {
+    "horizon": "5D",
+    "trading_days": 5,
+    "weights": {
+      "tech": {
+        "ret_5d": 0.35,
+        "rsi_14": 0.015,
+        "macd_hist": 0.4,
+        "atr_14_pct": -0.1
+      },
+      "fund": {
+        "rel_strength_20d": 0.65,
+        "drawdown": 0.25
+      },
+      "event": {
+        "surprise_score": 0.85,
+        "sentiment_financial": 0.6,
+        "novelty_score": 0.3
+      },
+      "macro": {
+        "regime_bull": 0.45,
+        "vix_penalty": -0.025
+      },
+      "cross": {
+        "crude_factor": -0.15,
+        "gold_factor": 0.1
+      }
+    },
+    "platt_params": [
+      1.28,
+      -0.05
+    ],
+    "latest_forecasts": {
+      "RELIANCE.NS": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.607,
+        "probability_neutral": 0.18,
+        "probability_bearish": 0.213,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 0.57,
+        "confidence": "HIGH",
+        "signal_quality": 6.1,
+        "model_disagreement": {
+          "components": {
+            "technical": 36.7,
+            "fundamental": -22.1,
+            "event_news": 56.2,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 26.2,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "HDFCBANK.NS": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.611,
+        "probability_neutral": 0.181,
+        "probability_bearish": 0.208,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 0.58,
+        "confidence": "HIGH",
+        "signal_quality": 6.7,
+        "model_disagreement": {
+          "components": {
+            "technical": 38.9,
+            "fundamental": 9.9,
+            "event_news": 43.1,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 13.6,
+          "consensus_level": "High Consensus"
+        }
+      },
+      "TCS.NS": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.717,
+        "probability_neutral": 0.171,
+        "probability_bearish": 0.112,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.88,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.9,
+        "model_disagreement": {
+          "components": {
+            "technical": 56.4,
+            "fundamental": 2.4,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 34.0,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "INFY.NS": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.715,
+        "probability_neutral": 0.171,
+        "probability_bearish": 0.114,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.87,
+        "confidence": "MEDIUM",
+        "signal_quality": 7.0,
+        "model_disagreement": {
+          "components": {
+            "technical": 47.2,
+            "fundamental": 13.7,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 31.2,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "ICICIBANK.NS": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.532,
+        "probability_neutral": 0.188,
+        "probability_bearish": 0.28,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.37,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.6,
+        "model_disagreement": {
+          "components": {
+            "technical": 51.8,
+            "fundamental": 9.8,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 17.8,
+          "consensus_level": "High Consensus"
+        }
+      },
+      "TMPV.NS": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.676,
+        "probability_neutral": 0.175,
+        "probability_bearish": 0.149,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.76,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.5,
+        "model_disagreement": {
+          "components": {
+            "technical": 64.2,
+            "fundamental": 31.5,
+            "event_news": 61.2,
+            "macro_regime": 22.0,
+            "cross_asset": -28.0
+          },
+          "dispersion_std": 33.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "NIFTYBEES.NS": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.513,
+        "probability_neutral": 0.189,
+        "probability_bearish": 0.298,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.31,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.2,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.0,
+            "fundamental": -8.2,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 20.9,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "GOLDBEES.NS": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.495,
+        "probability_neutral": 0.191,
+        "probability_bearish": 0.314,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.26,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.1,
+        "model_disagreement": {
+          "components": {
+            "technical": 44.4,
+            "fundamental": -12.3,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 19.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "BANKBEES.NS": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.484,
+        "probability_neutral": 0.192,
+        "probability_bearish": 0.324,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.23,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.0,
+        "model_disagreement": {
+          "components": {
+            "technical": 39.8,
+            "fundamental": -14.2,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 18.5,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "GC=F": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.708,
+        "probability_neutral": 0.172,
+        "probability_bearish": 0.12,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.85,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.7,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.3,
+            "fundamental": -6.5,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 35.6,
+          "consensus_level": "High Disagreement"
+        }
+      },
+      "CL=F": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.682,
+        "probability_neutral": 0.174,
+        "probability_bearish": 0.144,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.78,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.0,
+        "model_disagreement": {
+          "components": {
+            "technical": 48.8,
+            "fundamental": -40.6,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 44.5,
+          "consensus_level": "High Disagreement"
+        }
+      },
+      "PPFAS_FLEXI": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.54,
+        "probability_neutral": 0.187,
+        "probability_bearish": 0.273,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 0.39,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.5,
+        "model_disagreement": {
+          "components": {
+            "technical": 60.0,
+            "fundamental": 3.1,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 21.7,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "^NSEI": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.563,
+        "probability_neutral": 0.185,
+        "probability_bearish": 0.252,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 0.45,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.9,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.0,
+            "fundamental": -8.0,
+            "event_news": 20.2,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 19.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "^INDIAVIX": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.295,
+        "probability_neutral": 0.189,
+        "probability_bearish": 0.516,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": -0.32,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.1,
+        "model_disagreement": {
+          "components": {
+            "technical": -31.2,
+            "fundamental": -43.8,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": -28.0
+          },
+          "dispersion_std": 23.9,
+          "consensus_level": "Moderate Agreement"
+        }
+      }
+    }
+  },
+  "20D": {
+    "horizon": "20D",
+    "trading_days": 20,
+    "weights": {
+      "tech": {
+        "ret_5d": 0.35,
+        "rsi_14": 0.015,
+        "macd_hist": 0.4,
+        "atr_14_pct": -0.1
+      },
+      "fund": {
+        "rel_strength_20d": 0.65,
+        "drawdown": 0.25
+      },
+      "event": {
+        "surprise_score": 0.85,
+        "sentiment_financial": 0.6,
+        "novelty_score": 0.3
+      },
+      "macro": {
+        "regime_bull": 0.45,
+        "vix_penalty": -0.025
+      },
+      "cross": {
+        "crude_factor": -0.15,
+        "gold_factor": 0.1
+      }
+    },
+    "platt_params": [
+      1.42,
+      0.02
+    ],
+    "latest_forecasts": {
+      "RELIANCE.NS": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.54,
+        "probability_neutral": 0.187,
+        "probability_bearish": 0.273,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 0.85,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.3,
+        "model_disagreement": {
+          "components": {
+            "technical": 36.7,
+            "fundamental": -22.1,
+            "event_news": 56.2,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 26.2,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "HDFCBANK.NS": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.595,
+        "probability_neutral": 0.181,
+        "probability_bearish": 0.224,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 1.19,
+        "confidence": "HIGH",
+        "signal_quality": 6.5,
+        "model_disagreement": {
+          "components": {
+            "technical": 38.9,
+            "fundamental": 9.9,
+            "event_news": 43.1,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 13.6,
+          "consensus_level": "High Consensus"
+        }
+      },
+      "TCS.NS": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.663,
+        "probability_neutral": 0.176,
+        "probability_bearish": 0.161,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 1.61,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.3,
+        "model_disagreement": {
+          "components": {
+            "technical": 56.4,
+            "fundamental": 2.4,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 34.0,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "INFY.NS": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.674,
+        "probability_neutral": 0.175,
+        "probability_bearish": 0.151,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 1.67,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.6,
+        "model_disagreement": {
+          "components": {
+            "technical": 47.2,
+            "fundamental": 13.7,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 31.2,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "ICICIBANK.NS": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.545,
+        "probability_neutral": 0.186,
+        "probability_bearish": 0.269,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 0.88,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.8,
+        "model_disagreement": {
+          "components": {
+            "technical": 51.8,
+            "fundamental": 9.8,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 17.8,
+          "consensus_level": "High Consensus"
+        }
+      },
+      "TMPV.NS": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.646,
+        "probability_neutral": 0.178,
+        "probability_bearish": 0.176,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 1.5,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.2,
+        "model_disagreement": {
+          "components": {
+            "technical": 64.2,
+            "fundamental": 31.5,
+            "event_news": 61.2,
+            "macro_regime": 22.0,
+            "cross_asset": -28.0
+          },
+          "dispersion_std": 33.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "NIFTYBEES.NS": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.502,
+        "probability_neutral": 0.19,
+        "probability_bearish": 0.308,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.62,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.1,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.0,
+            "fundamental": -8.2,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 20.9,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "GOLDBEES.NS": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.482,
+        "probability_neutral": 0.192,
+        "probability_bearish": 0.326,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.5,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.0,
+        "model_disagreement": {
+          "components": {
+            "technical": 44.4,
+            "fundamental": -12.3,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 19.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "BANKBEES.NS": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.471,
+        "probability_neutral": 0.194,
+        "probability_bearish": 0.335,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.44,
+        "confidence": "LOW",
+        "signal_quality": 4.9,
+        "model_disagreement": {
+          "components": {
+            "technical": 39.8,
+            "fundamental": -14.2,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 18.5,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "GC=F": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.644,
+        "probability_neutral": 0.177,
+        "probability_bearish": 0.179,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 1.49,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.0,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.3,
+            "fundamental": -6.5,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 35.6,
+          "consensus_level": "High Disagreement"
+        }
+      },
+      "CL=F": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.571,
+        "probability_neutral": 0.184,
+        "probability_bearish": 0.245,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 1.04,
+        "confidence": "MEDIUM",
+        "signal_quality": 4.7,
+        "model_disagreement": {
+          "components": {
+            "technical": 48.8,
+            "fundamental": -40.6,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 44.5,
+          "consensus_level": "High Disagreement"
+        }
+      },
+      "PPFAS_FLEXI": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.539,
+        "probability_neutral": 0.187,
+        "probability_bearish": 0.274,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.85,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.5,
+        "model_disagreement": {
+          "components": {
+            "technical": 60.0,
+            "fundamental": 3.1,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 21.7,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "^NSEI": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.535,
+        "probability_neutral": 0.187,
+        "probability_bearish": 0.278,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.82,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.6,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.0,
+            "fundamental": -8.0,
+            "event_news": 20.2,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 19.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "^INDIAVIX": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.271,
+        "probability_neutral": 0.186,
+        "probability_bearish": 0.543,
+        "expected_direction": "MODERATELY BEARISH",
+        "expected_return_pct": -0.87,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.4,
+        "model_disagreement": {
+          "components": {
+            "technical": -31.2,
+            "fundamental": -43.8,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": -28.0
+          },
+          "dispersion_std": 23.9,
+          "consensus_level": "Moderate Agreement"
+        }
+      }
+    }
+  },
+  "60D": {
+    "horizon": "60D",
+    "trading_days": 60,
+    "weights": {
+      "tech": {
+        "ret_5d": 0.35,
+        "rsi_14": 0.015,
+        "macd_hist": 0.4,
+        "atr_14_pct": -0.1
+      },
+      "fund": {
+        "rel_strength_20d": 0.65,
+        "drawdown": 0.25
+      },
+      "event": {
+        "surprise_score": 0.85,
+        "sentiment_financial": 0.6,
+        "novelty_score": 0.3
+      },
+      "macro": {
+        "regime_bull": 0.45,
+        "vix_penalty": -0.025
+      },
+      "cross": {
+        "crude_factor": -0.15,
+        "gold_factor": 0.1
+      }
+    },
+    "platt_params": [
+      1.55,
+      0.08
+    ],
+    "latest_forecasts": {
+      "RELIANCE.NS": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.488,
+        "probability_neutral": 0.192,
+        "probability_bearish": 0.32,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.97,
+        "confidence": "MEDIUM",
+        "signal_quality": 4.7,
+        "model_disagreement": {
+          "components": {
+            "technical": 36.7,
+            "fundamental": -22.1,
+            "event_news": 56.2,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 26.2,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "HDFCBANK.NS": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.588,
+        "probability_neutral": 0.183,
+        "probability_bearish": 0.229,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 2.08,
+        "confidence": "HIGH",
+        "signal_quality": 6.5,
+        "model_disagreement": {
+          "components": {
+            "technical": 38.9,
+            "fundamental": 9.9,
+            "event_news": 43.1,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 13.6,
+          "consensus_level": "High Consensus"
+        }
+      },
+      "TCS.NS": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.618,
+        "probability_neutral": 0.18,
+        "probability_bearish": 0.202,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 2.41,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.8,
+        "model_disagreement": {
+          "components": {
+            "technical": 56.4,
+            "fundamental": 2.4,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 34.0,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "INFY.NS": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.643,
+        "probability_neutral": 0.177,
+        "probability_bearish": 0.18,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 2.69,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.2,
+        "model_disagreement": {
+          "components": {
+            "technical": 47.2,
+            "fundamental": 13.7,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 31.2,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "ICICIBANK.NS": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.564,
+        "probability_neutral": 0.184,
+        "probability_bearish": 0.252,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 1.81,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.0,
+        "model_disagreement": {
+          "components": {
+            "technical": 51.8,
+            "fundamental": 9.8,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 17.8,
+          "consensus_level": "High Consensus"
+        }
+      },
+      "TMPV.NS": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.639,
+        "probability_neutral": 0.178,
+        "probability_bearish": 0.183,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 2.64,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.1,
+        "model_disagreement": {
+          "components": {
+            "technical": 64.2,
+            "fundamental": 31.5,
+            "event_news": 61.2,
+            "macro_regime": 22.0,
+            "cross_asset": -28.0
+          },
+          "dispersion_std": 33.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "NIFTYBEES.NS": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.502,
+        "probability_neutral": 0.19,
+        "probability_bearish": 0.308,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 1.13,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.1,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.0,
+            "fundamental": -8.2,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 20.9,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "GOLDBEES.NS": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.48,
+        "probability_neutral": 0.192,
+        "probability_bearish": 0.328,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.88,
+        "confidence": "MEDIUM",
+        "signal_quality": 4.9,
+        "model_disagreement": {
+          "components": {
+            "technical": 44.4,
+            "fundamental": -12.3,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 19.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "BANKBEES.NS": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.469,
+        "probability_neutral": 0.193,
+        "probability_bearish": 0.338,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.76,
+        "confidence": "LOW",
+        "signal_quality": 4.9,
+        "model_disagreement": {
+          "components": {
+            "technical": 39.8,
+            "fundamental": -14.2,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 18.5,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "GC=F": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.588,
+        "probability_neutral": 0.182,
+        "probability_bearish": 0.23,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 2.08,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.4,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.3,
+            "fundamental": -6.5,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 35.6,
+          "consensus_level": "High Disagreement"
+        }
+      },
+      "CL=F": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.467,
+        "probability_neutral": 0.194,
+        "probability_bearish": 0.339,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.74,
+        "confidence": "LOW",
+        "signal_quality": 3.5,
+        "model_disagreement": {
+          "components": {
+            "technical": 48.8,
+            "fundamental": -40.6,
+            "event_news": 95.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 44.5,
+          "consensus_level": "High Disagreement"
+        }
+      },
+      "PPFAS_FLEXI": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.548,
+        "probability_neutral": 0.186,
+        "probability_bearish": 0.266,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 1.64,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.6,
+        "model_disagreement": {
+          "components": {
+            "technical": 60.0,
+            "fundamental": 3.1,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 21.7,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "^NSEI": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.52,
+        "probability_neutral": 0.189,
+        "probability_bearish": 0.291,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 1.33,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.4,
+        "model_disagreement": {
+          "components": {
+            "technical": 52.0,
+            "fundamental": -8.0,
+            "event_news": 20.2,
+            "macro_regime": 22.0,
+            "cross_asset": 12.0
+          },
+          "dispersion_std": 19.4,
+          "consensus_level": "Moderate Agreement"
+        }
+      },
+      "^INDIAVIX": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.257,
+        "probability_neutral": 0.185,
+        "probability_bearish": 0.558,
+        "expected_direction": "MODERATELY BEARISH",
+        "expected_return_pct": -1.75,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.6,
+        "model_disagreement": {
+          "components": {
+            "technical": -31.2,
+            "fundamental": -43.8,
+            "event_news": 0.0,
+            "macro_regime": 22.0,
+            "cross_asset": -28.0
+          },
+          "dispersion_std": 23.9,
+          "consensus_level": "Moderate Agreement"
+        }
+      }
+    }
+  }
+}

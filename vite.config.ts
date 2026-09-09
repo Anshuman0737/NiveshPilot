@@ -17,6 +17,11 @@ export default defineConfig({
         target: 'https://api.kite.trade',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/zerodha/, '')
+      },
+      '/api/news': {
+        target: 'https://news.google.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/news/, '')
       }
     }
   }

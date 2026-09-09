@@ -36,10 +36,31 @@ import { DisclaimerFooter } from './components/DisclaimerFooter'
 import { ArrowRight, ShieldCheck, Sparkles, Scale, Info } from 'lucide-react'
 
 export const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<ActiveTab>('home')
+  const [activeTab, setActiveTab] = useState<ActiveTab>(() => {
+    const hash = window.location.hash.replace('#', '')
+    if (['home', 'market-intelligence', 'ihavex', 'wait', 'sell', 'portfolio', 'compare', 'research'].includes(hash)) {
+      return hash as ActiveTab
+    }
+    return 'market-intelligence'
+  })
   const [advancedMode, setAdvancedMode] = useState<boolean>(false)
   const [isOnboardingOpen, setIsOnboardingOpen] = useState<boolean>(false)
   const [isAISettingsOpen, setIsAISettingsOpen] = useState<boolean>(false)
+
+  useEffect(() => {
+    window.location.hash = activeTab
+  }, [activeTab])
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (['home', 'market-intelligence', 'ihavex', 'wait', 'sell', 'portfolio', 'compare', 'research'].includes(hash)) {
+        setActiveTab(hash as ActiveTab)
+      }
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
 
   // Initial user financial suitability profile
   const [profile, setProfile] = useState<SuitabilityProfile>({

@@ -34,6 +34,7 @@ interface MarketIntelligenceDashboardProps {
   userProfile?: SuitabilityProfile
   initialSymbol?: string
   onNavigateTab?: (tab: string) => void
+  onExitToAdvisor?: () => void
 }
 
 export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardProps> = ({
@@ -47,11 +48,12 @@ export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardPr
     alreadyInvests: true
   },
   initialSymbol = 'RELIANCE.NS',
-  onNavigateTab
+  onNavigateTab,
+  onExitToAdvisor
 }) => {
   // Navigation & View Mode
   const [viewMode, setViewMode] = useState<'overview' | 'diagnostic'>('overview')
-  const [currentSidebarPath, setCurrentSidebarPath] = useState<string>('market-intelligence')
+  const [currentSidebarPath, setCurrentSidebarPath] = useState<string>('overview')
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false)
 
   // Filters & State
@@ -143,20 +145,23 @@ export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardPr
   // Handle Sidebar Navigation
   const handleSidebarNavigate = (path: string) => {
     setCurrentSidebarPath(path)
-    if (path === 'overview' && onNavigateTab) {
-      onNavigateTab('home')
-    } else if (path === 'my-portfolio' && onNavigateTab) {
-      onNavigateTab('portfolio')
-    } else if (path === 'mutual-funds' && onNavigateTab) {
-      onNavigateTab('ihavex')
-    } else if (path === 'research' && onNavigateTab) {
-      onNavigateTab('research')
-    } else if (path === 'model-health') {
-      setIsHealthModalOpen(true)
-    } else if (path === 'market-intelligence') {
+    if (path === 'overview') {
       setViewMode('overview')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else if (path === 'predictions') {
+      setViewMode('diagnostic')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else if (path === 'events') {
+      setViewMode('overview')
+      setTimeout(() => {
+        const el = document.getElementById('event-cascade-section')
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
     } else if (path === 'stocks') {
       setSelectedClass('equity')
+      setViewMode('overview')
+    } else if (path === 'mutual-funds') {
+      setSelectedClass('mutual_fund')
       setViewMode('overview')
     } else if (path === 'etfs') {
       setSelectedClass('etf')
@@ -164,10 +169,26 @@ export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardPr
     } else if (path === 'commodities') {
       setSelectedClass('commodity')
       setViewMode('overview')
-    } else if (path === 'predictions') {
-      setViewMode('diagnostic')
-    } else if (path === 'events') {
-      setViewMode('overview')
+    } else if (path === 'model-health') {
+      setIsHealthModalOpen(true)
+    } else if (path === 'home') {
+      if (onExitToAdvisor) {
+        onExitToAdvisor()
+      } else if (onNavigateTab) {
+        onNavigateTab('home')
+      }
+    } else if (path === 'portfolio' && onNavigateTab) {
+      onNavigateTab('portfolio')
+    } else if (path === 'ihavex' && onNavigateTab) {
+      onNavigateTab('ihavex')
+    } else if (path === 'wait' && onNavigateTab) {
+      onNavigateTab('wait')
+    } else if (path === 'sell' && onNavigateTab) {
+      onNavigateTab('sell')
+    } else if (path === 'compare' && onNavigateTab) {
+      onNavigateTab('compare')
+    } else if (path === 'research' && onNavigateTab) {
+      onNavigateTab('research')
     }
   }
 
@@ -204,6 +225,7 @@ export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardPr
         marketRegion={marketRegion}
         onToggleRegion={setMarketRegion}
         onExplainForecast={() => setIsExplainModalOpen(true)}
+        onExitToAdvisor={onExitToAdvisor || (() => onNavigateTab?.('home'))}
       />
 
       {/* 3. Main Workspace Area */}

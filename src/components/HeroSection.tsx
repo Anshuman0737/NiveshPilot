@@ -1,11 +1,12 @@
 import React from 'react'
-import { ArrowRight, Shield, Database, Scale, Sparkles, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, Shield, Database, Scale, Sparkles, CheckCircle2, Activity } from 'lucide-react'
 
 interface HeroSectionProps {
   onFindNextMove: () => void
   onExploreResearch: () => void
   currentAmount: number
   onSelectAmount?: (amount: number) => void
+  onOpenMarketIntelligence?: () => void
 }
 
 const QUICK_AMOUNTS = [10000, 25000, 50000, 100000, 250000]
@@ -14,7 +15,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onFindNextMove,
   onExploreResearch,
   currentAmount,
-  onSelectAmount
+  onSelectAmount,
+  onOpenMarketIntelligence
 }) => {
   const formattedAmount = new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -23,12 +25,50 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   }).format(currentAmount || 10000)
 
   return (
-    <section className="relative pt-12 pb-14 sm:pt-16 sm:pb-20 overflow-hidden border-b border-white/[0.04]">
+    <section className="relative pt-10 pb-14 sm:pt-14 sm:pb-20 overflow-hidden border-b border-white/[0.04]">
       {/* Sleek Radial Ambient Spotlight */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[450px] bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(16,185,129,0.12),rgba(255,255,255,0))] pointer-events-none" />
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-indigo-500/[0.04] rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center z-10">
+        {/* High-Visibility Market Terminal Bridge */}
+        {onOpenMarketIntelligence && (
+          <div className="mb-6 p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-cyan-950/70 via-slate-900/90 to-emerald-950/70 border border-cyan-500/40 shadow-lg shadow-cyan-950/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+            <div className="flex items-center space-x-3">
+              <div className="relative shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300">
+                  <Activity className="w-5 h-5" />
+                </div>
+                <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                </span>
+              </div>
+              <div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs sm:text-sm font-bold text-white tracking-wide">
+                    Institutional Market Intelligence Terminal
+                  </span>
+                  <span className="text-[9px] font-mono font-black px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                    LIVE 2,400+ VECTORS
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Real-time Markov regime shifts, cross-asset event shocks & calibrated directional forecasts.
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={onOpenMarketIntelligence}
+              className="w-full sm:w-auto px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-400 hover:from-cyan-400 hover:to-teal-300 text-navy-950 font-black text-xs flex items-center justify-center space-x-1.5 shadow-md shadow-cyan-500/25 shrink-0 transition-all hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
+            >
+              <span>Launch Terminal</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
+
         {/* Minimal Pill Badge */}
         <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-medium text-slate-300 mb-6 backdrop-blur-md">
           <Sparkles className="w-3.5 h-3.5 text-emerald-400" />

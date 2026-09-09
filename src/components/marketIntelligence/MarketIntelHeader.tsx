@@ -10,6 +10,7 @@ interface MarketIntelHeaderProps {
   marketRegion: 'IN' | 'US'
   onToggleRegion: (region: 'IN' | 'US') => void
   onExplainForecast: () => void
+  onExitToAdvisor?: () => void
   userRole?: string
   userName?: string
 }
@@ -23,6 +24,7 @@ export const MarketIntelHeader: React.FC<MarketIntelHeaderProps> = ({
   marketRegion,
   onToggleRegion,
   onExplainForecast,
+  onExitToAdvisor,
   userRole = 'Lead Quant',
   userName = 'Arjun Mehta'
 }) => {
@@ -163,6 +165,20 @@ export const MarketIntelHeader: React.FC<MarketIntelHeaderProps> = ({
           <span className="material-symbols-outlined text-[20px]">notifications</span>
           <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-error rounded-full animate-pulse"></span>
         </button>
+
+        {/* Quick Return to Decision Advisor (Retail Mode) */}
+        {onExitToAdvisor && (
+          <button
+            type="button"
+            onClick={onExitToAdvisor}
+            className="flex items-center gap-1 sm:gap-1.5 h-7 px-2 sm:px-2.5 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 rounded text-emerald-300 hover:text-emerald-200 transition-all font-body-compact text-body-compact font-semibold text-xs shadow-sm cursor-pointer"
+            title="Return to ₹10k Decision Advisor"
+          >
+            <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+            <span className="hidden sm:inline">Decision Advisor (₹10k)</span>
+            <span className="sm:hidden">Advisor</span>
+          </button>
+        )}
 
         {/* User Profile */}
         <div className="flex items-center gap-2 pl-1 sm:pl-2 border-l border-outline-variant/40">

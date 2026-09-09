@@ -186,6 +186,10 @@ export const App: React.FC = () => {
                 setActiveTab('research')
                 window.scrollTo({ top: 0, behavior: 'smooth' })
               }}
+              onOpenMarketIntelligence={() => {
+                setActiveTab('market-intelligence')
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
               onSelectAmount={(amt) => setProfile((prev) => ({ ...prev, amount: amt }))}
             />
 
@@ -286,6 +290,10 @@ export const App: React.FC = () => {
         {activeTab === 'market-intelligence' && (
           <MarketIntelligenceDashboard
             userProfile={profile}
+            onExitToAdvisor={() => {
+              setActiveTab('home')
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
             onNavigateTab={(tab) => {
               if (
                 tab === 'home' ||
@@ -297,6 +305,7 @@ export const App: React.FC = () => {
                 tab === 'compare'
               ) {
                 setActiveTab(tab as any)
+                window.scrollTo({ top: 0, behavior: 'smooth' })
               }
             }}
           />
@@ -326,6 +335,31 @@ export const App: React.FC = () => {
           <ResearchDashboard ledger={ledger} backtest={backtest} funds={funds} />
         )}
       </main>
+
+      {/* Floating Quick-Switch to Market Intelligence Terminal (Available on all retail views) */}
+      {activeTab !== 'market-intelligence' && (
+        <div className="fixed bottom-5 right-5 z-40">
+          <button
+            onClick={() => {
+              setActiveTab('market-intelligence')
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+            className="flex items-center space-x-2.5 px-4 py-2.5 rounded-full bg-slate-900/95 hover:bg-slate-800 text-white border border-cyan-500/50 shadow-2xl shadow-cyan-950/80 backdrop-blur-xl transition-all hover:scale-105 active:scale-95 group cursor-pointer"
+            title="Switch to Institutional Market Intelligence Terminal"
+          >
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+            </span>
+            <span className="text-xs font-bold tracking-wide text-cyan-300 group-hover:text-white transition-colors">
+              🧭 Quant Terminal
+            </span>
+            <span className="text-[9px] font-mono font-black px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+              LIVE
+            </span>
+          </button>
+        </div>
+      )}
 
       {/* Global Disclaimer Footer (hidden on market intelligence terminal view) */}
       {activeTab !== 'market-intelligence' && <DisclaimerFooter />}

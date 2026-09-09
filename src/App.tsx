@@ -118,22 +118,22 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100 selection:bg-emerald-500/20 selection:text-emerald-200">
-      {/* Top Navbar */}
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        advancedMode={advancedMode}
-        setAdvancedMode={setAdvancedMode}
-        onOpenOnboarding={() => setIsOnboardingOpen(true)}
-        onOpenAISettings={() => setIsAISettingsOpen(true)}
-        isSuitableForEquity={suitability.isSuitableForEquity}
-      />
-
-      {/* Live Market Streaming Ticker Ribbon */}
-      <LiveMarketTicker />
-
-      {/* Dynamic Live Market Pulse & Stress Simulator */}
-      <LiveMarketPulse onSimulateStateChange={setSimulatedState} />
+      {/* Top Navigation & Tickers (hidden on dedicated market intelligence terminal view) */}
+      {activeTab !== 'market-intelligence' && (
+        <>
+          <Navbar
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            advancedMode={advancedMode}
+            setAdvancedMode={setAdvancedMode}
+            onOpenOnboarding={() => setIsOnboardingOpen(true)}
+            onOpenAISettings={() => setIsAISettingsOpen(true)}
+            isSuitableForEquity={suitability.isSuitableForEquity}
+          />
+          <LiveMarketTicker />
+          <LiveMarketPulse onSimulateStateChange={setSimulatedState} />
+        </>
+      )}
 
       {/* Main Content Area */}
       <main className="flex-grow">
@@ -263,7 +263,22 @@ export const App: React.FC = () => {
         )}
 
         {activeTab === 'market-intelligence' && (
-          <MarketIntelligenceDashboard userProfile={profile} />
+          <MarketIntelligenceDashboard
+            userProfile={profile}
+            onNavigateTab={(tab) => {
+              if (
+                tab === 'home' ||
+                tab === 'portfolio' ||
+                tab === 'ihavex' ||
+                tab === 'research' ||
+                tab === 'wait' ||
+                tab === 'sell' ||
+                tab === 'compare'
+              ) {
+                setActiveTab(tab as any)
+              }
+            }}
+          />
         )}
 
         {activeTab === 'ihavex' && (
@@ -291,8 +306,8 @@ export const App: React.FC = () => {
         )}
       </main>
 
-      {/* Global Disclaimer Footer */}
-      <DisclaimerFooter />
+      {/* Global Disclaimer Footer (hidden on market intelligence terminal view) */}
+      {activeTab !== 'market-intelligence' && <DisclaimerFooter />}
     </div>
   )
 }

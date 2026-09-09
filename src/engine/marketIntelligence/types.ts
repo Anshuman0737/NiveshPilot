@@ -26,6 +26,7 @@ export interface AssetMetadata {
   zerodha_symbol?: string
   underlying_index?: string
   amfi_code?: string
+  isin?: string
   look_through_holdings?: LookThroughHolding[]
   description: string
 }

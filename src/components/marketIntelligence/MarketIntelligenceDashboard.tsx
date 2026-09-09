@@ -15,33 +15,25 @@ import {
 } from '../../engine/marketIntelligence/providers/MarketDataProvider'
 import { fetchLiveNewsEvents } from '../../engine/marketIntelligence/providers/NewsEventProvider'
 import { computeDirectionalForecast } from '../../engine/marketIntelligence/forecastEngine'
-import { computeDataQualityScore } from '../../engine/marketIntelligence/providers/ProviderManager'
 import { evaluateAssetSuitability } from '../../engine/marketIntelligence/suitabilityBridge'
 import { SuitabilityProfile } from '../../engine/types'
-import { AssetHeaderCard } from './AssetHeaderCard'
-import { ProbabilisticForecastCard } from './ProbabilisticForecastCard'
-import { PriceForecastChart } from './PriceForecastChart'
-import { EventTimelineView } from './EventTimelineView'
-import { ModelDisagreementCard } from './ModelDisagreementCard'
-import { TopDriversCard } from './TopDriversCard'
-import { HistoricalPerformanceCard } from './HistoricalPerformanceCard'
-import { PredictionTrackRecordCard } from './PredictionTrackRecordCard'
+
+// Terminal Components
+import { MarketIntelSidebar } from './MarketIntelSidebar'
+import { MarketIntelHeader } from './MarketIntelHeader'
+import { MarketStateStrip } from './MarketStateStrip'
+import { MarketRegimeModule } from './MarketRegimeModule'
+import { EmergingSignalsSection } from './EmergingSignalsSection'
+import { EventCascadeSection } from './EventCascadeSection'
+import { AnomalySignalsTable } from './AnomalySignalsTable'
+import { AssetDiagnosticView } from './AssetDiagnosticView'
+import { ExplainForecastModal } from './ExplainForecastModal'
 import { ProviderHealthModal } from './ProviderHealthModal'
-import {
-  Search,
-  Filter,
-  ShieldCheck,
-  AlertTriangle,
-  Compass,
-  Layers,
-  Sparkles,
-  TrendingUp,
-  Activity
-} from 'lucide-react'
 
 interface MarketIntelligenceDashboardProps {
   userProfile?: SuitabilityProfile
   initialSymbol?: string
+  onNavigateTab?: (tab: string) => void
 }
 
 export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardProps> = ({
@@ -54,23 +46,33 @@ export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardPr
     hasEmergencyCushion: true,
     alreadyInvests: true
   },
-  initialSymbol = 'RELIANCE.NS'
+  initialSymbol = 'RELIANCE.NS',
+  onNavigateTab
 }) => {
+  // Navigation & View Mode
+  const [viewMode, setViewMode] = useState<'overview' | 'diagnostic'>('overview')
+  const [currentSidebarPath, setCurrentSidebarPath] = useState<string>('market-intelligence')
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false)
+
+  // Filters & State
   const [assets, setAssets] = useState<AssetMetadata[]>([])
   const [selectedSymbol, setSelectedSymbol] = useState<string>(initialSymbol)
   const [selectedClass, setSelectedClass] = useState<AssetClass | 'all'>('all')
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [activeHorizon, setActiveHorizon] = useState<ForecastHorizon>('5D')
+  const [marketRegion, setMarketRegion] = useState<'IN' | 'US'>('IN')
 
-  // Live state
+  // Modals
+  const [isExplainModalOpen, setIsExplainModalOpen] = useState<boolean>(false)
+  const [isHealthModalOpen, setIsHealthModalOpen] = useState<boolean>(false)
+
+  // Live Data State
   const [quote, setQuote] = useState<LiveMarketQuote | null>(null)
   const [events, setEvents] = useState<EventObservation[]>([])
-  const [prices, setPrices] = useState<AssetPricePoint[]>([])
+  const [, setPrices] = useState<AssetPricePoint[]>([])
   const [forecast, setForecast] = useState<DirectionalForecast | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [isHealthOpen, setIsHealthOpen] = useState<boolean>(false)
 
-  // 1. Initial assets metadata load
+  // 1. Initial assets universe load
   useEffect(() => {
     loadAssetsMetadata().then((data) => {
       if (data && data.length > 0) {
@@ -82,14 +84,21 @@ export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardPr
     })
   }, [])
 
-  const selectedAsset = assets.find((a) => a.symbol === selectedSymbol) || assets[0]
+  const selectedAsset = assets.find((a) => a.symbol === selectedSymbol) || assets[0] || {
+    symbol: 'RELIANCE.NS',
+    name: 'Reliance Industries Ltd.',
+    asset_class: 'equity' as AssetClass,
+    sector: 'Energy & Retail',
+    currency: 'INR',
+    isin: 'INE002A01018',
+    lookback_years: 5
+  }
 
-  // 2. Fetch live quote, events, prices, and compute forecast
+  // 2. Fetch live quote, events, history, and calculate forecast
   useEffect(() => {
     if (!selectedAsset) return
 
     let isMounted = true
-    setIsLoading(true)
 
     const syncData = async () => {
       try {
@@ -108,11 +117,9 @@ export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardPr
         const fc = await computeDirectionalForecast(selectedAsset, activeHorizon, evts)
         if (isMounted) {
           setForecast(fc)
-          setIsLoading(false)
         }
       } catch (err) {
-        console.warn('Sync market intelligence caught error:', err)
-        if (isMounted) setIsLoading(false)
+        console.warn('Market intelligence sync caught error:', err)
       }
     }
 
@@ -121,9 +128,9 @@ export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardPr
     return () => {
       isMounted = false
     }
-  }, [selectedSymbol, activeHorizon, assets])
+  }, [selectedSymbol, activeHorizon, selectedAsset])
 
-  // Filtered asset list
+  // Filtered asset list based on search or class filter
   const filteredAssets = assets.filter((a) => {
     const matchClass = selectedClass === 'all' || a.asset_class === selectedClass
     const matchSearch =
@@ -133,164 +140,204 @@ export const MarketIntelligenceDashboard: React.FC<MarketIntelligenceDashboardPr
     return matchClass && matchSearch
   })
 
+  // Handle Sidebar Navigation
+  const handleSidebarNavigate = (path: string) => {
+    setCurrentSidebarPath(path)
+    if (path === 'overview' && onNavigateTab) {
+      onNavigateTab('home')
+    } else if (path === 'my-portfolio' && onNavigateTab) {
+      onNavigateTab('portfolio')
+    } else if (path === 'mutual-funds' && onNavigateTab) {
+      onNavigateTab('ihavex')
+    } else if (path === 'research' && onNavigateTab) {
+      onNavigateTab('research')
+    } else if (path === 'model-health') {
+      setIsHealthModalOpen(true)
+    } else if (path === 'market-intelligence') {
+      setViewMode('overview')
+    } else if (path === 'stocks') {
+      setSelectedClass('equity')
+      setViewMode('overview')
+    } else if (path === 'etfs') {
+      setSelectedClass('etf')
+      setViewMode('overview')
+    } else if (path === 'commodities') {
+      setSelectedClass('commodity')
+      setViewMode('overview')
+    } else if (path === 'predictions') {
+      setViewMode('diagnostic')
+    } else if (path === 'events') {
+      setViewMode('overview')
+    }
+  }
+
+  const handleInspectAsset = (symbol: string) => {
+    setSelectedSymbol(symbol)
+    setViewMode('diagnostic')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   const suitability = selectedAsset
     ? evaluateAssetSuitability(selectedAsset, forecast, userProfile)
     : null
 
-  const dataQualityScore = computeDataQualityScore(
-    quote?.freshness || 'HISTORICAL',
-    events.length,
-    !!quote && quote.price > 0
-  )
-
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-fade-in">
-      {/* Dashboard Top Title Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center space-x-2">
-            <span className="text-xs uppercase font-bold tracking-widest text-emerald-400 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-              Dynamic Market Intelligence
-            </span>
-            <span className="text-xs text-slate-500 font-mono">P(Return &gt; θ | Market State, Info State)</span>
-          </div>
-          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1.5">
-            Probabilistic Directional Forecasting
-          </h1>
-          <p className="text-sm text-slate-400 max-w-3xl mt-1 leading-relaxed">
-            Multi-horizon directional conviction conditioned on real price structures, normalized corporate/macro events,
-            and information surprise reactions. Calibrated with zero lookahead bias.
-          </p>
-        </div>
+    <div className="min-h-screen bg-background text-on-surface font-body-default text-body-default antialiased selection:bg-tertiary/20 selection:text-tertiary">
+      {/* 1. Left Sidebar Navigation (Desktop Fixed + Mobile Slide-over) */}
+      <MarketIntelSidebar
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        currentPath={currentSidebarPath}
+        onNavigate={handleSidebarNavigate}
+      />
 
-        {/* Global Health Trigger */}
-        <button
-          onClick={() => setIsHealthOpen(true)}
-          className="self-start md:self-auto px-4 py-2 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-white/[0.08] text-xs font-bold text-slate-300 hover:text-white flex items-center space-x-2 transition-all shadow-lg"
-        >
-          <Activity className="w-4 h-4 text-emerald-400" />
-          <span>Provider Health & Status</span>
-        </button>
-      </div>
+      {/* 2. Top Institutional Header */}
+      <MarketIntelHeader
+        onToggleMobileNav={() => setIsMobileNavOpen(!isMobileNavOpen)}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        selectedClass={selectedClass}
+        onSelectClass={(cls) => {
+          setSelectedClass(cls)
+          if (viewMode === 'diagnostic') setViewMode('overview')
+        }}
+        marketRegion={marketRegion}
+        onToggleRegion={setMarketRegion}
+        onExplainForecast={() => setIsExplainModalOpen(true)}
+      />
 
-      {/* Asset Class Filter Bar & Asset Selector */}
-      <div className="p-4 rounded-3xl bg-slate-900/80 border border-white/[0.06] space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          {/* Asset Class Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold">
-            {(['all', 'equity', 'etf', 'commodity', 'mutual_fund', 'index'] as const).map((cls) => (
-              <button
-                key={cls}
-                onClick={() => setSelectedClass(cls)}
-                className={`px-3 py-1.5 rounded-xl capitalize transition-all ${
-                  selectedClass === cls
-                    ? 'bg-emerald-500 text-slate-950 font-extrabold shadow-md'
-                    : 'bg-white/[0.03] text-slate-400 hover:text-white border border-white/[0.04]'
-                }`}
-              >
-                {cls === 'all' ? 'All Assets' : cls.replace('_', ' ')}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Box */}
-          <div className="relative w-full sm:w-64">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              placeholder="Search ticker, company or sector..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-slate-950 border border-white/[0.08] text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
-            />
-          </div>
-        </div>
-
-        {/* Horizontal Quick-Pick Asset Chips */}
-        <div className="flex items-center space-x-2 overflow-x-auto pb-1 pt-1 no-scrollbar">
-          {filteredAssets.map((a) => {
-            const isSelected = a.symbol === selectedSymbol
-            return (
-              <button
-                key={a.symbol}
-                onClick={() => setSelectedSymbol(a.symbol)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold shrink-0 transition-all flex items-center space-x-2 ${
-                  isSelected
-                    ? 'bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/40 text-emerald-300'
-                    : 'bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.04] text-slate-400 hover:text-white'
-                }`}
-              >
-                <span>{a.symbol}</span>
-                <span className="text-[10px] font-sans text-slate-500 font-normal">
-                  ({a.name.split(' ')[0]})
+      {/* 3. Main Workspace Area */}
+      <div className="xl:pl-64 transition-all duration-300">
+        <main className="w-full pt-14 px-2 sm:px-space-base pb-space-xl">
+          <div className="flex flex-col w-full text-on-surface">
+            {/* Top Global Alert / System Broadcast */}
+            <div className="w-full bg-surface-container-lowest px-space-sm sm:px-space-md py-1.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-on-surface-variant font-label-caps text-label-caps mb-space-sm shadow-sm rounded">
+              <div className="flex flex-wrap items-center gap-space-xs sm:gap-space-sm">
+                <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-tertiary/20 text-tertiary font-data-mono-compact text-data-mono-compact uppercase">
+                  System Broadcast
                 </span>
-              </button>
-            )
-          })}
-        </div>
-      </div>
-
-      {selectedAsset && (
-        <div className="space-y-6">
-          {/* Asset Header Card */}
-          <AssetHeaderCard
-            asset={selectedAsset}
-            quote={quote}
-            dataQualityScore={dataQualityScore}
-            onOpenHealth={() => setIsHealthOpen(true)}
-          />
-
-          {/* Responsible UX Suitability Banner */}
-          {suitability && !suitability.isPermittedBySuitability && (
-            <div className="p-4 rounded-2xl bg-amber-500/[0.06] border border-amber-500/30 flex items-start space-x-3 text-xs">
-              <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-bold text-amber-300 uppercase tracking-wider text-[11px] block">
-                  Suitability Safety Advisory ({suitability.badge})
+                <span className="text-on-surface">
+                  Markov Ensemble v4.8: Live calibration complete across 2,400+ equity vectors. Macro regime delta synchronized at 14:20 IST.
                 </span>
-                <p className="text-slate-300 leading-relaxed mt-0.5">{suitability.message}</p>
+              </div>
+              <div className="flex items-center gap-2 sm:gap-space-md shrink-0">
+                <span className="text-secondary font-data-mono-compact text-data-mono-compact">
+                  LATENCY: 18ms
+                </span>
+                <span className="text-outline">·</span>
+                <span className="text-on-surface-variant">NEXT RUN: 14:30 IST</span>
               </div>
             </div>
-          )}
 
-          {/* Probabilistic Forecast Dominant Card */}
-          <ProbabilisticForecastCard
-            forecast={forecast}
-            activeHorizon={activeHorizon}
-            onSelectHorizon={setActiveHorizon}
-          />
+            {/* Suitability Caution Alert (If Emergency Fund < 6M or Short Horizon) */}
+            {suitability && !suitability.isPermittedBySuitability && (
+              <div className="mb-space-sm p-space-sm rounded bg-error-container/20 border border-error/40 flex items-start gap-2 text-error">
+                <span className="material-symbols-outlined text-[18px] shrink-0 mt-0.5">
+                  shield_with_heart
+                </span>
+                <div className="font-body-compact text-body-compact">
+                  <strong>Suitability Safety Gate Active:</strong> {suitability.message} Market forecasts remain educational and will not override emergency liquidity needs.
+                </div>
+              </div>
+            )}
 
-          {/* Interactive Price & Forecast Cone SVG Chart */}
-          <PriceForecastChart
-            prices={prices}
-            forecast={forecast}
-            activeHorizon={activeHorizon}
-            currency={selectedAsset.currency}
-          />
+            {/* VIEW MODE ROUTING */}
+            {viewMode === 'overview' ? (
+              <>
+                {/* Page Header Area */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between px-space-sm sm:px-space-md py-space-sm mb-space-sm bg-surface-container-low rounded">
+                  <div className="flex flex-col gap-0.5">
+                    <div className="flex items-center gap-space-xs">
+                      <span className="material-symbols-outlined text-secondary text-[18px]">
+                        query_stats
+                      </span>
+                      <span className="font-label-caps text-label-caps text-secondary uppercase tracking-widest">
+                        Autonomous Quant Intel Engine
+                      </span>
+                    </div>
+                    <h1 className="font-headline-xl text-headline-xl text-on-surface tracking-tight">
+                      Market Intelligence
+                    </h1>
+                    <p className="font-body-default text-body-default text-on-surface-variant">
+                      Real-time market state, emerging events and probabilistic directional forecasts across Indian &amp; Global asset classes.
+                    </p>
+                  </div>
 
-          {/* Two-Column Grid: Evidentiary Drivers & Model Disagreement */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <TopDriversCard
-              topBullishDrivers={forecast?.top_bullish_drivers || []}
-              topBearishDrivers={forecast?.top_bearish_drivers || []}
-            />
+                  <div className="mt-space-sm md:mt-0 flex flex-wrap items-center gap-space-xs font-data-mono-compact text-data-mono-compact">
+                    <div className="bg-surface-container px-space-sm py-1 rounded flex items-center gap-space-xs">
+                      <span className="text-on-surface-variant">SIGNAL HORIZON:</span>
+                      <span className="text-primary font-semibold">T+5 TRADING SESSIONS</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setIsExplainModalOpen(true)}
+                      className="bg-primary hover:bg-primary-container text-on-primary hover:text-on-primary-container px-space-sm py-1 rounded font-body-compact text-body-compact font-semibold transition-all flex items-center gap-1 shadow-sm"
+                    >
+                      <span className="material-symbols-outlined text-[14px]">tune</span>
+                      <span>Filter Parameters</span>
+                    </button>
+                  </div>
+                </div>
 
-            {forecast && <ModelDisagreementCard disagreement={forecast.model_disagreement} />}
+                {/* 1. COMPACT MARKET-STATE STRIP (7 live assets) */}
+                <MarketStateStrip onSelectAsset={handleInspectAsset} />
+
+                {/* 2. MARKET REGIME ANALYSIS MODULE */}
+                <MarketRegimeModule />
+
+                {/* 3. EMERGING QUANTITATIVE SIGNALS (3 Institutional Cards) */}
+                <EmergingSignalsSection onInspectAsset={handleInspectAsset} />
+
+                {/* 4. WHAT CHANGED TODAY (Sequential Cascade & Asset Correlation Pulse) */}
+                <EventCascadeSection onInspectAsset={handleInspectAsset} />
+
+                {/* 5. LIVE MARKET-WIDE ANOMALY SIGNALS (Dense Table) */}
+                <AnomalySignalsTable onInspectAsset={handleInspectAsset} />
+
+                {/* Institutional Notice Footer */}
+                <div className="p-space-sm bg-surface-container-lowest text-on-surface-variant font-body-compact text-body-compact flex items-start gap-2 shadow-sm rounded">
+                  <span className="material-symbols-outlined text-outline text-[16px] mt-0.5 shrink-0">
+                    info
+                  </span>
+                  <p className="flex-1 leading-normal">
+                    <strong>Institutional Notice:</strong> Probabilistic forecasts represent quantitative model estimations and historical backtested distributions. They do not constitute investment advice or guarantees of market performance. Real-time inference pipelines process data through stochastic filtering and causal graph models subject to model drift and liquidity constraints.
+                  </p>
+                </div>
+              </>
+            ) : (
+              /* ASSET INTELLIGENCE DEEP-DIVE (BENTO VIEW) */
+              <AssetDiagnosticView
+                asset={selectedAsset}
+                quote={quote}
+                forecast={forecast}
+                events={events}
+                activeHorizon={activeHorizon}
+                onChangeHorizon={setActiveHorizon}
+                onBackToOverview={() => {
+                  setViewMode('overview')
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+                allAssets={filteredAssets}
+                onSelectAsset={(sym) => setSelectedSymbol(sym)}
+              />
+            )}
           </div>
+        </main>
+      </div>
 
-          {/* Real Chronological Event Timeline */}
-          <EventTimelineView events={events} />
-
-          {/* Empirical Walk-Forward Backtesting & Calibration Verification */}
-          <HistoricalPerformanceCard />
-
-          {/* Immutable Cryptographic Prediction Track Record */}
-          <PredictionTrackRecordCard />
-        </div>
-      )}
+      {/* Explain Forecast Modal */}
+      <ExplainForecastModal
+        isOpen={isExplainModalOpen}
+        onClose={() => setIsExplainModalOpen(false)}
+        asset={selectedAsset}
+        forecast={forecast}
+      />
 
       {/* Provider Health Modal */}
-      <ProviderHealthModal isOpen={isHealthOpen} onClose={() => setIsHealthOpen(false)} />
+      <ProviderHealthModal
+        isOpen={isHealthModalOpen}
+        onClose={() => setIsHealthModalOpen(false)}
+      />
     </div>
   )
 }

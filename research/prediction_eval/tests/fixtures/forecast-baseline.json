@@ -1,0 +1,579 @@
+{
+  "schema_version": "nivesh-replay-golden-v1",
+  "calculation_id": "preserved-directional-core-v1",
+  "fingerprints": {
+    "commit": "23ea34175f8e5a323dfa5243e536c5401983824b",
+    "node_version": "v22.22.1",
+    "scenario_file": {
+      "path": "research/prediction_eval/tests/fixtures/replay-cases.json",
+      "sha256": "55302AB6D3D657DF3A9C5F466735562E72C6CC6DBFF03C95C134234E33C990A7"
+    },
+    "harness_file": {
+      "path": "research/prediction_eval/tests/test_replay.cjs",
+      "sha256": "6D1BD4EDFC8D4494F3099143331A4AFBFEB48F5699CF40F4613DB432487CB709"
+    }
+  },
+  "results": [
+    {
+      "id": "scenario-01-horizon-1d-shipped",
+      "forecast": {
+        "horizon": "1D",
+        "days": 1,
+        "probability_bullish": 0.46,
+        "probability_neutral": 0.2,
+        "probability_bearish": 0.34,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.08,
+        "confidence": "LOW",
+        "signal_quality": 5.1,
+        "model_disagreement": {
+          "components": {
+            "technical": 22.8,
+            "fundamental": 2.4,
+            "event_news": 0,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 13.1,
+          "consensus_level": "High Consensus"
+        },
+        "top_bullish_drivers": [
+          "Technical momentum: RSI(59) & MACD trending positive",
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-02-horizon-5d-shipped",
+      "forecast": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.31,
+        "probability_neutral": 0.2,
+        "probability_bearish": 0.49,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": -0.26,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.3,
+        "model_disagreement": {
+          "components": {
+            "technical": -34.5,
+            "fundamental": -6.3,
+            "event_news": 0,
+            "macro_regime": -18,
+            "cross_asset": 12
+          },
+          "dispersion_std": 15.9,
+          "consensus_level": "High Consensus"
+        },
+        "top_bullish_drivers": [
+          "Calm baseline volatility within normal parameters"
+        ],
+        "top_bearish_drivers": [
+          "Technical weakness: Short-term price momentum decelerating",
+          "Macro headwinds: Elevated volatility and cautious regime conditioning"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-03-horizon-20d-shipped",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.6,
+        "probability_neutral": 0.18,
+        "probability_bearish": 0.22,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 1.22,
+        "confidence": "HIGH",
+        "signal_quality": 6.2,
+        "model_disagreement": {
+          "components": {
+            "technical": 62,
+            "fundamental": 19.7,
+            "event_news": 0,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 21.4,
+          "consensus_level": "Moderate Agreement"
+        },
+        "top_bullish_drivers": [
+          "Technical momentum: RSI(68) & MACD trending positive",
+          "Relative strength: Outperforming broad benchmark by +3.0%",
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-04-horizon-60d-shipped",
+      "forecast": {
+        "horizon": "60D",
+        "days": 60,
+        "probability_bullish": 0.11,
+        "probability_neutral": 0.17,
+        "probability_bearish": 0.72,
+        "expected_direction": "STRONGLY BEARISH",
+        "expected_return_pct": -3.54,
+        "confidence": "HIGH",
+        "signal_quality": 7.3,
+        "model_disagreement": {
+          "components": {
+            "technical": -82.4,
+            "fundamental": -54.4,
+            "event_news": 0,
+            "macro_regime": -42,
+            "cross_asset": -28
+          },
+          "dispersion_std": 27.4,
+          "consensus_level": "Moderate Agreement"
+        },
+        "top_bullish_drivers": [
+          "Calm baseline volatility within normal parameters"
+        ],
+        "top_bearish_drivers": [
+          "Technical weakness: Short-term price momentum decelerating",
+          "Lagging relative strength vs benchmark index (-8.0%)",
+          "Macro headwinds: Elevated volatility and cautious regime conditioning"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-05-fallback-missing-horizon",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.42,
+        "probability_neutral": 0.2,
+        "probability_bearish": 0.38,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.13,
+        "confidence": "LOW",
+        "signal_quality": 5,
+        "model_disagreement": {
+          "components": {
+            "technical": 8.5,
+            "fundamental": 1.6,
+            "event_news": 0,
+            "macro_regime": 5,
+            "cross_asset": 12
+          },
+          "dispersion_std": 4.4,
+          "consensus_level": "High Consensus"
+        },
+        "top_bullish_drivers": [
+          "Calm baseline volatility within normal parameters"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-06-missing-features-defaults",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.49,
+        "probability_neutral": 0.19,
+        "probability_bearish": 0.32,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.54,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.4,
+        "model_disagreement": {
+          "components": {
+            "technical": -0.6,
+            "fundamental": 4,
+            "event_news": 0,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 13.2,
+          "consensus_level": "High Consensus"
+        },
+        "top_bullish_drivers": [
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-07-zero-features-defaults",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.49,
+        "probability_neutral": 0.19,
+        "probability_bearish": 0.32,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.54,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.4,
+        "model_disagreement": {
+          "components": {
+            "technical": -0.6,
+            "fundamental": 4,
+            "event_news": 0,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 13.2,
+          "consensus_level": "High Consensus"
+        },
+        "top_bullish_drivers": [
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-08-latest-vs-earlier-row",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.63,
+        "probability_neutral": 0.18,
+        "probability_bearish": 0.19,
+        "expected_direction": "MODERATELY BULLISH",
+        "expected_return_pct": 1.41,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.2,
+        "model_disagreement": {
+          "components": {
+            "technical": 82,
+            "fundamental": 25.6,
+            "event_news": 0,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 28.2,
+          "consensus_level": "Moderate Agreement"
+        },
+        "top_bullish_drivers": [
+          "Technical momentum: RSI(72) & MACD trending positive",
+          "Relative strength: Outperforming broad benchmark by +4.0%",
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-09-positive-first-event-order",
+      "forecast": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.69,
+        "probability_neutral": 0.18,
+        "probability_bearish": 0.13,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 0.81,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.8,
+        "model_disagreement": {
+          "components": {
+            "technical": 21.3,
+            "fundamental": 7.1,
+            "event_news": 95,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 31.9,
+          "consensus_level": "Moderate Agreement"
+        },
+        "top_bullish_drivers": [
+          "Event Surprise: Good News Better than Expected (+95 pts)",
+          "Technical momentum: RSI(55) & MACD trending positive",
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-10-negative-first-event-order",
+      "forecast": {
+        "horizon": "5D",
+        "days": 5,
+        "probability_bullish": 0.25,
+        "probability_neutral": 0.19,
+        "probability_bearish": 0.56,
+        "expected_direction": "MODERATELY BEARISH",
+        "expected_return_pct": -0.45,
+        "confidence": "MEDIUM",
+        "signal_quality": 4.5,
+        "model_disagreement": {
+          "components": {
+            "technical": 21.3,
+            "fundamental": 7.1,
+            "event_news": -95,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 46.5,
+          "consensus_level": "High Disagreement"
+        },
+        "top_bullish_drivers": [
+          "Technical momentum: RSI(55) & MACD trending positive",
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Event reaction signal is subdued or negative (-95 pts)"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-11-category-strongly-bearish",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.11,
+        "probability_neutral": 0.17,
+        "probability_bearish": 0.72,
+        "expected_direction": "STRONGLY BEARISH",
+        "expected_return_pct": -1.95,
+        "confidence": "MEDIUM",
+        "signal_quality": 7.1,
+        "model_disagreement": {
+          "components": {
+            "technical": -95,
+            "fundamental": -63.1,
+            "event_news": 0,
+            "macro_regime": -42,
+            "cross_asset": -28
+          },
+          "dispersion_std": 32.1,
+          "consensus_level": "Moderate Agreement"
+        },
+        "top_bullish_drivers": [
+          "Calm baseline volatility within normal parameters"
+        ],
+        "top_bearish_drivers": [
+          "Technical weakness: Short-term price momentum decelerating",
+          "Lagging relative strength vs benchmark index (-9.0%)",
+          "Macro headwinds: Elevated volatility and cautious regime conditioning"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-12-category-strongly-bullish",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.65,
+        "probability_neutral": 0.18,
+        "probability_bearish": 0.17,
+        "expected_direction": "STRONGLY BULLISH",
+        "expected_return_pct": 1.54,
+        "confidence": "MEDIUM",
+        "signal_quality": 6.2,
+        "model_disagreement": {
+          "components": {
+            "technical": 95,
+            "fundamental": 31.5,
+            "event_news": 0,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 32.8,
+          "consensus_level": "Moderate Agreement"
+        },
+        "top_bullish_drivers": [
+          "Technical momentum: RSI(75) & MACD trending positive",
+          "Relative strength: Outperforming broad benchmark by +5.0%",
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-13-empty-history",
+      "forecast": null,
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-14-cache-reuse",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.53,
+        "probability_neutral": 0.18,
+        "probability_bearish": 0.29,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.77,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.8,
+        "model_disagreement": {
+          "components": {
+            "technical": 21.9,
+            "fundamental": 7.9,
+            "event_news": 0,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 12.1,
+          "consensus_level": "High Consensus"
+        },
+        "top_bullish_drivers": [
+          "Technical momentum: RSI(55) & MACD trending positive",
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-15-model-retry-on-failure",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.53,
+        "probability_neutral": 0.18,
+        "probability_bearish": 0.29,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.77,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.8,
+        "model_disagreement": {
+          "components": {
+            "technical": 21.9,
+            "fundamental": 7.9,
+            "event_news": 0,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 12.1,
+          "consensus_level": "High Consensus"
+        },
+        "top_bullish_drivers": [
+          "Technical momentum: RSI(55) & MACD trending positive",
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json",
+        "/data/market_intelligence/models.json"
+      ]
+    },
+    {
+      "id": "scenario-16-history-retry-on-failure",
+      "forecast": {
+        "horizon": "20D",
+        "days": 20,
+        "probability_bullish": 0.53,
+        "probability_neutral": 0.18,
+        "probability_bearish": 0.29,
+        "expected_direction": "NEUTRAL / RANGE-BOUND",
+        "expected_return_pct": 0.77,
+        "confidence": "MEDIUM",
+        "signal_quality": 5.8,
+        "model_disagreement": {
+          "components": {
+            "technical": 21.9,
+            "fundamental": 7.9,
+            "event_news": 0,
+            "macro_regime": 35,
+            "cross_asset": 12
+          },
+          "dispersion_std": 12.1,
+          "consensus_level": "High Consensus"
+        },
+        "top_bullish_drivers": [
+          "Technical momentum: RSI(55) & MACD trending positive",
+          "Market Regime: Favorable Bull environment supporting trend continuation"
+        ],
+        "top_bearish_drivers": [
+          "Range-bound consolidation resistance near recent swing high"
+        ]
+      },
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    },
+    {
+      "id": "scenario-17-empty-history-map-cached",
+      "forecast": null,
+      "fetch_trace": [
+        "/data/market_intelligence/models.json",
+        "/data/market_intelligence/historical_prices.json"
+      ]
+    }
+  ]
+}

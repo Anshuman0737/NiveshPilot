@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "Node10",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "noEmit": false,
+    "allowImportingTsExtensions": false,
+    "noEmitOnError": true,
+    "incremental": false,
+    "rootDir": "../..",
+    "types": []
+  },
+  "include": [
+    "../../src/engine/marketIntelligence/forecastEngine.ts"
+  ]
+}

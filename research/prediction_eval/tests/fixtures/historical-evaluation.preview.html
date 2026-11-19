@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYNTHETIC UI TEST HARNESS - Historical Evaluation</title>
+  <link rel="stylesheet" href="/src/index.css" />
+  <style>
+    /* Preview only: no icon font is loaded, so the decorative icon spans are hidden. Each has a visible text label beside it. */
+    .material-symbols-outlined { display: none !important; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface p-4 max-w-5xl mx-auto min-h-screen">
+  <!-- Prominent Synthetic Harness Banner -->
+  <div class="mb-6 p-4 rounded bg-surface-container-high border-2 border-primary/60 shadow-lg">
+    <div class="flex items-center gap-2 text-primary font-bold text-base mb-1">
+      <span class="material-symbols-outlined text-[24px]">science</span>
+      <h1 class="uppercase tracking-wider">SYNTHETIC UI TEST HARNESS — NOT STUDY RESULTS</h1>
+    </div>
+    <p class="text-xs text-on-surface-variant leading-relaxed">
+      This isolated harness tests the production React disclosure component and cryptographic verification pipeline
+      under controlled synthetic scenarios. It is not part of the production application routes.
+    </p>
+  </div>
+
+  <div id="harness-app"></div>
+
+  <script type="module">
+    import React, { useState, useEffect } from 'react'
+    import ReactDOM from 'react-dom/client'
+    import { HistoricalEvaluationPanel } from '/src/components/marketIntelligence/HistoricalEvaluationPanel.tsx'
+    import {
+      defaultSha256,
+      SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+      SCHEMA_VERSION_SUMMARY_V2,
+      SCHEMA_VERSION_SUMMARY_V3,
+      STUDY_PROTOCOL_ID
+    } from '/src/engine/marketIntelligence/historicalEvaluation.ts'
+
+    function Harness() {
+      const [v2Text, setV2Text] = useState('')
+      const [v3Text, setV3Text] = useState('')
+      const [selectedScenario, setSelectedScenario] = useState('valid-v3')
+      const [loadingFixtures, setLoadingFixtures] = useState(true)
+      const [fixtureError, setFixtureError] = useState(null)
+      const [activeConfig, setActiveConfig] = useState(null)
+      const [scenarioError, setScenarioError] = useState(null)
+
+      useEffect(() => {
+        let isCancelled = false
+        Promise.all([
+          fetch('/research/prediction_eval/tests/fixtures/historical-evaluation.synthetic-v2.json').then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status} loading v2 fixture`)
+            return r.text()
+          }),
+          fetch('/research/prediction_eval/tests/fixtures/historical-evaluation.synthetic-v3.json').then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status} loading v3 fixture`)
+            return r.text()
+          })
+        ]).then(([v2, v3]) => {
+          if (!isCancelled) {
+            setV2Text(v2)
+            setV3Text(v3)
+            setLoadingFixtures(false)
+          }
+        }).catch(err => {
+          if (!isCancelled) {
+            console.error('Failed to load synthetic fixtures', err)
+            setFixtureError(err?.message || String(err))
+            setLoadingFixtures(false)
+          }
+        })
+        return () => {
+          isCancelled = true
+        }
+      }, [])
+
+      const encoder = new TextEncoder()
+      const v2Bytes = encoder.encode(v2Text)
+      const v3Bytes = encoder.encode(v3Text)
+
+      // Turns a partition's metrics into the contract's empty-cohort shape (0 rows, null metrics).
+      function emptyPartition(partition) {
+        partition.counts.raw_partition_count = 0
+        partition.counts.eligible_count = 0
+        partition.counts.excluded_count = 0
+        partition.counts.requested_count = 0
+        partition.counts.exclusion_reason_counts = {}
+        partition.counts.model_available_counts = { heuristic: 0, frequency: 0, logistic: 0 }
+        partition.comparison_status = 'empty'
+        partition.metrics.sample_count = 0
+        partition.metrics.class_support = [0, 0, 0]
+        partition.metrics.status = 'empty'
+        for (const m of ['heuristic', 'frequency', 'logistic']) {
+          const model = partition.metrics.models[m]
+          model.mean_brier = null
+          model.mean_log_loss = null
+          model.log_loss_state = 'empty'
+          model.accuracy = null
+          model.confusion = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+          model.class_recall = [null, null, null]
+          model.reliability_bins = model.reliability_bins.map(b => ({ ...b, count: 0, mean_probability: null, observed_frequency: null }))
+        }
+      }
+
+      // Uncertainty block for a common reason that applies to every block length at once.
+      function commonUnavailableUncertainty(uncertainty, reason, n) {
+        uncertainty.status = 'unavailable'
+        uncertainty.reason = reason
+        uncertainty.n = n
+        uncertainty.point_differences = [
+          { pair_id: 'heuristic_minus_frequency', point_difference: null },
+          { pair_id: 'heuristic_minus_logistic', point_difference: null }
+        ]
+        uncertainty.block_lengths = uncertainty.block_lengths.map(b => ({
+          ...b,
+          status: 'unavailable',
+          reason,
+          pairs: [
+            { pair_id: 'heuristic_minus_frequency', lower: null, upper: null },
+            { pair_id: 'heuristic_minus_logistic', lower: null, upper: null }
+          ]
+        }))
+      }
+
+      // Binds a modified synthetic summary to a descriptor over its exact encoded bytes.
+      async function bindSummary(obj, summarySchemaVersion) {
+        const bytes = encoder.encode(JSON.stringify(obj))
+        const hash = await defaultSha256(bytes)
+        const desc = {
+          schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+          run_id: obj.run_id,
+          study_id: obj.study_id,
+          protocol_id: STUDY_PROTOCOL_ID,
+          summary_schema_version: summarySchemaVersion,
+          coverage_end_date: obj.dataset_attribution.coverage_end_date,
+          summary_bytes: bytes.byteLength,
+          summary_sha256: hash,
+          manifest_bytes: 1024,
+          manifest_sha256: hash
+        }
+        return {
+          fetchFn: async (url) => {
+            if (url.includes('release.json')) return new Response(encoder.encode(JSON.stringify(desc)), { status: 200 })
+            return new Response(bytes, { status: 200 })
+          }
+        }
+      }
+
+      // Scenario builders
+      function getScenarioConfig(id) {
+        if (id === 'valid-v2') {
+          return {
+            label: 'Valid v2 (Scored Below Every Block Floor)',
+            build: async () => {
+              const hash = await defaultSha256(v2Bytes)
+              const descriptor = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: 'run-2026-synthetic-002',
+                study_id: 'study-synthetic-nifty-v2',
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: SCHEMA_VERSION_SUMMARY_V2,
+                coverage_end_date: '2022-01-05',
+                summary_bytes: v2Bytes.byteLength,
+                summary_sha256: hash,
+                manifest_bytes: 1024,
+                manifest_sha256: hash
+              }
+              const descBytes = encoder.encode(JSON.stringify(descriptor))
+              return {
+                fetchFn: async (url) => {
+                  if (url.includes('release.json')) return new Response(descBytes, { status: 200 })
+                  return new Response(v2Bytes, { status: 200 })
+                }
+              }
+            }
+          }
+        }
+
+        if (id === 'valid-v3') {
+          return {
+            label: 'Valid v3 (Scored, Intervals Available)',
+            build: async () => {
+              const hash = await defaultSha256(v3Bytes)
+              const descriptor = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: 'run-2026-synthetic-003',
+                study_id: 'study-synthetic-nifty-v3',
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: SCHEMA_VERSION_SUMMARY_V3,
+                coverage_end_date: '2024-06-28',
+                summary_bytes: v3Bytes.byteLength,
+                summary_sha256: hash,
+                manifest_bytes: 1024,
+                manifest_sha256: hash
+              }
+              const descBytes = encoder.encode(JSON.stringify(descriptor))
+              return {
+                fetchFn: async (url) => {
+                  if (url.includes('release.json')) return new Response(descBytes, { status: 200 })
+                  return new Response(v3Bytes, { status: 200 })
+                }
+              }
+            }
+          }
+        }
+
+        if (id === 'unavailable-404') {
+          return {
+            label: 'Unavailable (Release 404)',
+            build: async () => ({
+              fetchFn: async (url) => new Response('Not found', { status: 404 })
+            })
+          }
+        }
+
+        if (id === 'unsupported-version') {
+          return {
+            label: 'Unsupported Protocol Version (v99)',
+            build: async () => {
+              const obj = JSON.parse(v3Text)
+              obj.schema_version = 'nivesh-evaluation-summary-v99'
+              const badBytes = encoder.encode(JSON.stringify(obj))
+              const hash = await defaultSha256(badBytes)
+              const desc = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: obj.run_id,
+                study_id: obj.study_id,
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: 'nivesh-evaluation-summary-v99',
+                coverage_end_date: obj.dataset_attribution.coverage_end_date,
+                summary_bytes: badBytes.byteLength,
+                summary_sha256: hash,
+                manifest_bytes: 1024,
+                manifest_sha256: hash
+              }
+              return {
+                fetchFn: async (url) => {
+                  if (url.includes('release.json')) return new Response(encoder.encode(JSON.stringify(desc)), { status: 200 })
+                  return new Response(badBytes, { status: 200 })
+                }
+              }
+            }
+          }
+        }
+
+        if (id === 'stale') {
+          return {
+            label: 'Stale Descriptor Binding',
+            build: async () => {
+              const hash = await defaultSha256(v3Bytes)
+              const desc = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: 'mismatched-run-id',
+                study_id: 'study-synthetic-nifty-v3',
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: SCHEMA_VERSION_SUMMARY_V3,
+                coverage_end_date: '2024-06-28',
+                summary_bytes: v3Bytes.byteLength,
+                summary_sha256: hash,
+                manifest_bytes: 1024,
+                manifest_sha256: hash
+              }
+              return {
+                fetchFn: async (url) => {
+                  if (url.includes('release.json')) return new Response(encoder.encode(JSON.stringify(desc)), { status: 200 })
+                  return new Response(v3Bytes, { status: 200 })
+                }
+              }
+            }
+          }
+        }
+
+        if (id === 'digest-mismatch') {
+          return {
+            label: 'SHA-256 Digest Mismatch',
+            build: async () => {
+              const desc = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: 'run-2026-synthetic-003',
+                study_id: 'study-synthetic-nifty-v3',
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: SCHEMA_VERSION_SUMMARY_V3,
+                coverage_end_date: '2024-06-28',
+                summary_bytes: v3Bytes.byteLength,
+                summary_sha256: '0000000000000000000000000000000000000000000000000000000000000000',
+                manifest_bytes: 1024,
+                manifest_sha256: '0000000000000000000000000000000000000000000000000000000000000000'
+              }
+              return {
+                fetchFn: async (url) => {
+                  if (url.includes('release.json')) return new Response(encoder.encode(JSON.stringify(desc)), { status: 200 })
+                  return new Response(v3Bytes, { status: 200 })
+                }
+              }
+            }
+          }
+        }
+
+        if (id === 'byte-mismatch') {
+          return {
+            label: 'Byte Count Mismatch',
+            build: async () => {
+              const hash = await defaultSha256(v3Bytes)
+              const desc = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: 'run-2026-synthetic-003',
+                study_id: 'study-synthetic-nifty-v3',
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: SCHEMA_VERSION_SUMMARY_V3,
+                coverage_end_date: '2024-06-28',
+                summary_bytes: v3Bytes.byteLength + 100,
+                summary_sha256: hash,
+                manifest_bytes: 1024,
+                manifest_sha256: hash
+              }
+              return {
+                fetchFn: async (url) => {
+                  if (url.includes('release.json')) return new Response(encoder.encode(JSON.stringify(desc)), { status: 200 })
+                  return new Response(v3Bytes, { status: 200 })
+                }
+              }
+            }
+          }
+        }
+
+        if (id === 'crypto-failing') {
+          return {
+            label: 'Crypto API Unavailable',
+            build: async () => {
+              const hash = await defaultSha256(v3Bytes)
+              const desc = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: 'run-2026-synthetic-003',
+                study_id: 'study-synthetic-nifty-v3',
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: SCHEMA_VERSION_SUMMARY_V3,
+                coverage_end_date: '2024-06-28',
+                summary_bytes: v3Bytes.byteLength,
+                summary_sha256: hash,
+                manifest_bytes: 1024,
+                manifest_sha256: hash
+              }
+              return {
+                fetchFn: async (url) => {
+                  if (url.includes('release.json')) return new Response(encoder.encode(JSON.stringify(desc)), { status: 200 })
+                  return new Response(v3Bytes, { status: 200 })
+                },
+                digestFn: () => {
+                  throw new Error('Web Cryptography API is unavailable')
+                }
+              }
+            }
+          }
+        }
+
+        if (id === 'comparison-unavailable') {
+          return {
+            label: 'Comparison Unavailable (Logistic not converged)',
+            build: async () => {
+              const obj = JSON.parse(v3Text)
+              obj.partitions.test.comparison_status = 'comparison_unavailable'
+              obj.partitions.test.comparison_unavailable_reasons = ['logistic: not_converged']
+              obj.partitions.test.method_states.logistic.available = false
+              obj.partitions.test.method_states.logistic.unavailable_reason = 'not_converged'
+              obj.partitions.test.method_states.logistic.failure_stage = 'fit'
+              obj.partitions.test.counts.model_available_counts.logistic = 0
+              obj.partitions.test.metrics = null
+              // n stays the 800 requested TEST origins; no point estimate is kept
+              commonUnavailableUncertainty(obj.uncertainty, 'comparison_unavailable', obj.partitions.test.counts.requested_count)
+              const bytes = encoder.encode(JSON.stringify(obj))
+              const hash = await defaultSha256(bytes)
+              const desc = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: obj.run_id,
+                study_id: obj.study_id,
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: SCHEMA_VERSION_SUMMARY_V3,
+                coverage_end_date: obj.dataset_attribution.coverage_end_date,
+                summary_bytes: bytes.byteLength,
+                summary_sha256: hash,
+                manifest_bytes: 1024,
+                manifest_sha256: hash
+              }
+              return {
+                fetchFn: async (url) => {
+                  if (url.includes('release.json')) return new Response(encoder.encode(JSON.stringify(desc)), { status: 200 })
+                  return new Response(bytes, { status: 200 })
+                }
+              }
+            }
+          }
+        }
+
+        if (id === 'infinite-log-loss') {
+          return {
+            label: 'Infinite Log Loss Preservation',
+            build: async () => {
+              const obj = JSON.parse(v3Text)
+              obj.partitions.test.metrics.models.heuristic.log_loss_state = 'infinite'
+              obj.partitions.test.metrics.models.heuristic.mean_log_loss = null
+              obj.partitions.test.metrics.models.heuristic.zero_actual_probability_count = 1
+              const bytes = encoder.encode(JSON.stringify(obj))
+              const hash = await defaultSha256(bytes)
+              const desc = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: obj.run_id,
+                study_id: obj.study_id,
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: SCHEMA_VERSION_SUMMARY_V3,
+                coverage_end_date: obj.dataset_attribution.coverage_end_date,
+                summary_bytes: bytes.byteLength,
+                summary_sha256: hash,
+                manifest_bytes: 1024,
+                manifest_sha256: hash
+              }
+              return {
+                fetchFn: async (url) => {
+                  if (url.includes('release.json')) return new Response(encoder.encode(JSON.stringify(desc)), { status: 200 })
+                  return new Response(bytes, { status: 200 })
+                }
+              }
+            }
+          }
+        }
+
+        if (id === 'empty-cohort') {
+          return {
+            label: 'Empty Cohort (0 samples)',
+            build: async () => {
+              const obj = JSON.parse(v2Text)
+              emptyPartition(obj.partitions.test)
+              // An empty TEST cohort has no mature span and takes the common empty_cohort reason.
+              obj.admission_summary.mature_test_end_index = obj.admission_summary.mature_test_start_index
+              obj.admission_summary.mature_test_span_count = 0
+              obj.uncertainty.mature_span_count = 0
+              commonUnavailableUncertainty(obj.uncertainty, 'empty_cohort', 0)
+              return bindSummary(obj, SCHEMA_VERSION_SUMMARY_V2)
+            }
+          }
+        }
+
+        if (id === 'gapped-scored') {
+          return {
+            label: 'Scored TEST with an Admitted Gap (points, no intervals)',
+            build: async () => {
+              const obj = JSON.parse(v2Text)
+              // The same 3 scored sessions in a 4-slot mature span with one missing-VIX gap
+              const admission = obj.admission_summary
+              admission.mature_test_end_index += 1
+              admission.mature_test_span_count += 1
+              admission.missing_vix_gap_count = 1
+              admission.union_gap_count = 1
+              const counts = obj.partitions.test.counts
+              counts.raw_partition_count += 1
+              counts.excluded_count += 1
+              counts.exclusion_reason_counts = { ...counts.exclusion_reason_counts, missing_vix: 1 }
+              obj.uncertainty.mature_span_count = admission.mature_test_span_count
+              obj.uncertainty.reason = 'non_contiguous_test_cohort'
+              obj.uncertainty.block_lengths = obj.uncertainty.block_lengths.map(b => ({ ...b, status: 'unavailable', reason: 'non_contiguous_test_cohort' }))
+              return bindSummary(obj, SCHEMA_VERSION_SUMMARY_V2)
+            }
+          }
+        }
+
+        if (id === 'dev-comparison-unavailable') {
+          return {
+            label: 'DEV Comparison Unavailable (TEST scored)',
+            build: async () => {
+              const obj = JSON.parse(v3Text)
+              const dev = obj.partitions.development
+              dev.comparison_status = 'comparison_unavailable'
+              dev.comparison_unavailable_reasons = ['logistic: missing_training_classes']
+              dev.method_states.logistic = { available: false, unavailable_reason: 'missing_training_classes', failure_stage: null }
+              dev.counts.model_available_counts.logistic = 0
+              dev.metrics = null
+              return bindSummary(obj, SCHEMA_VERSION_SUMMARY_V3)
+            }
+          }
+        }
+
+        if (id === 'dev-empty') {
+          return {
+            label: 'DEV Empty Cohort (TEST scored)',
+            build: async () => {
+              const obj = JSON.parse(v3Text)
+              emptyPartition(obj.partitions.development)
+              return bindSummary(obj, SCHEMA_VERSION_SUMMARY_V3)
+            }
+          }
+        }
+
+        if (id === 'delayed-load') {
+          return {
+            label: 'Delayed Load Lifecycle (3s)',
+            build: async () => {
+              const hash = await defaultSha256(v3Bytes)
+              const desc = {
+                schema_version: SCHEMA_VERSION_RELEASE_DESCRIPTOR,
+                run_id: 'run-2026-synthetic-003',
+                study_id: 'study-synthetic-nifty-v3',
+                protocol_id: STUDY_PROTOCOL_ID,
+                summary_schema_version: SCHEMA_VERSION_SUMMARY_V3,
+                coverage_end_date: '2024-06-28',
+                summary_bytes: v3Bytes.byteLength,
+                summary_sha256: hash,
+                manifest_bytes: 1024,
+                manifest_sha256: hash
+              }
+              return {
+                fetchFn: async (url) => {
+                  await new Promise(r => setTimeout(r, 3000))
+                  if (url.includes('release.json')) return new Response(encoder.encode(JSON.stringify(desc)), { status: 200 })
+                  return new Response(v3Bytes, { status: 200 })
+                }
+              }
+            }
+          }
+        }
+
+        throw new Error('Unknown scenario ' + id)
+      }
+
+      const scenarios = [
+        'valid-v3',
+        'valid-v2',
+        'unavailable-404',
+        'unsupported-version',
+        'stale',
+        'digest-mismatch',
+        'byte-mismatch',
+        'crypto-failing',
+        'comparison-unavailable',
+        'gapped-scored',
+        'infinite-log-loss',
+        'empty-cohort',
+        'dev-comparison-unavailable',
+        'dev-empty',
+        'delayed-load'
+      ]
+
+      useEffect(() => {
+        if (loadingFixtures || !v2Text || !v3Text) return
+        let cancelled = false
+        setActiveConfig(null)
+        setScenarioError(null)
+        try {
+          const scenario = getScenarioConfig(selectedScenario)
+          scenario.build().then(cfg => {
+            if (!cancelled) {
+              setActiveConfig(cfg)
+            }
+          }).catch(err => {
+            if (!cancelled) {
+              setScenarioError(err?.message || String(err))
+            }
+          })
+        } catch (err) {
+          if (!cancelled) {
+            setScenarioError(err?.message || String(err))
+          }
+        }
+        return () => {
+          cancelled = true
+        }
+      }, [selectedScenario, loadingFixtures, v2Text, v3Text])
+
+      if (loadingFixtures) {
+        return React.createElement('div', { className: 'p-6 text-center text-on-surface-variant' }, 'Loading synthetic fixtures...')
+      }
+
+      if (fixtureError) {
+        return React.createElement('div', { className: 'p-6 text-center text-error font-medium' }, `Failed to load synthetic fixtures: ${fixtureError}`)
+      }
+
+      return React.createElement(
+        'div',
+        { className: 'space-y-6 min-w-0 max-w-full' },
+        // Scenario Selection Toolbar
+        React.createElement(
+          'div',
+          { className: 'p-4 rounded bg-surface-container border border-outline-variant/40 space-y-3 min-w-0 max-w-full' },
+          React.createElement('div', { className: 'font-semibold text-sm text-on-surface' }, 'Select Test Scenario:'),
+          React.createElement(
+            'div',
+            { className: 'flex flex-wrap gap-2' },
+            scenarios.map(scId => {
+              const isSel = scId === selectedScenario
+              return React.createElement(
+                'button',
+                {
+                  key: scId,
+                  type: 'button',
+                  onClick: () => setSelectedScenario(scId),
+                  className: `px-3 py-1.5 rounded text-xs font-semibold cursor-pointer border transition-colors ${
+                    isSel
+                      ? 'bg-primary text-on-primary border-primary'
+                      : 'bg-surface-container-high text-on-surface-variant border-outline-variant/40 hover:bg-surface-container-highest'
+                  }`
+                },
+                getScenarioConfig(scId).label
+              )
+            })
+          )
+        ),
+
+        // Live Render Area
+        React.createElement(
+          'div',
+          { className: 'p-4 rounded bg-surface-container-lowest border border-outline-variant/40 shadow-inner min-w-0 max-w-full' },
+          React.createElement('div', { className: 'text-xs text-on-surface-variant font-data-mono-compact mb-3' }, `Active Component Render [Scenario: ${selectedScenario}]:`),
+          activeConfig
+            ? React.createElement(HistoricalEvaluationPanel, {
+                key: selectedScenario,
+                fetchFn: activeConfig.fetchFn,
+                digestFn: activeConfig.digestFn,
+                initiallyExpanded: true
+              })
+            : scenarioError
+              ? React.createElement('div', { className: 'p-4 rounded bg-error-container/30 border border-error/40 text-error text-xs font-mono' }, `Failed to build scenario: ${scenarioError}`)
+              : React.createElement('div', { className: 'text-xs text-on-surface-variant' }, 'Initializing scenario...')
+        )
+      )
+    }
+
+    const rootEl = document.getElementById('harness-app')
+    if (rootEl) {
+      const root = ReactDOM.createRoot(rootEl)
+      root.render(React.createElement(Harness))
+    }
+  </script>
+</body>
+</html>

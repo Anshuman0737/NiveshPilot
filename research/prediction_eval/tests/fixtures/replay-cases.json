@@ -1,0 +1,874 @@
+{
+  "schema_version": "nivesh-replay-cases-v1",
+  "scenarios": [
+    {
+      "id": "scenario-01-horizon-1d-shipped",
+      "description": "Horizon 1D with shipped Platt pair [1.15, -0.08] and irrelevant weights/latest_forecasts",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "1D",
+      "events": [],
+      "models_fixture": {
+        "1D": {
+          "horizon": "1D",
+          "trading_days": 1,
+          "weights": { "technical": 0.30, "event_news": 0.40, "irrelevant_weight": 99.9 },
+          "platt_params": [1.15, -0.08],
+          "latest_forecasts": { "irrelevant_forecast": "ignore" }
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000,
+            "ret_5d": 0.015,
+            "rsi_14": 58.5,
+            "macd_hist": 0.25,
+            "vol_30d": 0.12,
+            "rel_strength_20d": 0.0,
+            "drawdown": -0.02,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-02-horizon-5d-shipped",
+      "description": "Horizon 5D with shipped Platt pair [1.28, -0.05]",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "5D",
+      "events": [],
+      "models_fixture": {
+        "5D": {
+          "horizon": "5D",
+          "trading_days": 5,
+          "weights": { "technical": 0.25 },
+          "platt_params": [1.28, -0.05],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000,
+            "ret_5d": -0.025,
+            "rsi_14": 42.0,
+            "macd_hist": -0.45,
+            "vol_30d": 0.18,
+            "rel_strength_20d": -0.01,
+            "drawdown": -0.06,
+            "market_regime": "Correction"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-03-horizon-20d-shipped",
+      "description": "Horizon 20D with shipped Platt pair [1.42, 0.02]",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000,
+            "ret_5d": 0.04,
+            "rsi_14": 68.0,
+            "macd_hist": 0.85,
+            "vol_30d": 0.11,
+            "rel_strength_20d": 0.03,
+            "drawdown": -0.01,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-04-horizon-60d-shipped",
+      "description": "Horizon 60D with shipped Platt pair [1.55, 0.08]",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "60D",
+      "events": [],
+      "models_fixture": {
+        "60D": {
+          "horizon": "60D",
+          "trading_days": 60,
+          "weights": {},
+          "platt_params": [1.55, 0.08],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000,
+            "ret_5d": -0.05,
+            "rsi_14": 35.0,
+            "macd_hist": -1.2,
+            "vol_30d": 0.28,
+            "rel_strength_20d": -0.08,
+            "drawdown": -0.18,
+            "market_regime": "Bear"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-05-fallback-missing-horizon",
+      "description": "Horizon missing in models fixture; verifies fallback Platt pair [1.25, -0.05]",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "1D": {
+          "horizon": "1D",
+          "trading_days": 1,
+          "weights": {},
+          "platt_params": [1.15, -0.08],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000,
+            "ret_5d": 0.01,
+            "rsi_14": 52.0,
+            "macd_hist": 0.1,
+            "vol_30d": 0.15,
+            "rel_strength_20d": 0.0,
+            "drawdown": -0.03,
+            "market_regime": "Sideways"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-06-missing-features-defaults",
+      "description": "Missing optional feature fields; verifies default fallback values (RSI 50, vol 0.15, Bull regime, 0 scores)",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-07-zero-features-defaults",
+      "description": "Explicit zero feature values; verifies || legacy semantics: RSI 0 -> 50, vol 0 -> 0.15",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000,
+            "ret_5d": 0.0,
+            "rsi_14": 0.0,
+            "macd_hist": 0.0,
+            "vol_30d": 0.0,
+            "rel_strength_20d": 0.0,
+            "drawdown": 0.0,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-08-latest-vs-earlier-row",
+      "description": "Multiple historical price rows; verifies that only the latest row is selected for scoring",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-08-30",
+            "close": 24000,
+            "open": 23900,
+            "high": 24100,
+            "low": 23800,
+            "volume": 500000,
+            "ret_5d": -0.08,
+            "rsi_14": 25.0,
+            "macd_hist": -1.5,
+            "vol_30d": 0.35,
+            "rel_strength_20d": -0.1,
+            "drawdown": -0.25,
+            "market_regime": "Bear"
+          },
+          {
+            "date": "2026-08-31",
+            "close": 24500,
+            "open": 24100,
+            "high": 24600,
+            "low": 24000,
+            "volume": 800000,
+            "ret_5d": 0.0,
+            "rsi_14": 50.0,
+            "macd_hist": 0.0,
+            "vol_30d": 0.15,
+            "rel_strength_20d": 0.0,
+            "drawdown": -0.05,
+            "market_regime": "Sideways"
+          },
+          {
+            "date": "2026-09-01",
+            "close": 25200,
+            "open": 24600,
+            "high": 25300,
+            "low": 24500,
+            "volume": 1200000,
+            "ret_5d": 0.05,
+            "rsi_14": 72.0,
+            "macd_hist": 1.2,
+            "vol_30d": 0.10,
+            "rel_strength_20d": 0.04,
+            "drawdown": -0.005,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-09-positive-first-event-order",
+      "description": "Multiple events where events[0] is positive surprise and events[1] is negative; verifies events[0] is used without sorting",
+      "asset": {
+        "symbol": "RELIANCE.NS",
+        "name": "Reliance Industries Ltd",
+        "asset_class": "equity",
+        "sector": "Energy",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian conglomerate"
+      },
+      "horizon": "5D",
+      "events": [
+        {
+          "event_id": "EVT-POS-001",
+          "symbol": "RELIANCE.NS",
+          "event_type": "corporate",
+          "event_subtype": "earnings",
+          "title": "Strong Q2 Earnings Beat",
+          "published_at": "2026-09-01T08:00:00Z",
+          "effective_at": "2026-09-01T09:15:00Z",
+          "source": "NSE",
+          "source_type": "recognized_provider",
+          "source_url": "https://example.com/evt1",
+          "reliability_score": 0.95,
+          "expected_value": 100,
+          "actual_value": 125,
+          "metric_unit": "INR",
+          "surprise_pct": 25.0,
+          "surprise_category": "Good News Better than Expected",
+          "sentiment_dimensions": {
+            "financial": 0.85,
+            "operational": 0.8,
+            "product": 0.5,
+            "brand": 0.7,
+            "regulatory": 0.0,
+            "customer": 0.6,
+            "competitive": 0.7
+          },
+          "novelty_score": 0.8,
+          "attention_zscore": 2.1,
+          "independent_source_count": 5,
+          "cluster_id": "CLS-001"
+        },
+        {
+          "event_id": "EVT-NEG-002",
+          "symbol": "RELIANCE.NS",
+          "event_type": "market",
+          "event_subtype": "crude",
+          "title": "Crude Oil Price Shock",
+          "published_at": "2026-09-01T08:30:00Z",
+          "effective_at": "2026-09-01T09:15:00Z",
+          "source": "Reuters",
+          "source_type": "news",
+          "source_url": "https://example.com/evt2",
+          "reliability_score": 0.9,
+          "expected_value": 75,
+          "actual_value": 95,
+          "metric_unit": "USD",
+          "surprise_pct": -26.6,
+          "surprise_category": "Bad News Worse than Expected",
+          "sentiment_dimensions": {
+            "financial": -0.8,
+            "operational": -0.5,
+            "product": 0.0,
+            "brand": -0.2,
+            "regulatory": 0.0,
+            "customer": 0.0,
+            "competitive": -0.3
+          },
+          "novelty_score": 0.9,
+          "attention_zscore": 3.0,
+          "independent_source_count": 8,
+          "cluster_id": "CLS-002"
+        }
+      ],
+      "models_fixture": {
+        "5D": {
+          "horizon": "5D",
+          "trading_days": 5,
+          "weights": {},
+          "platt_params": [1.28, -0.05],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "RELIANCE.NS": [
+          {
+            "date": "2026-09-01",
+            "close": 3000,
+            "open": 2980,
+            "high": 3020,
+            "low": 2970,
+            "volume": 2000000,
+            "ret_5d": 0.02,
+            "rsi_14": 55.0,
+            "macd_hist": 0.3,
+            "vol_30d": 0.16,
+            "rel_strength_20d": 0.01,
+            "drawdown": -0.03,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-10-negative-first-event-order",
+      "description": "Multiple events where events[0] is negative surprise and events[1] is positive; verifies events[0] is used without sorting",
+      "asset": {
+        "symbol": "RELIANCE.NS",
+        "name": "Reliance Industries Ltd",
+        "asset_class": "equity",
+        "sector": "Energy",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian conglomerate"
+      },
+      "horizon": "5D",
+      "events": [
+        {
+          "event_id": "EVT-NEG-002",
+          "symbol": "RELIANCE.NS",
+          "event_type": "market",
+          "event_subtype": "crude",
+          "title": "Crude Oil Price Shock",
+          "published_at": "2026-09-01T08:30:00Z",
+          "effective_at": "2026-09-01T09:15:00Z",
+          "source": "Reuters",
+          "source_type": "news",
+          "source_url": "https://example.com/evt2",
+          "reliability_score": 0.9,
+          "expected_value": 75,
+          "actual_value": 95,
+          "metric_unit": "USD",
+          "surprise_pct": -26.6,
+          "surprise_category": "Bad News Worse than Expected",
+          "sentiment_dimensions": {
+            "financial": -0.8,
+            "operational": -0.5,
+            "product": 0.0,
+            "brand": -0.2,
+            "regulatory": 0.0,
+            "customer": 0.0,
+            "competitive": -0.3
+          },
+          "novelty_score": 0.9,
+          "attention_zscore": 3.0,
+          "independent_source_count": 8,
+          "cluster_id": "CLS-002"
+        },
+        {
+          "event_id": "EVT-POS-001",
+          "symbol": "RELIANCE.NS",
+          "event_type": "corporate",
+          "event_subtype": "earnings",
+          "title": "Strong Q2 Earnings Beat",
+          "published_at": "2026-09-01T08:00:00Z",
+          "effective_at": "2026-09-01T09:15:00Z",
+          "source": "NSE",
+          "source_type": "recognized_provider",
+          "source_url": "https://example.com/evt1",
+          "reliability_score": 0.95,
+          "expected_value": 100,
+          "actual_value": 125,
+          "metric_unit": "INR",
+          "surprise_pct": 25.0,
+          "surprise_category": "Good News Better than Expected",
+          "sentiment_dimensions": {
+            "financial": 0.85,
+            "operational": 0.8,
+            "product": 0.5,
+            "brand": 0.7,
+            "regulatory": 0.0,
+            "customer": 0.6,
+            "competitive": 0.7
+          },
+          "novelty_score": 0.8,
+          "attention_zscore": 2.1,
+          "independent_source_count": 5,
+          "cluster_id": "CLS-001"
+        }
+      ],
+      "models_fixture": {
+        "5D": {
+          "horizon": "5D",
+          "trading_days": 5,
+          "weights": {},
+          "platt_params": [1.28, -0.05],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "RELIANCE.NS": [
+          {
+            "date": "2026-09-01",
+            "close": 3000,
+            "open": 2980,
+            "high": 3020,
+            "low": 2970,
+            "volume": 2000000,
+            "ret_5d": 0.02,
+            "rsi_14": 55.0,
+            "macd_hist": 0.3,
+            "vol_30d": 0.16,
+            "rel_strength_20d": 0.01,
+            "drawdown": -0.03,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-11-category-strongly-bearish",
+      "description": "High volatility bear setup crossing pBear >= 0.65 for STRONGLY BEARISH classification",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 23000,
+            "open": 23500,
+            "high": 23600,
+            "low": 22900,
+            "volume": 2500000,
+            "ret_5d": -0.08,
+            "rsi_14": 22.0,
+            "macd_hist": -1.8,
+            "vol_30d": 0.32,
+            "rel_strength_20d": -0.09,
+            "drawdown": -0.22,
+            "market_regime": "Bear"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-12-category-strongly-bullish",
+      "description": "Low volatility high momentum bull setup crossing pBull >= 0.65 for STRONGLY BULLISH classification",
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 26000,
+            "open": 25500,
+            "high": 26100,
+            "low": 25400,
+            "volume": 2000000,
+            "ret_5d": 0.06,
+            "rsi_14": 75.0,
+            "macd_hist": 1.5,
+            "vol_30d": 0.09,
+            "rel_strength_20d": 0.05,
+            "drawdown": 0.0,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-13-empty-history",
+      "description": "Asset with empty price history array returns null",
+      "asset": {
+        "symbol": "UNKNOWN_ASSET",
+        "name": "Unknown Asset",
+        "asset_class": "equity",
+        "sector": "None",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Asset with no data"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "UNKNOWN_ASSET": []
+      }
+    },
+    {
+      "id": "scenario-14-cache-reuse",
+      "description": "Two sequential calls with identical setup; verifies in-memory cache reuse (models and historical prices are fetched only on call 1)",
+      "repeat_calls": 2,
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000,
+            "ret_5d": 0.02,
+            "rsi_14": 55.0,
+            "macd_hist": 0.3,
+            "vol_30d": 0.15,
+            "rel_strength_20d": 0.01,
+            "drawdown": -0.02,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-15-model-retry-on-failure",
+      "description": "Models fetch fails on call 1, then succeeds on call 2 retry",
+      "repeat_calls": 2,
+      "model_failures": 1,
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000,
+            "ret_5d": 0.02,
+            "rsi_14": 55.0,
+            "macd_hist": 0.3,
+            "vol_30d": 0.15,
+            "rel_strength_20d": 0.01,
+            "drawdown": -0.02,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-16-history-retry-on-failure",
+      "description": "History fetch fails on call 1, then succeeds on call 2 retry",
+      "repeat_calls": 2,
+      "history_failures": 1,
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {
+        "^NSEI": [
+          {
+            "date": "2026-09-01",
+            "close": 25000,
+            "open": 24900,
+            "high": 25100,
+            "low": 24850,
+            "volume": 1000000,
+            "ret_5d": 0.02,
+            "rsi_14": 55.0,
+            "macd_hist": 0.3,
+            "vol_30d": 0.15,
+            "rel_strength_20d": 0.01,
+            "drawdown": -0.02,
+            "market_regime": "Bull"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scenario-17-empty-history-map-cached",
+      "description": "Historical prices fetch returns empty map {}; verifies successful empty map is cached and not refetched on call 2",
+      "repeat_calls": 2,
+      "asset": {
+        "symbol": "^NSEI",
+        "name": "Nifty 50 Index",
+        "asset_class": "index",
+        "sector": "Broad Market",
+        "exchange": "NSE",
+        "currency": "INR",
+        "benchmark": "^NSEI",
+        "description": "Indian equity benchmark"
+      },
+      "horizon": "20D",
+      "events": [],
+      "models_fixture": {
+        "20D": {
+          "horizon": "20D",
+          "trading_days": 20,
+          "weights": {},
+          "platt_params": [1.42, 0.02],
+          "latest_forecasts": {}
+        }
+      },
+      "prices_fixture": {}
+    }
+  ]
+}

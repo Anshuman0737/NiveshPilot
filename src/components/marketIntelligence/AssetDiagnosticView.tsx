@@ -7,6 +7,7 @@ import {
   AssetPricePoint
 } from '../../engine/marketIntelligence/types'
 import { LiveMarketQuote } from '../../engine/marketIntelligence/providers/MarketDataProvider'
+import { HistoricalEvaluationPanel } from './HistoricalEvaluationPanel'
 
 interface AssetDiagnosticViewProps {
   asset: AssetMetadata
@@ -469,6 +470,11 @@ export const AssetDiagnosticView: React.FC<AssetDiagnosticViewProps> = ({
               </div>
             </div>
           </section>
+
+          {/* HISTORICAL EVALUATION DISCLOSURE (NIFTY 50 ONLY) */}
+          {asset.symbol === '^NSEI' && (
+            <HistoricalEvaluationPanel />
+          )}
 
           {/* WHAT CHANGED THE FORECAST (EXPLAINABLE AI ATTRIBUTION - 100% REAL) */}
           <section className="bg-surface-container-low border border-outline-variant/40 rounded p-space-sm sm:p-space-base shadow-sm">

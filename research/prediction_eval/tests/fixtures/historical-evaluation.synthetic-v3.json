@@ -1,0 +1,1701 @@
+{
+  "schema_version": "nivesh-evaluation-summary-v3",
+  "run_id": "run-2026-synthetic-003",
+  "study_id": "study-synthetic-nifty-v3",
+  "protocol_id": "nivesh-offline-study-v1",
+  "data_kind": "historical",
+  "development_status": "retrospective_historical_evaluation",
+  "claim_label": "SYNTHETIC TEST FIXTURE / NOT MARKET RESULTS - Retrospective replay of frozen heuristic on synthetic market data",
+  "dataset_attribution": {
+    "source_kind": "admitted_historical_market_data",
+    "asset_label": "Nifty 50 Synthetic Index",
+    "series_id": "SYNTHETIC_NSEI_V3",
+    "coverage_start_date": "2022-01-03",
+    "coverage_end_date": "2024-06-28"
+  },
+  "replay_identity": {
+    "claim_label": "Retrospective replay of the frozen current heuristic",
+    "script": {
+      "raw_byte_count": 29957,
+      "sha256": "011C6FE6702FC0D1F5FBF6E37B9D8D4B95CA7370D6AE8D026FAD896E1EB7E66C"
+    },
+    "request": {
+      "raw_byte_count": 1024,
+      "sha256": "A1B2C3D4E5F60718293A4B5C6D7E8F90A1B2C3D4E5F60718293A4B5C6D7E8F90"
+    },
+    "response": {
+      "raw_byte_count": 2048,
+      "sha256": "B1C2D3E4F5A60718293A4B5C6D7E8F90A1B2C3D4E5F60718293A4B5C6D7E8F90"
+    },
+    "model_sha256": "C1D2E3F4A5B60718293A4B5C6D7E8F90A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "build_manifest_sha256": "D1E2F3A4B5C60718293A4B5C6D7E8F90A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "calculation_id": "calc-2026-synthetic-v3"
+  },
+  "provenance_identity": {
+    "config_sha256": "E1F2A3B4C5D60718293A4B5C6D7E8F90A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "admission_sha256": "F1A2B3C4D5E60718293A4B5C6D7E8F90A1B2C3D4E5F60718293A4B5C6D7E8F90",
+    "approval_sha256": "44556677889900112233AABBCCDDEEFF44556677889900112233AABBCCDDEEFF"
+  },
+  "chronological_cutoffs": {
+    "development_start": "2022-01-03",
+    "test_start": "2023-01-02"
+  },
+  "admission_summary": {
+    "mature_test_start_index": 1400,
+    "mature_test_end_index": 2200,
+    "mature_test_span_count": 800,
+    "warmup_gap_count": 0,
+    "missing_vix_gap_count": 0,
+    "union_gap_count": 0,
+    "gap_digest": "55667788990011223344AABBCCDDEEFF55667788990011223344AABBCCDDEEFF",
+    "policy": "nonzero_gaps_lead_to_unavailable_intervals"
+  },
+  "fixed_definitions": {
+    "classes": [
+      "BEAR",
+      "NEUTRAL",
+      "BULL"
+    ],
+    "neutral_band": "[-0.005, 0.005]",
+    "horizon_sessions": 20,
+    "primary_probability_metric": "brier_score",
+    "log_loss_zero_policy": "penalize_infinite"
+  },
+  "partitions": {
+    "development": {
+      "partition": "development",
+      "cutoff_index": 1000,
+      "cutoff_date": "2022-01-03",
+      "counts": {
+        "raw_partition_count": 400,
+        "eligible_count": 200,
+        "excluded_count": 200,
+        "requested_count": 200,
+        "exclusion_reason_counts": {
+          "label_crosses_test_boundary": 20,
+          "missing_vix": 180
+        },
+        "model_available_counts": {
+          "heuristic": 200,
+          "frequency": 200,
+          "logistic": 200
+        }
+      },
+      "comparison_status": "scored",
+      "comparison_unavailable_reasons": [],
+      "method_states": {
+        "heuristic": {
+          "available": true
+        },
+        "frequency": {
+          "available": true,
+          "unavailable_reason": null
+        },
+        "logistic": {
+          "available": true,
+          "unavailable_reason": null,
+          "failure_stage": null
+        }
+      },
+      "metrics": {
+        "sample_count": 200,
+        "class_support": [
+          70,
+          60,
+          70
+        ],
+        "status": "scored",
+        "models": {
+          "heuristic": {
+            "mean_brier": 0.2611,
+            "mean_log_loss": 0.4987,
+            "log_loss_state": "finite",
+            "zero_actual_probability_count": 0,
+            "tie_count": 0,
+            "accuracy": 0.75,
+            "confusion": [
+              [
+                52,
+                10,
+                8
+              ],
+              [
+                7,
+                46,
+                7
+              ],
+              [
+                8,
+                10,
+                52
+              ]
+            ],
+            "class_recall": [
+              0.7428571428571429,
+              0.7666666666666667,
+              0.7428571428571429
+            ],
+            "reliability_bins": [
+              {
+                "class_label": "BEAR",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 3,
+                "count": 200,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.35
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 3,
+                "count": 200,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 3,
+                "count": 200,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.35
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              }
+            ]
+          },
+          "frequency": {
+            "mean_brier": 0.3122,
+            "mean_log_loss": 0.6411,
+            "log_loss_state": "finite",
+            "zero_actual_probability_count": 0,
+            "tie_count": 0,
+            "accuracy": 0.65,
+            "confusion": [
+              [
+                45,
+                15,
+                10
+              ],
+              [
+                10,
+                40,
+                10
+              ],
+              [
+                10,
+                15,
+                45
+              ]
+            ],
+            "class_recall": [
+              0.6428571428571429,
+              0.6666666666666666,
+              0.6428571428571429
+            ],
+            "reliability_bins": [
+              {
+                "class_label": "BEAR",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 3,
+                "count": 200,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.35
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 3,
+                "count": 200,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 3,
+                "count": 200,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.35
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              }
+            ]
+          },
+          "logistic": {
+            "mean_brier": 0.2978,
+            "mean_log_loss": 0.5733,
+            "log_loss_state": "finite",
+            "zero_actual_probability_count": 0,
+            "tie_count": 0,
+            "accuracy": 0.71,
+            "confusion": [
+              [
+                50,
+                10,
+                10
+              ],
+              [
+                8,
+                44,
+                8
+              ],
+              [
+                10,
+                12,
+                48
+              ]
+            ],
+            "class_recall": [
+              0.7142857142857143,
+              0.7333333333333333,
+              0.6857142857142857
+            ],
+            "reliability_bins": [
+              {
+                "class_label": "BEAR",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 3,
+                "count": 200,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.35
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 3,
+                "count": 200,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 3,
+                "count": 200,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.35
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              }
+            ]
+          }
+        }
+      }
+    },
+    "test": {
+      "partition": "test",
+      "cutoff_index": 1400,
+      "cutoff_date": "2023-01-02",
+      "counts": {
+        "raw_partition_count": 820,
+        "eligible_count": 800,
+        "excluded_count": 20,
+        "requested_count": 800,
+        "exclusion_reason_counts": {
+          "unknown_outcome": 20
+        },
+        "model_available_counts": {
+          "heuristic": 800,
+          "frequency": 800,
+          "logistic": 800
+        }
+      },
+      "comparison_status": "scored",
+      "comparison_unavailable_reasons": [],
+      "method_states": {
+        "heuristic": {
+          "available": true
+        },
+        "frequency": {
+          "available": true,
+          "unavailable_reason": null
+        },
+        "logistic": {
+          "available": true,
+          "unavailable_reason": null,
+          "failure_stage": null
+        }
+      },
+      "metrics": {
+        "sample_count": 800,
+        "class_support": [
+          280,
+          240,
+          280
+        ],
+        "status": "scored",
+        "models": {
+          "heuristic": {
+            "mean_brier": 0.2854,
+            "mean_log_loss": 0.5218,
+            "log_loss_state": "finite",
+            "zero_actual_probability_count": 0,
+            "tie_count": 0,
+            "accuracy": 0.735,
+            "confusion": [
+              [
+                210,
+                40,
+                30
+              ],
+              [
+                30,
+                168,
+                42
+              ],
+              [
+                28,
+                42,
+                210
+              ]
+            ],
+            "class_recall": [
+              0.75,
+              0.7,
+              0.75
+            ],
+            "reliability_bins": [
+              {
+                "class_label": "BEAR",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 3,
+                "count": 800,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3333333333333333
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 3,
+                "count": 800,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3333333333333333
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 3,
+                "count": 800,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3333333333333333
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              }
+            ]
+          },
+          "frequency": {
+            "mean_brier": 0.3204,
+            "mean_log_loss": 0.6542,
+            "log_loss_state": "finite",
+            "zero_actual_probability_count": 0,
+            "tie_count": 0,
+            "accuracy": 0.63,
+            "confusion": [
+              [
+                168,
+                56,
+                56
+              ],
+              [
+                36,
+                156,
+                48
+              ],
+              [
+                56,
+                44,
+                180
+              ]
+            ],
+            "class_recall": [
+              0.6,
+              0.65,
+              0.6428571428571429
+            ],
+            "reliability_bins": [
+              {
+                "class_label": "BEAR",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 3,
+                "count": 800,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3333333333333333
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 3,
+                "count": 800,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3333333333333333
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 3,
+                "count": 800,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3333333333333333
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              }
+            ]
+          },
+          "logistic": {
+            "mean_brier": 0.3015,
+            "mean_log_loss": 0.5891,
+            "log_loss_state": "finite",
+            "zero_actual_probability_count": 0,
+            "tie_count": 0,
+            "accuracy": 0.71,
+            "confusion": [
+              [
+                189,
+                49,
+                42
+              ],
+              [
+                33,
+                174,
+                33
+              ],
+              [
+                42,
+                33,
+                205
+              ]
+            ],
+            "class_recall": [
+              0.675,
+              0.725,
+              0.7321428571428571
+            ],
+            "reliability_bins": [
+              {
+                "class_label": "BEAR",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 3,
+                "count": 800,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3333333333333333
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BEAR",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 3,
+                "count": 800,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3333333333333333
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "NEUTRAL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 0,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 1,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 2,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 3,
+                "count": 800,
+                "mean_probability": 0.35,
+                "observed_frequency": 0.3333333333333333
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 4,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 5,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 6,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 7,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 8,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              },
+              {
+                "class_label": "BULL",
+                "bin_index": 9,
+                "count": 0,
+                "mean_probability": null,
+                "observed_frequency": null
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "uncertainty": {
+    "protocol_id": "nivesh-paired-stationary-brier-v1",
+    "method": "paired_stationary_bootstrap",
+    "status": "available",
+    "reason": null,
+    "n": 800,
+    "mature_span_count": 800,
+    "replicates": 10000,
+    "nominal_coverage": 0.95,
+    "quantile_rule": "linear_integer40_v1",
+    "block_floor_factor": 10,
+    "point_differences": [
+      {
+        "pair_id": "heuristic_minus_frequency",
+        "point_difference": -0.035
+      },
+      {
+        "pair_id": "heuristic_minus_logistic",
+        "point_difference": -0.0161
+      }
+    ],
+    "block_lengths": [
+      {
+        "block_length": 20,
+        "label": "minimum, overlap-motivated setting; not a minimum realized block length",
+        "status": "available",
+        "reason": null,
+        "seed": 20261123,
+        "pairs": [
+          {
+            "pair_id": "heuristic_minus_frequency",
+            "lower": -0.062,
+            "upper": -0.012
+          },
+          {
+            "pair_id": "heuristic_minus_logistic",
+            "lower": -0.045,
+            "upper": 0.015
+          }
+        ]
+      },
+      {
+        "block_length": 40,
+        "label": "intermediate block length",
+        "status": "available",
+        "reason": null,
+        "seed": 20261143,
+        "pairs": [
+          {
+            "pair_id": "heuristic_minus_frequency",
+            "lower": -0.071,
+            "upper": -0.008
+          },
+          {
+            "pair_id": "heuristic_minus_logistic",
+            "lower": -0.052,
+            "upper": 0.021
+          }
+        ]
+      },
+      {
+        "block_length": 60,
+        "label": "long block length",
+        "status": "available",
+        "reason": null,
+        "seed": 20261163,
+        "pairs": [
+          {
+            "pair_id": "heuristic_minus_frequency",
+            "lower": -0.078,
+            "upper": -0.003
+          },
+          {
+            "pair_id": "heuristic_minus_logistic",
+            "lower": -0.058,
+            "upper": 0.026
+          }
+        ]
+      }
+    ]
+  },
+  "limitations": [
+    "SYNTHETIC TEST FIXTURE / NOT MARKET RESULTS - Fabricated v3 contract test fixture.",
+    "Hand-authored schematic aggregates: metric values, confusion counts and reliability bins are illustrative placeholders, are not mutually derivable from per-session predictions, and were not produced by the study pipeline or from market data; the historical-looking schema tags and dates are fabricated.",
+    "Frozen historical heuristic replay with event inputs zeroed for offline comparison.",
+    "Offline baselines (Laplace frequency and multinomial logistic regression) are uncalibrated comparator references.",
+    "Historical performance does not guarantee future forecasting efficacy or trading returns.",
+    "Test window is not an untouched holdout because the frozen heuristic and protocol were developed with prior knowledge of historical market series.",
+    "This study does not evaluate trading performance, slippage, execution cost, or investor financial suitability."
+  ]
+}
